@@ -1,0 +1,57 @@
+---
+interface Props {
+  caption?: string;
+}
+
+const { caption } = Astro.props;
+---
+
+<figure class="data-table">
+  {caption && <figcaption>{caption}</figcaption>}
+  <div class="data-table__scroll">
+    <slot />
+  </div>
+</figure>
+
+<style>
+  .data-table {
+    margin: 2rem 0;
+  }
+
+  figcaption {
+    margin-bottom: 0.65rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .data-table__scroll {
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+  }
+
+  :global(.data-table table) {
+    width: 100%;
+    min-width: 36rem;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  :global(.data-table th),
+  :global(.data-table td) {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 0.85rem;
+    text-align: left;
+  }
+
+  :global(.data-table th) {
+    position: sticky;
+    top: 0;
+    background: var(--color-paper);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+</style>

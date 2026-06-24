@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const notes = (await getCollection("notes")).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<BaseLayout title="Notes - dd-y / 余非凡" description="短思考、工作笔记和 AI 系统判断。">
+  <section class="notes-page page-shell">
+    <header>
+      <p>Notes</p>
+      <h1>NOTES</h1>
+      <span>一些还没有长成文章的判断、问题和工作笔记。</span>
+    </header>
+
+    <div class="notes-page__list">
+      {notes.map((note) => (
+        <article>
+          <time datetime={note.data.publishedAt.toISOString()}>
+            {note.data.publishedAt.toISOString().slice(0, 10)}
+          </time>
+          <h2>{note.data.title}</h2>
+          <p>{note.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notes-page {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  header {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  header p,
+  time {
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 12vw, 11rem);
+    font-weight: 850;
+    line-height: 0.82;
+  }
+
+  header span {
+    max-width: 28rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+    line-height: 1.65;
+  }
+
+  .notes-page__list {
+    border-top: 1px solid var(--color-line);
+  }
+
+  article {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 1fr);
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-line);
+    padding-block: 1.4rem;
+  }
+
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+  }
+
+  p {
+    grid-column: 2;
+    max-width: 44rem;
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 680px) {
+    article,
+    p {
+      grid-template-columns: 1fr;
+      grid-column: auto;
+    }
+  }
+</style>

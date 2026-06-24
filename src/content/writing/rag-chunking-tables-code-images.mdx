@@ -8,15 +8,56 @@ tags: ["RAG", "Document Parsing", "Chunking"]
 featured: true
 ---
 
+import Callout from "@/components/mdx/Callout.astro";
+import CodeBlock from "@/components/mdx/CodeBlock.astro";
+import DataTable from "@/components/mdx/DataTable.astro";
+
 复杂文档分块的问题，不是把文本切得更平均，而是尽量保护原始语义结构。
 
 ## 背景与问题
 
 很多 RAG 系统最早都会从固定长度分块开始：500 token 一段，重叠 50 token，看起来简单直接。但当文档里出现表格、代码块、图片说明和层级标题时，这种方法会很快暴露问题。
 
+<Callout title="Core idea">
+固定长度分块只能控制片段大小，不能保证语义完整。复杂文档更应该先识别结构，再决定如何切分。
+</Callout>
+
 ## 一个更稳妥的方向
 
 我更倾向于先做结构识别，再做语义切分。也就是说，分块器应该知道哪些内容不能被随意切开，哪些内容可以合并，哪些内容需要保留前后上下文。
+
+<DataTable caption="Chunking strategy comparison">
+  <table>
+    <thead>
+      <tr>
+        <th>Strategy</th>
+        <th>Strength</th>
+        <th>Risk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fixed length</td>
+        <td>Simple and fast</td>
+        <td>Breaks tables and code blocks</td>
+      </tr>
+      <tr>
+        <td>Structure first</td>
+        <td>Preserves semantic units</td>
+        <td>Requires better parsing</td>
+      </tr>
+    </tbody>
+  </table>
+</DataTable>
+
+<CodeBlock filename="chunker.py" language="python">
+
+```python
+def should_keep_together(block):
+    return block.type in {"table", "code", "figure"}
+```
+
+</CodeBlock>
 
 ## 评测比参数更重要
 

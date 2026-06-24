@@ -1,0 +1,66 @@
+---
+interface Props {
+  filename?: string;
+  language?: string;
+}
+
+const { filename, language } = Astro.props;
+---
+
+<figure class="code-block">
+  {(filename || language) && (
+    <figcaption>
+      <span>{filename}</span>
+      <small>{language}</small>
+      <button type="button">Copy</button>
+    </figcaption>
+  )}
+  <div class="code-block__body">
+    <slot />
+  </div>
+</figure>
+
+<style>
+  .code-block {
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    margin: 2rem 0;
+    background: #111;
+    color: #f5f1e8;
+  }
+
+  figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.18);
+    padding: 0.75rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  small {
+    color: rgba(245, 241, 232, 0.62);
+  }
+
+  button {
+    border: 1px solid rgba(245, 241, 232, 0.28);
+    padding: 0.2rem 0.45rem;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  .code-block__body {
+    overflow-x: auto;
+    padding: 1rem;
+  }
+
+  :global(.code-block pre) {
+    margin: 0;
+  }
+</style>

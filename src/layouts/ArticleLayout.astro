@@ -1,0 +1,172 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { MarkdownHeading } from "astro";
+import ArticleToc from "@/components/mdx/ArticleToc.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+  entry: CollectionEntry<"writing">;
+  headings: MarkdownHeading[];
+}
+
+const { entry, headings } = Astro.props;
+const published = entry.data.publishedAt.toLocaleDateString("en", {
+  month: "short",
+  day: "numeric",
+  year: "numeric"
+});
+---
+
+<BaseLayout title={`${entry.data.title} - dd-y / 余非凡`} description={entry.data.description}>
+  <article class="article page-shell">
+    <header class="article__hero">
+      <p class="article__eyebrow">Writing</p>
+      <h1>{entry.data.title}</h1>
+      <p>{entry.data.description}</p>
+    </header>
+
+    <div class="article__layout">
+      <aside class="article__meta">
+        <span>Published</span>
+        <strong>{published}</strong>
+        <span>Reading</span>
+        <strong>{entry.data.minutes} min</strong>
+        <span>Tags</span>
+        <div>
+          {entry.data.tags.map((tag) => <em>{tag}</em>)}
+        </div>
+      </aside>
+
+      <div class="article__body">
+        <slot />
+      </div>
+
+      <ArticleToc headings={headings} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  .article__hero {
+    max-width: 58rem;
+    margin-bottom: clamp(3rem, 7vw, 6rem);
+  }
+
+  .article__eyebrow {
+    margin: 0 0 1rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2.7rem, 6vw, 6rem);
+    font-weight: 820;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .article__hero p:not(.article__eyebrow) {
+    max-width: 44rem;
+    margin: 1.3rem 0 0;
+    color: #35332f;
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.75;
+  }
+
+  .article__layout {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.22fr) minmax(0, 48rem) minmax(10rem, 0.22fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .article__meta {
+    position: sticky;
+    top: 6rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .article__meta strong {
+    margin-bottom: 0.75rem;
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .article__meta div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .article__meta em {
+    border: 1px solid var(--color-line);
+    padding: 0.24rem 0.42rem;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .article__body {
+    min-width: 0;
+  }
+
+  .article__body :global(h2) {
+    scroll-margin-top: 7rem;
+    margin: 3rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .article__body :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .article__body :global(p),
+  .article__body :global(li) {
+    color: #35332f;
+    font-size: 1.03rem;
+    line-height: 2;
+  }
+
+  .article__body :global(a) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .article__body :global(pre) {
+    overflow-x: auto;
+    border: 1px solid var(--color-line);
+    padding: 1rem;
+    background: #111;
+    color: #f5f1e8;
+  }
+
+  @media (max-width: 1040px) {
+    .article__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .article__meta {
+      position: static;
+      border-top: 1px solid var(--color-line);
+      border-bottom: 1px solid var(--color-line);
+      padding-block: 1rem;
+    }
+  }
+</style>
