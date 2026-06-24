@@ -24,6 +24,7 @@
   "devDependencies": {
     "@astrojs/check": "latest",
     "@playwright/test": "latest",
+    "@types/node": "^26.0.0",
     "sharp": "latest",
     "typescript": "latest",
     "wrangler": "latest"
