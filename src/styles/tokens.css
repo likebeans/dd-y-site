@@ -1,0 +1,16 @@
+:root {
+  color-scheme: light;
+  --color-paper: #f5f1e8;
+  --color-ink: #111111;
+  --color-muted: #8b867c;
+  --color-soft: #ece6dc;
+  --color-line: #d9d3c8;
+  --color-line-strong: #c7c0b4;
+  --color-lime: #c7f432;
+  --space-page: clamp(1.25rem, 5vw, 4rem);
+  --max-page: 1440px;
+  --radius-small: 4px;
+  --font-display: "Geist", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}

@@ -1,0 +1,17 @@
+---
+import { navItems } from "@/data/navigation";
+import { profile } from "@/data/profile";
+
+const resumeHref = navItems.find((item) => item.label === "RESUME")?.href ?? "/resume";
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner page-shell">
+    <span>© 2026 {profile.handle}</span>
+    <div class="site-footer__links" aria-label="Footer links">
+      <a href={`mailto:${profile.email}`}>EMAIL</a>
+      <a href={profile.github}>GITHUB</a>
+      <a href={resumeHref}>RESUME</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+---
+import { navItems } from "@/data/navigation";
+import { profile } from "@/data/profile";
+---
+
+<header class="site-header">
+  <div class="site-header__inner page-shell">
+    <a class="site-header__brand" href="/" aria-label="dd-y / 余非凡 home">
+      {profile.handle} / {profile.name}
+    </a>
+    <nav class="site-header__nav" aria-label="Primary navigation">
+      {
+        navItems.map((item) => (
+          <a href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
