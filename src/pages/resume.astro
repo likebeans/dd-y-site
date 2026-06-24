@@ -162,14 +162,56 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   }
 
   @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
     :global(.site-header),
     :global(.site-footer),
     header a {
       display: none;
     }
 
+    :global(html),
+    :global(body) {
+      background: var(--color-paper);
+    }
+
     .resume-page {
+      max-width: none;
       padding: 0;
+    }
+
+    header {
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3.1rem;
+    }
+
+    header span {
+      margin-top: 0.45rem;
+      font-size: 0.9rem;
+    }
+
+    .skill-grid,
+    .resume-experience {
+      gap: 0.65rem;
+    }
+
+    h3 {
+      font-size: 0.95rem;
+    }
+
+    p,
+    li {
+      font-size: 0.86rem;
+    }
+
+    ul {
+      margin-top: 0.2rem;
     }
   }
 </style>
