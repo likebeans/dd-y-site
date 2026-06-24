@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+import ArrowLink from "@/components/ArrowLink.astro";
+import SectionLabel from "@/components/SectionLabel.astro";
+
+const posts = (await getCollection("writing"))
+  .filter((post) => post.data.featured)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<section class="featured-writing page-shell">
+  <SectionLabel label="Featured Writing" kicker="Long-form thinking" />
+  <div class="featured-writing__grid">
+    {
+      posts.map((post, index) => (
+        <a class:list={["writing-row", index === 0 && "writing-row--lead"]} href={`/writing/${post.id}`}>
+          <span class="writing-row__meta">
+            {post.data.tags.join(" · ")} · {post.data.minutes} min read
+          </span>
+          <strong>{post.data.title}</strong>
+          <p>{post.data.description}</p>
+        </a>
+      ))
+    }
+  </div>
+  <ArrowLink href="/writing" label="VIEW ALL WRITING" />
+</section>
+
+<style>
+  .featured-writing {
+    padding-block: clamp(3rem, 7vw, 6rem);
+  }
+
+  .featured-writing__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 0;
+    margin: 1.8rem 0 1.5rem;
+    border-top: 1px solid var(--color-line);
+    border-left: 1px solid var(--color-line);
+  }
+
+  .writing-row {
+    min-height: 17rem;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: clamp(1.2rem, 3vw, 2rem);
+    transition: background 180ms ease;
+  }
+
+  .writing-row:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .writing-row--lead {
+    min-height: 24rem;
+  }
+
+  .writing-row__meta {
+    display: block;
+    margin-bottom: 2.4rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .writing-row strong {
+    display: block;
+    max-width: 16em;
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.4vw, 2.15rem);
+    line-height: 1.18;
+  }
+
+  .writing-row p {
+    max-width: 32rem;
+    margin: 1rem 0 0;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 820px) {
+    .featured-writing__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .writing-row,
+    .writing-row--lead {
+      min-height: auto;
+    }
+  }
+</style>

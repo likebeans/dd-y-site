@@ -1,0 +1,44 @@
+---
+interface Props {
+  label: string;
+  kicker?: string;
+}
+
+const { label, kicker } = Astro.props;
+---
+
+<div class="section-label">
+  <span>{label}</span>
+  {kicker && <small>{kicker}</small>}
+</div>
+
+<style>
+  .section-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .section-label span::after {
+    display: inline-block;
+    width: 0.38rem;
+    height: 0.38rem;
+    margin-left: 0.45rem;
+    border-radius: 999px;
+    content: "";
+    background: var(--color-lime);
+    vertical-align: 0.06rem;
+  }
+
+  .section-label small {
+    color: var(--color-muted);
+    font-size: inherit;
+  }
+</style>

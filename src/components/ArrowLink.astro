@@ -1,0 +1,51 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "primary" | "quiet";
+}
+
+const { href, label, variant = "quiet" } = Astro.props;
+---
+
+<a class:list={["arrow-link", `arrow-link--${variant}`]} href={href}>
+  <span>{label}</span>
+  <span aria-hidden="true">↗</span>
+</a>
+
+<style>
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 2.9rem;
+    border: 1px solid var(--color-ink);
+    padding-inline: 1.05rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .arrow-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .arrow-link--primary {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .arrow-link--quiet {
+    border-color: transparent;
+  }
+
+  .arrow-link--quiet:hover {
+    background: rgba(17, 17, 17, 0.04);
+  }
+</style>

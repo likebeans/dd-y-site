@@ -1,0 +1,19 @@
+---
+import ExperiencePreview from "@/components/home/ExperiencePreview.astro";
+import FeaturedWriting from "@/components/home/FeaturedWriting.astro";
+import Hero from "@/components/home/Hero.astro";
+import SelectedWork from "@/components/home/SelectedWork.astro";
+import TechnicalFocus from "@/components/home/TechnicalFocus.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="dd-y / 余非凡 - AI Systems Engineer"
+  description="FROM MODELS TO SYSTEMS. 大模型算法工程师，关注 RAG、Agent、工具调用、评测与可上线的 AI 应用系统。"
+>
+  <Hero />
+  <SelectedWork />
+  <ExperiencePreview />
+  <TechnicalFocus />
+  <FeaturedWriting />
+</BaseLayout>
