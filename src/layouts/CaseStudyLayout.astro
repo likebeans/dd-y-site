@@ -1,0 +1,156 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ArchitectureFigure from "@/components/work/ArchitectureFigure.astro";
+import MetricStrip from "@/components/work/MetricStrip.astro";
+import ProjectMeta from "@/components/work/ProjectMeta.astro";
+
+interface Props {
+  entry: CollectionEntry<"work">;
+}
+
+const { entry } = Astro.props;
+---
+
+<BaseLayout title={`${entry.data.title} - dd-y / 余非凡`} description={entry.data.summary}>
+  <article class="case-study page-shell">
+    <header class="case-study__hero" id="overview">
+      <div>
+        <p class="case-study__eyebrow">{entry.data.status}</p>
+        <h1>{entry.data.title}</h1>
+        <p>{entry.data.summary}</p>
+      </div>
+      <ProjectMeta
+        year={entry.data.year}
+        role={entry.data.role}
+        status={entry.data.status}
+        stack={entry.data.stack}
+        tags={entry.data.tags}
+      />
+    </header>
+
+    <MetricStrip metrics={entry.data.metrics} />
+    <ArchitectureFigure title={`${entry.data.title} Architecture`} />
+
+    <div class="case-study__body">
+      <nav aria-label="Case study sections">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#constraints">Constraints</a>
+        <a href="#system-design">System Design</a>
+        <a href="#key-decisions">Key Decisions</a>
+        <a href="#impact">Impact</a>
+        <a href="#reflection">Reflection</a>
+      </nav>
+      <div class="case-study__content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  .case-study__hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.34fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .case-study__eyebrow {
+    margin: 0 0 1.2rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 12ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3.4rem, 8vw, 8.5rem);
+    font-weight: 840;
+    letter-spacing: 0;
+    line-height: 0.88;
+  }
+
+  .case-study__hero p:not(.case-study__eyebrow) {
+    max-width: 42rem;
+    margin: 1.5rem 0 0;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    line-height: 1.7;
+  }
+
+  .case-study__body {
+    display: grid;
+    grid-template-columns: minmax(9rem, 0.24fr) minmax(0, 0.76fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  nav {
+    position: sticky;
+    top: 6rem;
+    display: grid;
+    gap: 0.7rem;
+    align-self: start;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  nav a:hover {
+    color: var(--color-ink);
+  }
+
+  .case-study__content {
+    max-width: 52rem;
+  }
+
+  .case-study__content :global(h2) {
+    scroll-margin-top: 7rem;
+    margin: 3rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.08;
+  }
+
+  .case-study__content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .case-study__content :global(p),
+  .case-study__content :global(li) {
+    color: #35332f;
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+
+  .case-study__content :global(ul) {
+    padding-left: 1.2rem;
+  }
+
+  @media (max-width: 860px) {
+    .case-study__hero,
+    .case-study__body {
+      grid-template-columns: 1fr;
+    }
+
+    nav {
+      position: static;
+      display: flex;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--color-line);
+      border-bottom: 1px solid var(--color-line);
+      padding-block: 1rem;
+    }
+  }
+</style>

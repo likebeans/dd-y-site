@@ -1,0 +1,70 @@
+---
+interface Props {
+  year: number;
+  role: string;
+  status: string;
+  stack: string[];
+  tags: string[];
+}
+
+const { year, role, status, stack, tags } = Astro.props;
+---
+
+<aside class="project-meta">
+  <dl>
+    <div>
+      <dt>Year</dt>
+      <dd>{year}</dd>
+    </div>
+    <div>
+      <dt>Role</dt>
+      <dd>{role}</dd>
+    </div>
+    <div>
+      <dt>Status</dt>
+      <dd>{status}</dd>
+    </div>
+  </dl>
+  <div class="project-meta__tags">
+    {[...tags, ...stack].map((item) => <span>{item}</span>)}
+  </div>
+</aside>
+
+<style>
+  .project-meta {
+    display: grid;
+    gap: 1.25rem;
+    color: var(--color-muted);
+  }
+
+  dl {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0.25rem 0 0;
+    color: var(--color-ink);
+    line-height: 1.5;
+  }
+
+  .project-meta__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  span {
+    border: 1px solid var(--color-line);
+    padding: 0.28rem 0.45rem;
+    font-size: 0.72rem;
+  }
+</style>

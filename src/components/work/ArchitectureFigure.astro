@@ -1,0 +1,131 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "System Architecture" } = Astro.props;
+---
+
+<figure class="architecture-figure">
+  <figcaption>{title}</figcaption>
+  <div class="architecture-figure__canvas" aria-label={title}>
+    <div class="arch-node arch-node--user">User</div>
+    <div class="arch-node arch-node--agent">Agent Runtime</div>
+    <div class="arch-node arch-node--retrieval">Retrieval</div>
+    <div class="arch-node arch-node--tools">MCP Tools</div>
+    <div class="arch-node arch-node--system">Business System</div>
+    <span class="arch-line arch-line--vertical"></span>
+    <span class="arch-line arch-line--left"></span>
+    <span class="arch-line arch-line--right"></span>
+  </div>
+</figure>
+
+<style>
+  .architecture-figure {
+    margin: 2rem 0;
+    border: 1px solid var(--color-line);
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  figcaption {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.85rem 1rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .architecture-figure__canvas {
+    position: relative;
+    min-height: clamp(18rem, 40vw, 28rem);
+    overflow: hidden;
+    background:
+      linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px) 0 0 / 25% 100%,
+      linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px) 0 0 / 100% 25%;
+  }
+
+  .arch-node {
+    position: absolute;
+    z-index: 1;
+    min-width: 7rem;
+    border: 1px solid var(--color-line);
+    padding: 0.65rem 0.8rem;
+    background: color-mix(in srgb, var(--color-paper) 90%, white);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .arch-node--user {
+    top: 11%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .arch-node--agent {
+    top: 36%;
+    left: 50%;
+    border-color: var(--color-lime);
+    transform: translateX(-50%);
+  }
+
+  .arch-node--retrieval {
+    top: 58%;
+    left: 20%;
+  }
+
+  .arch-node--tools {
+    top: 58%;
+    right: 20%;
+  }
+
+  .arch-node--system {
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .arch-line {
+    position: absolute;
+    background: var(--color-line-strong);
+  }
+
+  .arch-line--vertical {
+    top: 19%;
+    bottom: 20%;
+    left: 50%;
+    width: 1px;
+  }
+
+  .arch-line--left {
+    top: 63%;
+    left: 33%;
+    width: 17%;
+    height: 1px;
+  }
+
+  .arch-line--right {
+    top: 63%;
+    right: 33%;
+    width: 17%;
+    height: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .arch-node {
+      min-width: 5.5rem;
+      font-size: 0.58rem;
+    }
+
+    .arch-node--retrieval {
+      left: 7%;
+    }
+
+    .arch-node--tools {
+      right: 7%;
+    }
+  }
+</style>

@@ -1,0 +1,65 @@
+---
+import { getCollection } from "astro:content";
+import WorkIndex from "@/components/work/WorkIndex.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Work - dd-y / 余非凡"
+  description="精选项目与系统设计实践，覆盖 RAG、Agent、工具调用与企业 AI 应用。"
+>
+  <section class="work-page page-shell">
+    <header>
+      <p>Selected Work</p>
+      <h1>WORK</h1>
+      <span>精选项目与系统设计，真实场景中的 AI 应用实践。</span>
+    </header>
+    <WorkIndex works={works} />
+  </section>
+</BaseLayout>
+
+<style>
+  .work-page {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.5fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  p {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 13vw, 12rem);
+    font-weight: 850;
+    line-height: 0.82;
+  }
+
+  span {
+    max-width: 23rem;
+    font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 720px) {
+    header {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
