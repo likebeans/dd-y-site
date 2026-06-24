@@ -1,37 +1,20 @@
 ---
 import { getCollection } from "astro:content";
+import { ProjectPreview } from "@/components/islands/ProjectPreview";
 import SectionLabel from "@/components/SectionLabel.astro";
 
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
+const projects = works.map((work) => ({
+  title: work.data.title,
+  role: work.data.role,
+  year: work.data.year,
+  href: `/work/${work.id}`
+}));
 ---
 
 <section class="selected-work page-shell" id="work">
   <SectionLabel label="Selected Work" kicker="Case studies" />
-  <div class="selected-work__layout">
-    <div class="selected-work__list">
-      {
-        works.map((work) => (
-          <a class="work-row" href={`/work/${work.id}`}>
-            <span class="work-row__index">{String(work.data.order).padStart(2, "0")}</span>
-            <span>
-              <strong>{work.data.title}</strong>
-              <small>{work.data.role}</small>
-            </span>
-            <span class="work-row__year">{work.data.year}</span>
-          </a>
-        ))
-      }
-    </div>
-    <aside class="selected-work__preview" aria-label="Architecture preview">
-      <div class="preview-grid">
-        <span>User</span>
-        <span class="active">Agent Runtime</span>
-        <span>Retrieval</span>
-        <span>Tools</span>
-        <span>Business System</span>
-      </div>
-    </aside>
-  </div>
+  <ProjectPreview projects={projects} client:visible />
 </section>
 
 <style>
@@ -40,18 +23,18 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
     padding-block: clamp(3rem, 7vw, 6rem);
   }
 
-  .selected-work__layout {
+  :global(.project-preview) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.76fr);
     gap: clamp(2rem, 5vw, 4rem);
     margin-top: 1.8rem;
   }
 
-  .selected-work__list {
+  :global(.project-preview__list) {
     border-top: 1px solid var(--color-line);
   }
 
-  .work-row {
+  :global(.work-row) {
     display: grid;
     grid-template-columns: 3rem minmax(0, 1fr) 4rem;
     gap: 1rem;
@@ -63,46 +46,63 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
       background 180ms ease;
   }
 
-  .work-row:hover {
+  :global(.work-row:hover),
+  :global(.work-row[data-active="true"]) {
     padding-left: 0.8rem;
     background: rgba(199, 244, 50, 0.08);
   }
 
-  .work-row__index,
-  .work-row__year {
+  :global(.work-row__index),
+  :global(.work-row__year) {
     color: var(--color-muted);
     font-family: var(--font-mono);
     font-size: 0.72rem;
   }
 
-  .work-row strong {
+  :global(.work-row strong) {
     display: block;
     font-family: var(--font-display);
     font-size: clamp(1.05rem, 1.5vw, 1.35rem);
   }
 
-  .work-row small {
+  :global(.work-row small) {
     display: block;
     margin-top: 0.35rem;
     color: var(--color-muted);
   }
 
-  .selected-work__preview {
+  :global(.selected-work__preview) {
     min-height: 20rem;
     border: 1px solid var(--color-line);
     padding: clamp(1rem, 3vw, 2rem);
     background: rgba(255, 255, 255, 0.16);
   }
 
-  .preview-grid {
+  :global(.selected-work__preview-title) {
+    display: grid;
+    gap: 0.35rem;
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  :global(.selected-work__preview-title small) {
+    color: var(--color-muted);
+    font-size: 0.68rem;
+  }
+
+  :global(.preview-grid) {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     height: 100%;
     align-content: center;
+    margin-top: 1.5rem;
   }
 
-  .preview-grid span {
+  :global(.preview-grid span) {
     border: 1px solid var(--color-line);
     padding: 0.8rem;
     color: var(--color-muted);
@@ -111,14 +111,14 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
     text-align: center;
   }
 
-  .preview-grid .active {
+  :global(.preview-grid .active) {
     grid-column: 1 / -1;
     border-color: var(--color-lime);
     color: var(--color-ink);
   }
 
   @media (max-width: 820px) {
-    .selected-work__layout {
+    :global(.project-preview) {
       grid-template-columns: 1fr;
     }
   }

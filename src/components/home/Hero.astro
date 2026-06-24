@@ -1,15 +1,7 @@
 ---
 import ArrowLink from "@/components/ArrowLink.astro";
+import { SystemTrace } from "@/components/islands/SystemTrace";
 import { profile } from "@/data/profile";
-
-const traceNodes = [
-  ["MODEL", "Understand capability"],
-  ["CONTEXT", "Organize information"],
-  ["RETRIEVAL", "Find relevant knowledge"],
-  ["TOOLS", "Call reliable functions"],
-  ["WORKFLOW", "Orchestrate process"],
-  ["PRODUCT", "Deliver value"]
-];
 ---
 
 <section class="hero page-shell">
@@ -49,15 +41,7 @@ const traceNodes = [
     </aside>
   </div>
 
-  <div class="system-trace" aria-label="System trace">
-    {traceNodes.map(([label, text]) => (
-      <a class="system-trace__node" href={`/writing?topic=${label.toLowerCase()}`}>
-        <span class="system-trace__dot"></span>
-        <strong>{label}</strong>
-        <small>{text}</small>
-      </a>
-    ))}
-  </div>
+  <SystemTrace client:visible />
 </section>
 
 <style>
@@ -240,24 +224,31 @@ const traceNodes = [
     padding-top: 1.65rem;
   }
 
-  .system-trace::before {
+  :global(.system-trace__line) {
     position: absolute;
     top: 0.25rem;
     right: 0;
     left: 0;
     height: 1px;
-    content: "";
-    background: linear-gradient(90deg, var(--color-lime), var(--color-line));
+    background: var(--color-line);
   }
 
-  .system-trace__node {
+  :global(.system-trace__line span) {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--color-lime), var(--color-line));
+    transform-origin: left;
+  }
+
+  :global(.system-trace__node) {
     position: relative;
     display: grid;
     gap: 0.55rem;
     min-height: 5rem;
   }
 
-  .system-trace__dot {
+  :global(.system-trace__dot) {
     position: absolute;
     top: -1.75rem;
     left: 0;
@@ -267,13 +258,13 @@ const traceNodes = [
     background: var(--color-paper);
   }
 
-  .system-trace strong {
+  :global(.system-trace strong) {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.02em;
   }
 
-  .system-trace small {
+  :global(.system-trace small) {
     max-width: 10rem;
     color: var(--color-muted);
     font-size: 0.82rem;
@@ -311,16 +302,23 @@ const traceNodes = [
       padding-left: 1.25rem;
     }
 
-    .system-trace::before {
+    :global(.system-trace__line) {
       top: 0;
       bottom: 0;
       left: 0;
       width: 1px;
       height: auto;
-      background: linear-gradient(var(--color-lime), var(--color-line));
+      background: var(--color-line);
     }
 
-    .system-trace__dot {
+    :global(.system-trace__line span) {
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(var(--color-lime), var(--color-line));
+      transform-origin: top;
+    }
+
+    :global(.system-trace__dot) {
       top: 0.2rem;
       left: -1.52rem;
     }
