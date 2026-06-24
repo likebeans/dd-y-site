@@ -1,0 +1,41 @@
+---
+title: "Intelligent Bidding System"
+summary: "结合 AI 配置、RAG 与 Agent 的智能投标系统，用于提升文档处理和方案生成效率。"
+year: 2026
+order: 3
+role: "Crawler / Agent / RAG"
+status: "In Progress"
+stack: ["Python", "Java", "RAG", "Crawler", "PostgreSQL", "Object Storage"]
+tags: ["RAG", "Agent", "Document AI"]
+metrics:
+  - label: "Doc pipeline"
+    value: "Structured"
+  - label: "Review loop"
+    value: "Human-in-loop"
+---
+
+## Problem
+
+投标场景涉及大量招标文件、历史方案、资质材料和格式要求。系统不仅要生成文本，还要理解文档结构、约束条件和业务事实。
+
+## Constraints
+
+- 文档包含表格、图片、代码块和扫描件，不能简单按长度切分。
+- 生成内容必须可追溯到来源。
+- 关键结论需要人工复核，不能完全自动提交。
+
+## System Design
+
+系统由文档采集、解析、分块、检索、重排、生成和审核流程组成。RAG 负责证据召回，Agent 负责多步骤任务编排，业务系统负责权限与状态。
+
+## Key Decisions
+
+把投标系统做成“可控生成流程”比做成“万能写作助手”更可靠。每一步都需要中间结果、引用依据和人工确认入口。
+
+## Impact
+
+项目目标是降低重复性文档整理成本，并提升方案生成的一致性和可复查性。
+
+## Reflection
+
+后续重点会放在评测体系、模板管理、引用质量和多人协作流程上。

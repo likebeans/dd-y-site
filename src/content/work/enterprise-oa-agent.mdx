@@ -1,0 +1,41 @@
+---
+title: "Enterprise OA Agent"
+summary: "把企业流程中的自然语言请求转化为可审批、可追踪、可回滚的系统动作。"
+year: 2025
+order: 1
+role: "Agent / MCP / Workflow"
+status: "Case Study"
+stack: ["Python", "FastAPI", "LangGraph", "PostgreSQL", "Redis", "MCP"]
+tags: ["Agent", "Workflow", "Tool Calling"]
+metrics:
+  - label: "Intent coverage"
+    value: "80%"
+  - label: "Tool success"
+    value: "95%+"
+---
+
+## Problem
+
+企业 OA 系统中的流程入口分散，用户需要理解多个系统页面、审批规则和字段约束。单纯把模型接入聊天窗口并不能解决问题，真正困难的是把自然语言意图转成可执行、可审批、可审计的业务动作。
+
+## Constraints
+
+- 工具调用必须可审计，不能绕过原有权限系统。
+- 敏感操作需要审批和二次确认。
+- Agent 执行失败时要能恢复现场，而不是只返回一段解释。
+
+## System Design
+
+系统把用户输入拆成意图识别、参数补全、审批检查、工具调用和结果回写几个阶段。模型只负责理解与规划，真正的动作由受控工具和业务系统接口完成。
+
+## Key Decisions
+
+最关键的判断是让 Agent 服从流程，而不是让流程迁就 Agent。每个工具都需要幂等约束、权限检查和结构化返回，避免模型把一次失败解释成另一次行动。
+
+## Impact
+
+项目验证了自然语言入口在流程密集型场景中的可行性，也沉淀出工具注册、审批拦截和执行日志等可复用能力。
+
+## Reflection
+
+下一版会进一步增强评测集、异常恢复和跨系统状态同步，让 Agent Runtime 更接近生产级工作流引擎。

@@ -1,0 +1,41 @@
+---
+title: "AI Browser"
+summary: "面向复杂网页任务的下一代 AI 浏览器实验，关注检索、浏览、动作与结果验证。"
+year: 2024
+order: 2
+role: "RAG / Search / VLLM"
+status: "Prototype"
+stack: ["Python", "Playwright", "VLLM", "Embeddings", "RAG"]
+tags: ["Browser Agent", "Search", "VLLM"]
+metrics:
+  - label: "Task flows"
+    value: "20+"
+  - label: "Latency focus"
+    value: "TTFT"
+---
+
+## Problem
+
+浏览器中的 AI 任务并不是一次问答，而是搜索、阅读、定位、点击、验证和总结的连续过程。模型需要看到页面状态，也需要知道什么时候停止。
+
+## Constraints
+
+- 网页结构不稳定，DOM、视觉布局和内容摘要都可能变化。
+- 浏览动作需要可回放，方便定位失败原因。
+- 推理延迟会直接影响用户体验。
+
+## System Design
+
+原型把页面观察、检索摘要、动作规划和执行验证拆成独立模块。浏览器自动化负责状态采集，模型负责下一步决策，评测脚本负责验证任务是否真的完成。
+
+## Key Decisions
+
+浏览任务不能只依赖页面全文摘要。更稳妥的方式是结合 DOM 结构、可点击元素、页面截图和任务上下文，让模型获得足够但不过量的信息。
+
+## Impact
+
+这个项目帮助沉淀了浏览器 Agent 的基本执行模式，也暴露出长链路任务在评测和错误恢复上的复杂性。
+
+## Reflection
+
+后续更值得投入的是任务评测、动作约束和失败归因，而不是继续堆更大的提示词。

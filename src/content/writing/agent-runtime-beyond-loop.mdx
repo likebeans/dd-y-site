@@ -1,0 +1,22 @@
+---
+title: "Agent Runtime 不只是循环调用模型"
+description: "一个生产级 Agent Runtime 还需要状态、审批、工具、事件与可观测性。"
+publishedAt: 2026-06-20
+minutes: 16
+tags: ["Agent", "System Design", "Runtime"]
+featured: true
+---
+
+Agent 的难点不在于让模型多调用一次工具，而在于让执行过程可控、可评测、可恢复。
+
+## 从 Demo 到 Runtime
+
+Demo 里的 Agent 可以是一个循环：模型规划，调用工具，观察结果，再继续规划。但进入真实系统之后，问题会变成权限、状态、审计、幂等、超时、回滚和人工确认。
+
+## Runtime 需要承载什么
+
+一个更可靠的 Agent Runtime 至少要管理任务状态、工具注册、参数校验、审批节点、事件日志和观测指标。模型只是其中一个决策组件。
+
+## 关键判断
+
+如果一个 Agent 执行失败后无法解释它做过什么，也无法安全恢复，那么它就还不能算生产级系统。
