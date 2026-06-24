@@ -46,16 +46,16 @@ import { profile } from "@/data/profile";
 
 <style>
   .hero {
-    min-height: calc(100vh - 4.5rem);
-    padding-top: clamp(3rem, 7vw, 6.75rem);
-    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+    min-height: min(54rem, calc(92vh - 4.5rem));
+    padding-top: clamp(2.5rem, 6vw, 5.5rem);
+    padding-bottom: clamp(1.75rem, 4vw, 3rem);
   }
 
   .hero__meta {
     display: flex;
     flex-wrap: wrap;
     gap: 0.7rem 1.25rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: clamp(2rem, 4.2vw, 3.75rem);
     color: var(--color-muted);
     font-size: 0.68rem;
   }
@@ -80,7 +80,7 @@ import { profile } from "@/data/profile";
     max-width: 13ch;
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(4.2rem, 11.4vw, 11.5rem);
+    font-size: clamp(4.2rem, 8vw, 9.25rem);
     font-weight: 860;
     letter-spacing: 0;
     line-height: 0.84;
@@ -114,7 +114,7 @@ import { profile } from "@/data/profile";
 
   .hero__diagram {
     position: relative;
-    min-height: 34rem;
+    min-height: 29rem;
     border-left: 1px solid var(--color-line);
     background:
       linear-gradient(to right, transparent 49.8%, rgba(17, 17, 17, 0.08) 50%, transparent 50.2%),
@@ -215,12 +215,12 @@ import { profile } from "@/data/profile";
     left: 18%;
   }
 
-  .system-trace {
+  :global(.system-trace) {
     position: relative;
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1.4rem;
-    margin-top: clamp(2.5rem, 6vw, 5rem);
+    margin-top: clamp(2rem, 4vw, 3.75rem);
     padding-top: 1.65rem;
   }
 
@@ -282,45 +282,89 @@ import { profile } from "@/data/profile";
       border-left: 0;
     }
 
-    .system-trace {
+    :global(.system-trace) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       row-gap: 2rem;
+    }
+  }
+
+  @media (min-width: 721px) {
+    h1 span {
+      white-space: nowrap;
     }
   }
 
   @media (max-width: 620px) {
     .hero {
       min-height: auto;
+      padding-top: 1.8rem;
+      padding-bottom: 1.4rem;
+    }
+
+    .hero__meta {
+      margin-bottom: 1.55rem;
+    }
+
+    .hero__role {
+      margin-bottom: 0.9rem;
+      font-size: 0.68rem;
+    }
+
+    h1 {
+      font-size: clamp(3.55rem, 16vw, 4.2rem);
+      line-height: 0.85;
+    }
+
+    .hero__thesis {
+      margin-top: 1.1rem;
+      font-size: 1.25rem;
+    }
+
+    .hero__intro {
+      margin-top: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .hero__actions {
+      margin-top: 1.45rem;
     }
 
     .hero__diagram {
       display: none;
     }
 
-    .system-trace {
-      grid-template-columns: 1fr;
-      padding-left: 1.25rem;
+    :global(.system-trace) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1rem;
+      margin-top: 1.55rem;
+      padding-top: 0;
     }
 
     :global(.system-trace__line) {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 1px;
-      height: auto;
-      background: var(--color-line);
+      display: none;
     }
 
-    :global(.system-trace__line span) {
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(var(--color-lime), var(--color-line));
-      transform-origin: top;
+    :global(.system-trace__node) {
+      gap: 0.4rem;
+      min-height: 0;
+      border-top: 1px solid var(--color-line);
+      padding-top: 0.65rem;
     }
 
     :global(.system-trace__dot) {
-      top: 0.2rem;
-      left: -1.52rem;
+      position: static;
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+
+    :global(.system-trace small) {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.system-trace__line span) {
+      transform: scaleX(1) !important;
     }
   }
 </style>

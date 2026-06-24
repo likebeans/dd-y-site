@@ -16,9 +16,9 @@ export function SystemTrace() {
     <div className="system-trace" aria-label="System trace">
       <div className="system-trace__line" aria-hidden="true">
         <motion.span
-          initial={reduceMotion ? false : { scaleX: 0 }}
+          initial={reduceMotion ? { scaleX: 1 } : { scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
       {nodes.map((node) => (
