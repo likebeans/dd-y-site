@@ -1,0 +1,175 @@
+---
+import ResumeSection from "@/components/resume/ResumeSection.astro";
+import { experience } from "@/data/experience";
+import { profile } from "@/data/profile";
+import { resume } from "@/data/resume";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Resume - dd-y / 余非凡" description="余非凡的在线简历。">
+  <section class="resume-page page-shell">
+    <header>
+      <div>
+        <p>Resume</p>
+        <h1>{profile.name}</h1>
+        <span>{profile.role}</span>
+      </div>
+      <a href="/resume-yufeifan.pdf">下载 PDF</a>
+    </header>
+
+    <ResumeSection title="个人概述">
+      <p>{resume.summary}</p>
+    </ResumeSection>
+
+    <ResumeSection title="技术能力">
+      <div class="skill-grid">
+        {resume.skills.map((group) => (
+          <section>
+            <h3>{group.label}</h3>
+            <p>{group.items.join(" / ")}</p>
+          </section>
+        ))}
+      </div>
+    </ResumeSection>
+
+    <ResumeSection title="工作经历">
+      <div class="resume-experience">
+        {experience.map((item) => (
+          <article>
+            <time>{item.period}</time>
+            <h3>{item.title}</h3>
+            <p>{item.organization}</p>
+            <ul>
+              {item.highlights.map((highlight) => <li>{highlight}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </ResumeSection>
+
+    <ResumeSection title="精选项目">
+      <p>{resume.projects.join(" / ")}</p>
+    </ResumeSection>
+
+    <ResumeSection title="技术写作">
+      <p>{resume.writing.join(" / ")}</p>
+    </ResumeSection>
+
+    <ResumeSection title="教育背景">
+      <p>{resume.education}</p>
+    </ResumeSection>
+
+    <ResumeSection title="链接">
+      <div class="resume-links">
+        {resume.links.map((link) => <a href={link.href}>{link.label}</a>)}
+      </div>
+    </ResumeSection>
+  </section>
+</BaseLayout>
+
+<style>
+  .resume-page {
+    max-width: 1120px;
+    padding-top: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  header p {
+    margin: 0 0 0.8rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+  }
+
+  header span {
+    display: block;
+    margin-top: 1rem;
+    color: #35332f;
+  }
+
+  header a {
+    border: 1px solid var(--color-ink);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  .skill-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  h3 {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+
+  .resume-experience {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .resume-experience article {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  time {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  .resume-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .resume-links a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  @media (max-width: 720px) {
+    header {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+
+  @media print {
+    :global(.site-header),
+    :global(.site-footer),
+    header a {
+      display: none;
+    }
+
+    .resume-page {
+      padding: 0;
+    }
+  }
+</style>

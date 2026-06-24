@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="resume-section">
+  <h2>{title}</h2>
+  <div>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .resume-section {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 2rem;
+    border-top: 1px solid var(--color-line);
+    padding-block: 1.4rem;
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  :global(.resume-section p:first-child) {
+    margin-top: 0;
+  }
+
+  :global(.resume-section p),
+  :global(.resume-section li) {
+    color: #35332f;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 720px) {
+    .resume-section {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+</style>

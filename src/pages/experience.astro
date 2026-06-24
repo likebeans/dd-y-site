@@ -1,0 +1,98 @@
+---
+import ExperienceTimeline from "@/components/resume/ExperienceTimeline.astro";
+import { currentFocus } from "@/data/experience";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Experience - dd-y / 余非凡" description="余非凡的工作经历、技术路径和当前关注方向。">
+  <section class="experience-page page-shell">
+    <header>
+      <p>Experience</p>
+      <h1>EXPERIENCE</h1>
+      <span>从模型能力本身，逐渐转向模型如何进入真实业务系统。</span>
+    </header>
+
+    <div class="experience-page__intro">
+      <p>
+        我的工作重心从模型能力本身，逐渐转向模型如何进入真实业务系统。模型、检索和推理只是起点，真正落地时还需要数据、权限、审批、评测、观测和工程边界。
+      </p>
+      <div>
+        {currentFocus.map((item) => <span>{item}</span>)}
+      </div>
+    </div>
+
+    <ExperienceTimeline />
+  </section>
+</BaseLayout>
+
+<style>
+  .experience-page {
+    padding-top: clamp(3rem, 7vw, 6rem);
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  header p {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-weight: 850;
+    line-height: 0.82;
+  }
+
+  header span,
+  .experience-page__intro p {
+    max-width: 34rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+    line-height: 1.65;
+  }
+
+  .experience-page__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(0, 0.45fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-bottom: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .experience-page__intro p {
+    margin: 0;
+  }
+
+  .experience-page__intro div {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    gap: 0.4rem;
+  }
+
+  .experience-page__intro span {
+    border: 1px solid var(--color-line);
+    padding: 0.36rem 0.5rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 780px) {
+    header,
+    .experience-page__intro {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
