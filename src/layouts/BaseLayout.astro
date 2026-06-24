@@ -7,12 +7,18 @@ import "@/styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonical?: string;
 }
 
 const {
   title = "dd-y / 余非凡",
-  description = "大模型算法工程师，关注 RAG、Agent、工具调用、评测与可上线的 AI 应用系统。"
+  description = "大模型算法工程师，关注 RAG、Agent、工具调用、评测与可上线的 AI 应用系统。",
+  image = "/og-home.png",
+  canonical = new URL(Astro.url.pathname, Astro.site ?? "https://yufeifan.cn").toString()
 } = Astro.props;
+
+const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
 ---
 
 <!doctype html>
@@ -22,7 +28,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f5f1e8" />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="dd-y / 余非凡" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
   </head>
   <body>
