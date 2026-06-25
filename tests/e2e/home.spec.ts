@@ -23,8 +23,10 @@ test("homepage presents identity and primary sections", async ({ page }) => {
 test("homepage exposes refined interaction and language controls", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.locator("[data-home-section='02']")).toBeVisible();
-  await expect(page.locator("[data-home-section='04']")).toBeVisible();
+  await expect(page.locator("[data-home-section='02']")).toHaveCount(0);
+  await expect(page.locator("[data-section-marker='Writing Tracks']")).toBeVisible();
+  await expect(page.locator("[data-section-marker='Current Thinking']")).toBeVisible();
+  await expect(page.locator("[data-surface-field]")).toBeVisible();
   await expect(page.locator("[data-home-visual]")).toBeVisible();
   await expect(page.getByRole("img", { name: /homepage image slot/i })).toBeVisible();
 
@@ -37,4 +39,9 @@ test("homepage exposes refined interaction and language controls", async ({ page
   await expect
     .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--cursor-x")))
     .toBe("240px");
+
+  await page.mouse.wheel(0, 900);
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--scroll-progress")))
+    .not.toBe("0");
 });
