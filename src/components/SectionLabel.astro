@@ -1,15 +1,17 @@
 ---
 interface Props {
   label: string;
+  labelEn?: string;
   kicker?: string;
+  kickerEn?: string;
 }
 
-const { label, kicker } = Astro.props;
+const { label, labelEn = label, kicker, kickerEn = kicker } = Astro.props;
 ---
 
 <div class="section-label">
-  <span>{label}</span>
-  {kicker && <small>{kicker}</small>}
+  <span data-i18n-zh={label} data-i18n-en={labelEn}>{label}</span>
+  {kicker && <small data-i18n-zh={kicker} data-i18n-en={kickerEn}>{kicker}</small>}
 </div>
 
 <style>

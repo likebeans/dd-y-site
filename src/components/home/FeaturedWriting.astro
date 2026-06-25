@@ -6,10 +6,21 @@ import SectionLabel from "@/components/SectionLabel.astro";
 const posts = (await getCollection("writing"))
   .filter((post) => post.data.featured)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+const featuredCopy: Record<string, { titleEn: string; descriptionEn: string }> = {
+  "agent-runtime-beyond-loop": {
+    titleEn: "Agent Runtime Is More Than Looping Model Calls",
+    descriptionEn: "A production-grade Agent Runtime also needs state, approval, tools, events, and observability."
+  },
+  "rag-chunking-tables-code-images": {
+    titleEn: "Protecting Tables, Code Blocks, and Images in RAG Chunking",
+    descriptionEn: "Preserve semantic structure in complex document processing instead of splitting by length alone."
+  }
+};
 ---
 
-<section class="featured-writing page-shell">
-  <SectionLabel label="Current Thinking" kicker="Featured writing" />
+<section class="featured-writing page-shell" data-home-section="04" data-section-tone="quiet">
+  <SectionLabel label="Current Thinking" labelEn="Current Thinking" kicker="Featured writing" kickerEn="Featured writing" />
   <div class="featured-writing__grid">
     {
       posts.map((post, index) => (
@@ -17,13 +28,20 @@ const posts = (await getCollection("writing"))
           <span class="writing-row__meta">
             {post.data.tags.join(" · ")} · {post.data.minutes} min read
           </span>
-          <strong>{post.data.title}</strong>
-          <p>{post.data.description}</p>
+          <strong data-i18n-zh={post.data.title} data-i18n-en={featuredCopy[post.id]?.titleEn ?? post.data.title}>
+            {post.data.title}
+          </strong>
+          <p
+            data-i18n-zh={post.data.description}
+            data-i18n-en={featuredCopy[post.id]?.descriptionEn ?? post.data.description}
+          >
+            {post.data.description}
+          </p>
         </a>
       ))
     }
   </div>
-  <ArrowLink href="/writing" label="VIEW ALL WRITING" />
+  <ArrowLink href="/writing" label="VIEW ALL WRITING" labelEn="VIEW ALL WRITING" />
 </section>
 
 <style>

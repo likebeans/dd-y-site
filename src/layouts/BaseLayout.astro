@@ -43,10 +43,70 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
     <title>{title}</title>
   </head>
   <body>
+    <div class="pointer-field" aria-hidden="true"></div>
     <SiteHeader />
     <main>
       <slot />
     </main>
     <SiteFooter />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const storageKey = "dd-y-language";
+
+        const readStoredLanguage = () => {
+          try {
+            return window.localStorage.getItem(storageKey);
+          } catch {
+            return null;
+          }
+        };
+
+        const writeStoredLanguage = (language) => {
+          try {
+            window.localStorage.setItem(storageKey, language);
+          } catch {
+            // Storage can be unavailable in privacy-focused contexts.
+          }
+        };
+
+        const applyLanguage = (language) => {
+          const nextLanguage = language === "en" ? "en" : "zh";
+          root.lang = nextLanguage === "en" ? "en" : "zh-CN";
+          root.dataset.language = nextLanguage;
+
+          document.querySelectorAll("[data-i18n-zh][data-i18n-en]").forEach((node) => {
+            const text = node.getAttribute(`data-i18n-${nextLanguage}`);
+            if (text !== null) {
+              node.textContent = text;
+            }
+          });
+
+          document.querySelectorAll("[data-language-option]").forEach((node) => {
+            node.setAttribute("aria-pressed", String(node.getAttribute("data-language-option") === nextLanguage));
+          });
+
+          writeStoredLanguage(nextLanguage);
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target instanceof Element ? event.target.closest("[data-language-option]") : null;
+          if (!target) return;
+          applyLanguage(target.getAttribute("data-language-option"));
+        });
+
+        let animationFrame = 0;
+        const setPointer = (event) => {
+          if (animationFrame) window.cancelAnimationFrame(animationFrame);
+          animationFrame = window.requestAnimationFrame(() => {
+            root.style.setProperty("--cursor-x", `${Math.round(event.clientX)}px`);
+            root.style.setProperty("--cursor-y", `${Math.round(event.clientY)}px`);
+          });
+        };
+
+        window.addEventListener("pointermove", setPointer, { passive: true });
+        applyLanguage(readStoredLanguage());
+      })();
+    </script>
   </body>
 </html>

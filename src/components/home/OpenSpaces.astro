@@ -1,13 +1,17 @@
 ---
+import Icon from "@/components/Icon.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
 import { spaces } from "@/data/spaces";
 ---
 
-<section class="open-spaces page-shell" id="spaces">
-  <SectionLabel label="Knowledge System" kicker="Open spaces" />
+<section class="open-spaces page-shell" id="spaces" data-home-section="05" data-section-tone="surface">
+  <SectionLabel label="Knowledge System" labelEn="Knowledge System" kicker="Open spaces" kickerEn="Open spaces" />
   <div class="open-spaces__grid">
     <div class="open-spaces__copy">
-      <p>
+      <p
+        data-i18n-zh="主站保持克制和正式，知识库、交互简历和开源项目作为独立空间存在。它们共享同一个技术身份，但各自承担不同用途。"
+        data-i18n-en="The main site stays restrained and formal, while the knowledge base, interactive resume, and open-source work live as independent spaces with different jobs."
+      >
         主站保持克制和正式，知识库、交互简历和开源项目作为独立空间存在。它们共享同一个技术身份，但各自承担不同用途。
       </p>
     </div>
@@ -17,11 +21,13 @@ import { spaces } from "@/data/spaces";
           <a class="space-row" href={space.href}>
             <span class="space-row__index mono">{String(index + 1).padStart(2, "0")}</span>
             <span>
-              <strong>{space.title}</strong>
-              <small>{space.label} · {space.futureDomain}</small>
+              <strong data-i18n-zh={space.title} data-i18n-en={space.titleEn}>{space.title}</strong>
+              <small>
+                <span data-i18n-zh={space.label} data-i18n-en={space.labelEn}>{space.label}</span> · {space.futureDomain}
+              </small>
             </span>
-            <p>{space.summary}</p>
-            <span class="space-row__arrow" aria-hidden="true">↗</span>
+            <p data-i18n-zh={space.summary} data-i18n-en={space.summaryEn}>{space.summary}</p>
+            <Icon name="arrowUpRight" class="space-row__arrow" />
           </a>
         ))
       }
@@ -94,8 +100,14 @@ import { spaces } from "@/data/spaces";
   }
 
   .space-row__arrow {
-    font-family: var(--font-mono);
-    text-align: right;
+    width: 0.9rem;
+    height: 0.9rem;
+    justify-self: end;
+    transition: transform 180ms ease;
+  }
+
+  .space-row:hover .space-row__arrow {
+    transform: translate(1px, -1px);
   }
 
   @media (max-width: 920px) {

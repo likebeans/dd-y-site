@@ -1,0 +1,31 @@
+<svg width="1400" height="820" viewBox="0 0 1400 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1400" height="820" fill="#EDE7DC"/>
+  <path d="M0 120H1400M0 240H1400M0 360H1400M0 480H1400M0 600H1400M0 720H1400" stroke="#D3CCC0"/>
+  <path d="M120 0V820M280 0V820M440 0V820M600 0V820M760 0V820M920 0V820M1080 0V820M1240 0V820" stroke="#DCD5CA"/>
+  <rect x="130" y="102" width="1140" height="610" stroke="#BDB5A8"/>
+  <rect x="202" y="176" width="332" height="126" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="590" y="176" width="246" height="126" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="894" y="176" width="304" height="126" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="202" y="474" width="244" height="116" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="506" y="474" width="330" height="116" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="894" y="474" width="304" height="116" fill="#F7F3EA" stroke="#C9C1B5"/>
+  <rect x="538" y="343" width="324" height="74" fill="#F3F9CF" stroke="#C7F432" stroke-width="2"/>
+  <path d="M534 239H590M836 239H894M368 302V474M713 302V343M713 417V474M1046 302V474M446 532H506M836 532H894" stroke="#BDB5A8"/>
+  <path d="M368 343H538M862 380H1046" stroke="#C7F432" stroke-width="2"/>
+  <text x="230" y="222" fill="#111111" font-family="monospace" font-size="22" font-weight="700">DOCUMENTS</text>
+  <text x="230" y="254" fill="#8B867C" font-family="monospace" font-size="16">tables · code · image refs</text>
+  <text x="620" y="222" fill="#111111" font-family="monospace" font-size="22" font-weight="700">RETRIEVAL</text>
+  <text x="620" y="254" fill="#8B867C" font-family="monospace" font-size="16">hybrid search</text>
+  <text x="924" y="222" fill="#111111" font-family="monospace" font-size="22" font-weight="700">TOOLS</text>
+  <text x="924" y="254" fill="#8B867C" font-family="monospace" font-size="16">reliable functions</text>
+  <text x="574" y="388" fill="#111111" font-family="monospace" font-size="22" font-weight="700">AGENT RUNTIME</text>
+  <text x="232" y="522" fill="#111111" font-family="monospace" font-size="22" font-weight="700">STATE</text>
+  <text x="232" y="554" fill="#8B867C" font-family="monospace" font-size="16">recoverable</text>
+  <text x="536" y="522" fill="#111111" font-family="monospace" font-size="22" font-weight="700">EVALUATION</text>
+  <text x="536" y="554" fill="#8B867C" font-family="monospace" font-size="16">trace · task set · review</text>
+  <text x="924" y="522" fill="#111111" font-family="monospace" font-size="22" font-weight="700">PRODUCT</text>
+  <text x="924" y="554" fill="#8B867C" font-family="monospace" font-size="16">value delivered</text>
+  <path d="M1120 620H1198M1159 581V659" stroke="#BDB5A8"/>
+  <rect x="1106" y="606" width="28" height="28" stroke="#C7F432" stroke-width="2"/>
+  <text x="202" y="660" fill="#8B867C" font-family="monospace" font-size="15">FROM MODELS TO SYSTEMS · VISUAL FIELD</text>
+</svg>

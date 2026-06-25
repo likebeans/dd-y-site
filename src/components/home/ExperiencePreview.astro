@@ -2,10 +2,13 @@
 import SectionLabel from "@/components/SectionLabel.astro";
 ---
 
-<section class="experience-preview page-shell">
-  <SectionLabel label="Experience" kicker="Career path" />
+<section class="experience-preview page-shell" data-home-section="08" data-section-tone="quiet">
+  <SectionLabel label="Experience" labelEn="Experience" kicker="Career path" kickerEn="Career path" />
   <div class="experience-preview__grid">
-    <p>
+    <p
+      data-i18n-zh="我的工作重心从模型能力本身，逐渐转向模型如何进入真实业务系统：数据、权限、流程、评测和工程边界，往往比一次模型调用更决定产品质量。"
+      data-i18n-en="My work has moved from model capability itself toward how models enter real business systems: data, permissions, process, evaluation, and engineering boundaries often decide product quality more than a single model call."
+    >
       我的工作重心从模型能力本身，逐渐转向模型如何进入真实业务系统：数据、权限、流程、评测和工程边界，往往比一次模型调用更决定产品质量。
     </p>
     <div class="timeline">

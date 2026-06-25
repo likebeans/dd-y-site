@@ -4,22 +4,40 @@ import { SystemTrace } from "@/components/islands/SystemTrace";
 import { profile } from "@/data/profile";
 ---
 
-<section class="hero page-shell">
+<section class="hero page-shell" data-home-section="01" data-section-tone="quiet">
   <div class="hero__meta mono">
-    <span>{profile.availability}</span>
+    <span data-i18n-zh={profile.availability} data-i18n-en="AVAILABLE FOR GOOD WORK">{profile.availability}</span>
     <span>{profile.timezone}</span>
-    <span>{profile.location}</span>
+    <span data-i18n-zh="BEIJING, CHINA" data-i18n-en="BEIJING, CHINA">{profile.location}</span>
   </div>
 
   <div class="hero__grid">
     <div class="hero__copy">
-      <p class="hero__role">{profile.role}</p>
+      <p
+        class="hero__role"
+        data-i18n-zh={profile.role}
+        data-i18n-en="AI Systems Engineer / Large Language Models"
+      >
+        {profile.role}
+      </p>
       <h1>
         <span>FROM MODELS</span>
         <span>TO SYSTEMS</span>
       </h1>
-      <p class="hero__thesis">{profile.thesis}</p>
-      <p class="hero__intro">关注模型能力如何进入真实业务系统：文档、检索、工具、状态、评测与可观测性。</p>
+      <p
+        class="hero__thesis"
+        data-i18n-zh={profile.thesis}
+        data-i18n-en="Not just calling models, but turning model capability into system capability."
+      >
+        {profile.thesis}
+      </p>
+      <p
+        class="hero__intro"
+        data-i18n-zh="关注模型能力如何进入真实业务系统：文档、检索、工具、状态、评测与可观测性。"
+        data-i18n-en="I focus on how model capability enters real production systems: documents, retrieval, tools, state, evaluation, and observability."
+      >
+        关注模型能力如何进入真实业务系统：文档、检索、工具、状态、评测与可观测性。
+      </p>
       <div class="hero__actions">
         <ArrowLink href="/writing" label="READ WRITING" variant="primary" />
         <ArrowLink href="/work" label="VIEW SYSTEMS" />

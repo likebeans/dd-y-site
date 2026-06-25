@@ -1,0 +1,33 @@
+---
+interface Props {
+  name: "arrowUpRight" | "arrowRight";
+  class?: string;
+  title?: string;
+}
+
+const { name, class: className, title } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 20 20"
+  fill="none"
+  aria-hidden={title ? undefined : "true"}
+  role={title ? "img" : undefined}
+>
+  {title && <title>{title}</title>}
+  <g stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.6">
+    {name === "arrowUpRight" && (
+      <>
+        <path d="M5 15L15 5" />
+        <path d="M7 5h8v8" />
+      </>
+    )}
+    {name === "arrowRight" && (
+      <>
+        <path d="M4 10h12" />
+        <path d="M11 5l5 5-5 5" />
+      </>
+    )}
+  </g>
+</svg>

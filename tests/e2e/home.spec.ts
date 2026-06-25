@@ -7,7 +7,7 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: /READ WRITING/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /GET RESUME/ })).toBeVisible();
   await expect(page.getByText("Writing Tracks", { exact: true })).toBeVisible();
-  await expect(page.getByText("Knowledge System", { exact: true })).toBeVisible();
+  await expect(page.locator("#spaces").getByText("Knowledge System", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /Notes on LLMs/ })).toHaveAttribute(
     "href",
     "https://likebeans.github.io/notes-on-llms/"
@@ -18,4 +18,23 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   );
   await expect(page.getByRole("link", { name: /01 Enterprise OA Agent/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /Agent Runtime 不只是循环调用模型/ })).toBeVisible();
+});
+
+test("homepage exposes refined interaction and language controls", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.locator("[data-home-section='02']")).toBeVisible();
+  await expect(page.locator("[data-home-section='04']")).toBeVisible();
+  await expect(page.locator("[data-home-visual]")).toBeVisible();
+  await expect(page.getByRole("img", { name: /homepage image slot/i })).toBeVisible();
+
+  await expect(page.getByRole("button", { name: "ZH" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "EN" }).click();
+  await expect(page.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("I focus on one question: how model capability enters real systems.")).toBeVisible();
+
+  await page.mouse.move(240, 320);
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--cursor-x")))
+    .toBe("240px");
 });
