@@ -1,0 +1,116 @@
+---
+import SectionLabel from "@/components/SectionLabel.astro";
+import { spaces } from "@/data/spaces";
+---
+
+<section class="open-spaces page-shell" id="spaces">
+  <SectionLabel label="Knowledge System" kicker="Open spaces" />
+  <div class="open-spaces__grid">
+    <div class="open-spaces__copy">
+      <p>
+        主站保持克制和正式，知识库、交互简历和开源项目作为独立空间存在。它们共享同一个技术身份，但各自承担不同用途。
+      </p>
+    </div>
+    <div class="space-list">
+      {
+        spaces.map((space, index) => (
+          <a class="space-row" href={space.href}>
+            <span class="space-row__index mono">{String(index + 1).padStart(2, "0")}</span>
+            <span>
+              <strong>{space.title}</strong>
+              <small>{space.label} · {space.futureDomain}</small>
+            </span>
+            <p>{space.summary}</p>
+            <span class="space-row__arrow" aria-hidden="true">↗</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .open-spaces {
+    padding-block: clamp(3rem, 7vw, 6rem);
+  }
+
+  .open-spaces__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    margin-top: 1.8rem;
+  }
+
+  .open-spaces__copy p {
+    max-width: 28rem;
+    margin: 0;
+    color: #35332f;
+    font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+    line-height: 1.65;
+  }
+
+  .space-list {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .space-row {
+    display: grid;
+    grid-template-columns: 3rem minmax(10rem, 0.82fr) minmax(0, 1fr) 2rem;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid var(--color-line);
+    padding-block: 1.15rem;
+    transition:
+      background 180ms ease,
+      padding 180ms ease;
+  }
+
+  .space-row:hover {
+    padding-left: 0.75rem;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .space-row__index,
+  .space-row small {
+    color: var(--color-muted);
+    font-size: 0.68rem;
+  }
+
+  .space-row strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(1.05rem, 1.4vw, 1.28rem);
+  }
+
+  .space-row small {
+    display: block;
+    margin-top: 0.35rem;
+  }
+
+  .space-row p {
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  .space-row__arrow {
+    font-family: var(--font-mono);
+    text-align: right;
+  }
+
+  @media (max-width: 920px) {
+    .open-spaces__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .space-row {
+      grid-template-columns: 2.4rem minmax(0, 1fr) 1.5rem;
+    }
+
+    .space-row p {
+      grid-column: 2 / -1;
+    }
+  }
+</style>

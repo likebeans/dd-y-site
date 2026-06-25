@@ -2,8 +2,10 @@
 import ExperiencePreview from "@/components/home/ExperiencePreview.astro";
 import FeaturedWriting from "@/components/home/FeaturedWriting.astro";
 import Hero from "@/components/home/Hero.astro";
+import OpenSpaces from "@/components/home/OpenSpaces.astro";
 import SelectedWork from "@/components/home/SelectedWork.astro";
 import TechnicalFocus from "@/components/home/TechnicalFocus.astro";
+import WritingTracks from "@/components/home/WritingTracks.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
@@ -12,8 +14,10 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   description="FROM MODELS TO SYSTEMS. 大模型算法工程师，关注 RAG、Agent、工具调用、评测与可上线的 AI 应用系统。"
 >
   <Hero />
-  <SelectedWork />
-  <ExperiencePreview />
-  <TechnicalFocus />
+  <WritingTracks />
   <FeaturedWriting />
+  <OpenSpaces />
+  <SelectedWork />
+  <TechnicalFocus />
+  <ExperiencePreview />
 </BaseLayout>
