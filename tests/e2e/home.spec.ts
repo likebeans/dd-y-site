@@ -27,6 +27,7 @@ test("homepage exposes refined interaction and language controls", async ({ page
   await expect(page.locator("[data-section-marker='Writing Tracks']")).toBeVisible();
   await expect(page.locator("[data-section-marker='Current Thinking']")).toBeVisible();
   await expect(page.locator("[data-surface-field]")).toBeVisible();
+  await expect(page.locator("[data-surface-well]")).toBeVisible();
   await expect(page.locator("[data-surface-contours]")).toBeVisible();
   await expect(page.locator("[data-cursor-lens]")).toBeVisible();
   await expect(page.locator("[data-home-visual]")).toBeVisible();
