@@ -4,6 +4,7 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "FROM MODELS TO SYSTEMS" })).toBeVisible();
+  await expect(page.getByText("把模型能力，做成可上线、可评测、可维护的系统。")).toBeVisible();
   await expect(page.getByRole("link", { name: /READ WRITING/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /GET RESUME/ })).toBeVisible();
   await expect(page.getByText("Writing Tracks", { exact: true })).toBeVisible();
@@ -36,7 +37,9 @@ test("homepage exposes refined interaction and language controls", async ({ page
   await expect(page.getByRole("button", { name: "ZH" })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "EN" }).click();
   await expect(page.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.getByText("I focus on one question: how model capability enters real systems.")).toBeVisible();
+  await expect(
+    page.getByText("I care about one thing: turning model capability into reliable systems.")
+  ).toBeVisible();
 
   await page.mouse.move(240, 320);
   await expect

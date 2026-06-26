@@ -27,16 +27,16 @@ import { profile } from "@/data/profile";
       <p
         class="hero__thesis"
         data-i18n-zh={profile.thesis}
-        data-i18n-en="Not just calling models, but turning model capability into system capability."
+        data-i18n-en="Turning model capability into systems that ship, measure, and endure."
       >
         {profile.thesis}
       </p>
       <p
         class="hero__intro"
-        data-i18n-zh="关注模型能力如何进入真实业务系统：文档、检索、工具、状态、评测与可观测性。"
-        data-i18n-en="I focus on how model capability enters real production systems: documents, retrieval, tools, state, evaluation, and observability."
+        data-i18n-zh={profile.intro}
+        data-i18n-en="I care about one thing: turning model capability into reliable systems."
       >
-        关注模型能力如何进入真实业务系统：文档、检索、工具、状态、评测与可观测性。
+        {profile.intro}
       </p>
       <div class="hero__actions">
         <ArrowLink href="/writing" label="READ WRITING" variant="primary" />
