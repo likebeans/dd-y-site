@@ -45,6 +45,8 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
   <body>
     <div class="surface-field" data-surface-field aria-hidden="true">
       <div class="surface-field__sheet"></div>
+      <div class="surface-field__contours" data-surface-contours></div>
+      <div class="surface-field__cursor" data-cursor-lens></div>
     </div>
     <SiteHeader />
     <main>
