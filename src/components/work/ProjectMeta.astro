@@ -10,7 +10,7 @@ interface Props {
 const { year, role, status, stack, tags } = Astro.props;
 ---
 
-<aside class="project-meta">
+<aside class="project-meta" data-case-meta-rail>
   <dl>
     <div>
       <dt>Year</dt>
@@ -25,22 +25,36 @@ const { year, role, status, stack, tags } = Astro.props;
       <dd>{status}</dd>
     </div>
   </dl>
-  <div class="project-meta__tags">
-    {[...tags, ...stack].map((item) => <span>{item}</span>)}
+  <div class="project-meta__group">
+    <p>Tags</p>
+    <div class="project-meta__tags">
+      {tags.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+  <div class="project-meta__group">
+    <p>Stack</p>
+    <div class="project-meta__tags">
+      {stack.map((item) => <span>{item}</span>)}
+    </div>
   </div>
 </aside>
 
 <style>
   .project-meta {
     display: grid;
-    gap: 1.25rem;
+    gap: 1.35rem;
     color: var(--color-muted);
   }
 
   dl {
     display: grid;
-    gap: 1rem;
+    border-top: 1px solid var(--color-line);
     margin: 0;
+  }
+
+  dl div {
+    border-bottom: 1px solid var(--color-line);
+    padding-block: 0.82rem;
   }
 
   dt {
@@ -54,6 +68,20 @@ const { year, role, status, stack, tags } = Astro.props;
     margin: 0.25rem 0 0;
     color: var(--color-ink);
     line-height: 1.5;
+  }
+
+  .project-meta__group {
+    display: grid;
+    gap: 0.55rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .project-meta__tags {

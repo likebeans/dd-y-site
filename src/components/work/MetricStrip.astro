@@ -11,7 +11,8 @@ interface Props {
 const { metrics } = Astro.props;
 ---
 
-{metrics.length > 0 && (
+{
+  metrics.length > 0 ? (
   <dl class="metric-strip">
     {metrics.map((metric) => (
       <div>
@@ -20,7 +21,10 @@ const { metrics } = Astro.props;
       </div>
     ))}
   </dl>
-)}
+  ) : (
+    <div class="metric-strip metric-strip--empty">Evidence metrics can be added later.</div>
+  )
+}
 
 <style>
   .metric-strip {
@@ -30,6 +34,18 @@ const { metrics } = Astro.props;
     border-top: 1px solid var(--color-line);
     border-left: 1px solid var(--color-line);
     margin: 2rem 0 0;
+  }
+
+  .metric-strip--empty {
+    display: block;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: 1rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   .metric-strip div {

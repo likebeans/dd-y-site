@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import ArrowLink from "@/components/ArrowLink.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ArchitectureFigure from "@/components/work/ArchitectureFigure.astro";
 import MetricStrip from "@/components/work/MetricStrip.astro";
@@ -29,23 +30,38 @@ const { entry } = Astro.props;
       />
     </header>
 
-    <MetricStrip metrics={entry.data.metrics} />
-    <ArchitectureFigure title={`${entry.data.title} Architecture`} />
+    <section class="case-study__snapshot" id="snapshot" data-case-snapshot>
+      <div class="case-study__snapshot-head">
+        <p>System Snapshot</p>
+        <span>Architecture, signals, and evidence live here before the narrative.</span>
+      </div>
+      <MetricStrip metrics={entry.data.metrics} />
+      <ArchitectureFigure title={`${entry.data.title} Architecture`} />
+    </section>
 
     <div class="case-study__body">
-      <nav aria-label="Case study sections">
+      <nav aria-label="Case study sections" data-case-nav>
         <a href="#overview">Overview</a>
-        <a href="#problem">Problem</a>
-        <a href="#constraints">Constraints</a>
-        <a href="#system-design">System Design</a>
-        <a href="#key-decisions">Key Decisions</a>
-        <a href="#impact">Impact</a>
-        <a href="#reflection">Reflection</a>
+        <a href="#snapshot">Snapshot</a>
+        <a href="#case-notes">Case Notes</a>
+        <a href="#next">Next</a>
       </nav>
-      <div class="case-study__content">
+      <div class="case-study__content" id="case-notes" data-case-content>
         <slot />
       </div>
     </div>
+
+    <footer class="case-study__next" id="next" data-case-next>
+      <div>
+        <p>Continue</p>
+        <span>Move between project evidence, writing, and resume without leaving the portfolio system.</span>
+      </div>
+      <div class="case-study__next-actions">
+        <ArrowLink href="/work" label="ALL WORK" />
+        <ArrowLink href="/writing" label="READ WRITING" />
+        <ArrowLink href="/resume" label="RESUME" />
+      </div>
+    </footer>
   </article>
 </BaseLayout>
 
@@ -85,6 +101,50 @@ const { entry } = Astro.props;
     margin: 1.5rem 0 0;
     font-size: clamp(1.1rem, 1.6vw, 1.35rem);
     line-height: 1.7;
+  }
+
+  .case-study__snapshot {
+    display: grid;
+    grid-template-columns: minmax(0, 0.26fr) minmax(0, 0.74fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    padding-block: clamp(1.4rem, 3vw, 2.2rem);
+    scroll-margin-top: 7rem;
+  }
+
+  .case-study__snapshot-head {
+    display: grid;
+    align-content: start;
+    gap: 0.75rem;
+  }
+
+  .case-study__snapshot-head p,
+  .case-study__next p {
+    margin: 0;
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .case-study__snapshot-head span,
+  .case-study__next span {
+    max-width: 20rem;
+    color: var(--color-muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .case-study__snapshot :global(.metric-strip),
+  .case-study__snapshot :global(.architecture-figure) {
+    grid-column: 2;
+  }
+
+  .case-study__snapshot :global(.metric-strip) {
+    margin-top: 0;
   }
 
   .case-study__body {
@@ -138,10 +198,39 @@ const { entry } = Astro.props;
     padding-left: 1.2rem;
   }
 
+  .case-study__next {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    border-top: 1px solid var(--color-line);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding-block: 1.4rem;
+    scroll-margin-top: 7rem;
+  }
+
+  .case-study__next div:first-child {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .case-study__next-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.2rem;
+    align-items: start;
+    justify-content: flex-end;
+  }
+
   @media (max-width: 860px) {
     .case-study__hero,
+    .case-study__snapshot,
     .case-study__body {
       grid-template-columns: 1fr;
+    }
+
+    .case-study__snapshot :global(.metric-strip),
+    .case-study__snapshot :global(.architecture-figure) {
+      grid-column: 1;
     }
 
     nav {
@@ -151,6 +240,14 @@ const { entry } = Astro.props;
       border-top: 1px solid var(--color-line);
       border-bottom: 1px solid var(--color-line);
       padding-block: 1rem;
+    }
+
+    .case-study__next {
+      flex-direction: column;
+    }
+
+    .case-study__next-actions {
+      justify-content: flex-start;
     }
   }
 </style>
