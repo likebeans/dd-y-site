@@ -7,7 +7,10 @@ const { title = "System Architecture" } = Astro.props;
 ---
 
 <figure class="architecture-figure">
-  <figcaption>{title}</figcaption>
+  <figcaption>
+    <span>System Snapshot</span>
+    <strong>{title}</strong>
+  </figcaption>
   <div class="architecture-figure__canvas" aria-label={title}>
     <div class="arch-node arch-node--user">User</div>
     <div class="arch-node arch-node--agent">Agent Runtime</div>
@@ -23,18 +26,26 @@ const { title = "System Architecture" } = Astro.props;
 <style>
   .architecture-figure {
     margin: 2rem 0;
-    border: 1px solid var(--color-line);
-    background: rgba(255, 255, 255, 0.16);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
   }
 
   figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
     border-bottom: 1px solid var(--color-line);
-    padding: 0.85rem 1rem;
+    padding: 0.82rem 0;
     color: var(--color-muted);
     font-family: var(--font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.02em;
     text-transform: uppercase;
+  }
+
+  figcaption strong {
+    color: var(--color-ink);
+    font-weight: 500;
   }
 
   .architecture-figure__canvas {
@@ -43,7 +54,29 @@ const { title = "System Architecture" } = Astro.props;
     overflow: hidden;
     background:
       linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px) 0 0 / 25% 100%,
-      linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px) 0 0 / 100% 25%;
+      linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px) 0 0 / 100% 25%,
+      linear-gradient(112deg, transparent 0 34%, rgba(199, 244, 50, 0.08) 34.2%, transparent 35.2% 69%, rgba(17, 17, 17, 0.04) 69.2%, transparent 70.2%);
+  }
+
+  .architecture-figure__canvas::before,
+  .architecture-figure__canvas::after {
+    position: absolute;
+    content: "";
+    pointer-events: none;
+  }
+
+  .architecture-figure__canvas::before {
+    inset: 12% 9%;
+    border-top: 1px solid rgba(17, 17, 17, 0.08);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+  }
+
+  .architecture-figure__canvas::after {
+    top: 50%;
+    right: 9%;
+    left: 9%;
+    height: 1px;
+    background: rgba(17, 17, 17, 0.09);
   }
 
   .arch-node {
@@ -53,6 +86,7 @@ const { title = "System Architecture" } = Astro.props;
     border: 1px solid var(--color-line);
     padding: 0.65rem 0.8rem;
     background: color-mix(in srgb, var(--color-paper) 90%, white);
+    box-shadow: 0 0 0 4px rgba(245, 241, 232, 0.76);
     font-family: var(--font-mono);
     font-size: 0.68rem;
     text-align: center;
@@ -69,6 +103,7 @@ const { title = "System Architecture" } = Astro.props;
     top: 36%;
     left: 50%;
     border-color: var(--color-lime);
+    background: color-mix(in srgb, var(--color-paper) 88%, var(--color-lime));
     transform: translateX(-50%);
   }
 
@@ -115,17 +150,41 @@ const { title = "System Architecture" } = Astro.props;
   }
 
   @media (max-width: 640px) {
+    figcaption {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .architecture-figure__canvas {
+      min-height: 24rem;
+    }
+
     .arch-node {
-      min-width: 5.5rem;
+      min-width: 5.4rem;
+      padding: 0.55rem 0.58rem;
       font-size: 0.58rem;
     }
 
+    .arch-node--user {
+      top: 8%;
+    }
+
+    .arch-node--agent {
+      top: 31%;
+    }
+
     .arch-node--retrieval {
+      top: 56%;
       left: 7%;
     }
 
     .arch-node--tools {
+      top: 56%;
       right: 7%;
+    }
+
+    .arch-node--system {
+      bottom: 9%;
     }
   }
 </style>
