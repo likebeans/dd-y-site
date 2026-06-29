@@ -1,6 +1,16 @@
 ---
 import { navItems } from "@/data/navigation";
 import { profile } from "@/data/profile";
+
+const normalizePath = (path: string) => path.replace(/\/$/, "") || "/";
+const currentPath = normalizePath(Astro.url.pathname);
+
+const isCurrentNavItem = (href: string) => {
+  if (href.startsWith("http") || href.includes("#")) return false;
+
+  const itemPath = normalizePath(new URL(href, Astro.url).pathname);
+  return currentPath === itemPath || (itemPath !== "/" && currentPath.startsWith(`${itemPath}/`));
+};
 ---
 
 <header class="site-header">
@@ -11,7 +21,7 @@ import { profile } from "@/data/profile";
     <nav class="site-header__nav" aria-label="Primary navigation">
       {
         navItems.map((item) => (
-          <a href={item.href}>
+          <a href={item.href} aria-current={isCurrentNavItem(item.href) ? "page" : undefined}>
             <span data-i18n-zh={item.label} data-i18n-en={item.labelEn}>{item.label}</span>
           </a>
         ))

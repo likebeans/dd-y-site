@@ -54,3 +54,31 @@ test("homepage exposes refined interaction and language controls", async ({ page
     .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--scroll-progress")))
     .not.toBe("0");
 });
+
+test("site chrome exposes mature navigation and language state", async ({ page }) => {
+  await page.goto("/work");
+
+  const navigation = page.getByRole("navigation", { name: "Primary navigation" });
+  await expect(navigation.getByRole("link", { name: "项目" })).toHaveAttribute("aria-current", "page");
+  await expect(navigation.getByRole("link", { name: "文章" })).not.toHaveAttribute("aria-current", "page");
+
+  await expect(page.locator("script[data-language-preflight]")).toHaveCount(1);
+
+  await page.keyboard.press("Tab");
+  const skipLink = page.getByRole("link", { name: "跳过导航" });
+  await expect(skipLink).toBeVisible();
+  await expect(skipLink).toHaveAttribute("href", "#main-content");
+});
+
+test("stored English preference is available before interaction", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem("dd-y-language", "en");
+  });
+
+  await page.goto("/");
+
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator("html")).toHaveAttribute("data-language", "en");
+  await expect(page.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("heading", { name: "FROM MODELS TO SYSTEMS" })).toBeVisible();
+});

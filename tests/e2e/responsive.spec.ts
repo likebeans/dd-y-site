@@ -6,4 +6,15 @@ test("mobile layout has no horizontal overflow", async ({ page }) => {
 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
   expect(overflow).toBe(false);
+
+  await expect(page.locator(".site-header")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Primary navigation" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "ZH" })).toBeVisible();
+
+  const headerFits = await page.evaluate(() => {
+    const header = document.querySelector(".site-header");
+    if (!header) return false;
+    return header.scrollWidth <= window.innerWidth;
+  });
+  expect(headerFits).toBe(true);
 });

@@ -175,6 +175,31 @@ main {
   outline-offset: 4px;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: var(--space-page);
+  z-index: 80;
+  border: 1px solid var(--color-ink);
+  padding: 0.7rem 0.9rem;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-150%);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.skip-link:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .page-shell {
   width: min(100%, var(--max-page));
   margin-inline: auto;
@@ -215,6 +240,7 @@ main {
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2.2vw, 2.25rem);
+  min-width: 0;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.02em;
@@ -223,6 +249,7 @@ main {
 .site-header__nav a {
   position: relative;
   padding-block: 0.4rem;
+  white-space: nowrap;
 }
 
 .site-header__nav a::after {
@@ -239,12 +266,29 @@ main {
 }
 
 .site-header__nav a:hover::after,
-.site-header__nav a:focus-visible::after {
+.site-header__nav a:focus-visible::after,
+.site-header__nav a[aria-current="page"]::after {
   transform: scaleX(1);
+}
+
+.site-header__nav a[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+.site-header__nav a[aria-current="page"] span::before {
+  content: "";
+  display: inline-block;
+  width: 0.34rem;
+  height: 0.34rem;
+  border: 1px solid var(--color-lime);
+  margin-right: 0.42rem;
+  background: rgba(199, 244, 50, 0.18);
+  vertical-align: 0.05em;
 }
 
 .site-header__language {
   display: inline-grid;
+  flex: 0 0 auto;
   grid-template-columns: repeat(2, 1fr);
   border: 1px solid var(--color-line);
   background: rgba(255, 255, 255, 0.16);
@@ -384,7 +428,13 @@ section[data-section-tone="focus"]::after {
     justify-content: space-between;
     gap: 0.65rem;
     overflow-x: auto;
+    overscroll-behavior-x: contain;
     padding-bottom: 0.1rem;
+    scrollbar-width: none;
+  }
+
+  .site-header__nav::-webkit-scrollbar {
+    display: none;
   }
 
   .site-header__language {
