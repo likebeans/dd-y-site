@@ -7,6 +7,7 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    summaryEn: z.string(),
     year: z.number(),
     order: z.number(),
     role: z.string(),
@@ -20,6 +21,14 @@ const work = defineCollection({
           value: z.string()
         })
       )
+      .default([]),
+    sectionsEn: z
+      .array(
+        z.object({
+          heading: z.string(),
+          body: z.array(z.string())
+        })
+      )
       .default([])
   })
 });
@@ -28,12 +37,22 @@ const writing = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/writing" }),
   schema: z.object({
     title: z.string(),
+    titleEn: z.string(),
     description: z.string(),
+    descriptionEn: z.string(),
     publishedAt: z.date(),
     updatedAt: z.date().optional(),
     minutes: z.number(),
     tags: z.array(z.string()),
-    featured: z.boolean().default(false)
+    featured: z.boolean().default(false),
+    sectionsEn: z
+      .array(
+        z.object({
+          heading: z.string(),
+          body: z.array(z.string())
+        })
+      )
+      .default([])
   })
 });
 
@@ -41,6 +60,8 @@ const notes = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/notes" }),
   schema: z.object({
     title: z.string(),
+    titleEn: z.string(),
+    bodyEn: z.string(),
     publishedAt: z.date(),
     tags: z.array(z.string()).default([])
   })

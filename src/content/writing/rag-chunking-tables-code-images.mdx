@@ -1,11 +1,26 @@
 ---
 title: "RAG 分块中的表格、代码块与图片保护"
+titleEn: "Protecting Tables, Code Blocks, and Images in RAG Chunking"
 description: "在复杂文档处理中保护语义结构，而不是简单按长度切分。"
+descriptionEn: "Preserve semantic structure in complex document processing instead of splitting by length alone."
 publishedAt: 2026-06-15
 updatedAt: 2026-06-16
 minutes: 12
 tags: ["RAG", "Document Parsing", "Chunking"]
 featured: true
+sectionsEn:
+  - heading: "Background and Problem"
+    body:
+      - "Many RAG systems start with fixed-length chunking: 500 tokens per segment with 50 tokens of overlap."
+      - "That looks simple, but it breaks quickly when documents contain tables, code blocks, image captions, and hierarchical headings."
+  - heading: "A More Reliable Direction"
+    body:
+      - "I prefer structure recognition before semantic splitting."
+      - "A chunker should know which blocks cannot be split casually, which blocks can be merged, and which blocks need surrounding context."
+  - heading: "Evaluation Matters More Than Parameters"
+    body:
+      - "There is no universally optimal chunking strategy."
+      - "The useful work is building evaluation sets for the target scenario and checking whether recall, citation quality, answer quality, and human readability improve together."
 ---
 
 import Callout from "@/components/mdx/Callout.astro";

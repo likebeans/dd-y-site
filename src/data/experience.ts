@@ -1,8 +1,8 @@
 export const experience = [
   {
     period: "2025 - Now",
-    title: "Large Language Model Algorithm Engineer",
-    organization: "Current / Confidential",
+    title: "大模型算法工程师",
+    organization: "当前职位 / 保密",
     summary: "负责企业 AI 应用中的 RAG、Agent、工具调用、流程编排与评测体系建设。",
     highlights: [
       "把自然语言入口连接到可审批、可观测的业务流程。",
@@ -12,8 +12,8 @@ export const experience = [
   },
   {
     period: "2024 - 2025",
-    title: "AI Application Engineer",
-    organization: "Project / Product Practice",
+    title: "AI 应用工程师",
+    organization: "项目 / 产品实践",
     summary: "探索浏览器 Agent、检索增强生成和模型推理服务在实际产品中的落地方式。",
     highlights: [
       "围绕网页任务拆解观察、规划、执行和验证流程。",
@@ -24,9 +24,9 @@ export const experience = [
 
 export const currentFocus = [
   "Agent Runtime",
-  "RAG Evaluation",
+  "RAG 评测",
   "Document AI",
-  "Tool Calling",
-  "Workflow Orchestration",
-  "Production AI Systems"
+  "工具调用",
+  "工作流编排",
+  "生产级 AI 系统"
 ];

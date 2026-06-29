@@ -2,18 +2,20 @@
 import { getCollection } from "astro:content";
 import { ProjectPreview } from "@/components/islands/ProjectPreview";
 import SectionLabel from "@/components/SectionLabel.astro";
+import { toZhPhrase } from "@/data/terms";
 
 const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data.order);
 const projects = works.map((work) => ({
   title: work.data.title,
-  role: work.data.role,
+  role: toZhPhrase(work.data.role),
+  roleEn: work.data.role,
   year: work.data.year,
   href: `/work/${work.id}`
 }));
 ---
 
 <section class="selected-work page-shell" id="work" data-section-marker="Selected Systems" data-section-tone="focus">
-  <SectionLabel label="Selected Systems" labelEn="Selected Systems" kicker="Proof of work" kickerEn="Proof of work" />
+  <SectionLabel label="精选项目" labelEn="Selected Systems" kicker="作品证据" kickerEn="Proof of work" />
   <ProjectPreview projects={projects} client:visible />
 </section>
 

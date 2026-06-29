@@ -2,7 +2,7 @@ export const spaces = [
   {
     title: "Notes on LLMs",
     titleEn: "Notes on LLMs",
-    label: "Knowledge System",
+    label: "知识库",
     labelEn: "Knowledge System",
     href: "https://likebeans.github.io/notes-on-llms/",
     futureDomain: "notes.yufeifan.cn",
@@ -12,7 +12,7 @@ export const spaces = [
   {
     title: "Resume Lab",
     titleEn: "Resume Lab",
-    label: "Interactive Resume",
+    label: "交互简历",
     labelEn: "Interactive Resume",
     href: "https://likebeans.github.io/OpenResume/",
     futureDomain: "resume.yufeifan.cn",
@@ -22,7 +22,7 @@ export const spaces = [
   {
     title: "GitHub / Open Source",
     titleEn: "GitHub / Open Source",
-    label: "Public Work",
+    label: "公开作品",
     labelEn: "Public Work",
     href: "https://github.com/likebeans",
     futureDomain: "github.com/likebeans",

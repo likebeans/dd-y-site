@@ -20,13 +20,18 @@ const featuredCopy: Record<string, { titleEn: string; descriptionEn: string }> =
 ---
 
 <section class="featured-writing page-shell" data-section-marker="Current Thinking" data-section-tone="quiet">
-  <SectionLabel label="Current Thinking" labelEn="Current Thinking" kicker="Featured writing" kickerEn="Featured writing" />
+  <SectionLabel label="当前思考" labelEn="Current Thinking" kicker="精选文章" kickerEn="Featured writing" />
   <div class="featured-writing__grid">
     {
       posts.map((post, index) => (
         <a class:list={["writing-row", index === 0 && "writing-row--lead"]} href={`/writing/${post.id}`}>
           <span class="writing-row__meta">
-            {post.data.tags.join(" · ")} · {post.data.minutes} min read
+            <span
+              data-i18n-zh={`${post.data.tags.join(" · ")} · ${post.data.minutes} 分钟阅读`}
+              data-i18n-en={`${post.data.tags.join(" · ")} · ${post.data.minutes} min read`}
+            >
+              {post.data.tags.join(" · ")} · {post.data.minutes} 分钟阅读
+            </span>
           </span>
           <strong data-i18n-zh={post.data.title} data-i18n-en={featuredCopy[post.id]?.titleEn ?? post.data.title}>
             {post.data.title}
@@ -41,7 +46,7 @@ const featuredCopy: Record<string, { titleEn: string; descriptionEn: string }> =
       ))
     }
   </div>
-  <ArrowLink href="/writing" label="VIEW ALL WRITING" labelEn="VIEW ALL WRITING" />
+  <ArrowLink href="/writing" label="查看全部文章" labelEn="VIEW ALL WRITING" />
 </section>
 
 <style>

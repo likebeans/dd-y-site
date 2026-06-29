@@ -3,7 +3,7 @@ import SectionLabel from "@/components/SectionLabel.astro";
 ---
 
 <section class="home-visual page-shell" data-section-marker="Visual Field" data-section-tone="focus" data-home-visual>
-  <SectionLabel label="Visual Field" labelEn="Visual Field" kicker="Image archive" kickerEn="Image archive" />
+  <SectionLabel label="图像区域" labelEn="Visual Field" kicker="图片归档" kickerEn="Image archive" />
   <div class="home-visual__grid">
     <div class="home-visual__copy">
       <p
@@ -14,13 +14,13 @@ import SectionLabel from "@/components/SectionLabel.astro";
       </p>
       <dl>
         <div>
-          <dt>FORMAT</dt>
+          <dt data-i18n-zh="格式" data-i18n-en="FORMAT">格式</dt>
           <dd data-i18n-zh="宽幅图片 / 系统图 / 产品截图" data-i18n-en="Wide image / system diagram / product screenshot">
             宽幅图片 / 系统图 / 产品截图
           </dd>
         </div>
         <div>
-          <dt>ROLE</dt>
+          <dt data-i18n-zh="作用" data-i18n-en="ROLE">作用</dt>
           <dd data-i18n-zh="让页面在纯文本之外有一个记忆点" data-i18n-en="Give the page one visual memory beyond text">
             让页面在纯文本之外有一个记忆点
           </dd>
@@ -28,12 +28,12 @@ import SectionLabel from "@/components/SectionLabel.astro";
       </dl>
     </div>
     <figure class="home-visual__media">
-      <img src="/home-visual.svg" alt="Homepage image slot: visual archive placeholder" loading="lazy" />
+      <img src="/home-visual.svg" alt="首页图片槽位：视觉归档占位" loading="lazy" />
       <figcaption>
-        <strong data-i18n-zh="System visual placeholder" data-i18n-en="System visual placeholder">
-          System visual placeholder
+        <strong data-i18n-zh="系统图占位" data-i18n-en="System visual placeholder">
+          系统图占位
         </strong>
-        <span>Image slot</span>
+        <span data-i18n-zh="图片位置" data-i18n-en="Image slot">图片位置</span>
       </figcaption>
     </figure>
   </div>

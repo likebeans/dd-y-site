@@ -3,15 +3,15 @@ export const resume = {
     "大模型算法工程师，关注 RAG、Agent、工具调用、评测体系和可上线的 AI 应用系统。擅长把模型能力拆解为数据、流程、权限、工具和工程边界中的可维护系统能力。",
   skills: [
     {
-      label: "AI Systems",
+      label: "AI 系统",
       items: ["RAG", "Agent Runtime", "Tool Calling", "Evaluation", "Prompt Engineering"]
     },
     {
-      label: "Engineering",
+      label: "工程能力",
       items: ["Python", "FastAPI", "Java", "PostgreSQL", "Redis", "Playwright"]
     },
     {
-      label: "Workflow",
+      label: "工作流",
       items: ["MCP", "LangGraph", "Human-in-loop", "Observability", "Document Parsing"]
     }
   ],
@@ -27,9 +27,9 @@ export const resume = {
     "Agent Runtime 不只是循环调用模型"
   ],
   links: [
-    { label: "Website", href: "https://yufeifan.cn" },
+    { label: "个人网站", href: "https://yufeifan.cn" },
     { label: "GitHub", href: "https://github.com/dd-y" },
-    { label: "Email", href: "mailto:hi@yufeifan.cn" }
+    { label: "邮箱", href: "mailto:hi@yufeifan.cn" }
   ],
   education: "计算机科学 / AI 工程方向"
 };

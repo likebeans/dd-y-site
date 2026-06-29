@@ -46,6 +46,10 @@ const { href, label, labelEn = label, variant = "quiet" } = Astro.props;
     transition: transform 180ms ease;
   }
 
+  .arrow-link span {
+    white-space: nowrap;
+  }
+
   .arrow-link:hover .arrow-link__icon {
     transform: translate(1px, -1px);
   }

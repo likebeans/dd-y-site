@@ -3,18 +3,18 @@ import { profile } from "@/data/profile";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="About - dd-y / 余非凡" description="关于余非凡：大模型算法工程师，关注从 Models 到 Systems。">
+<BaseLayout title="关于 - dd-y / 余非凡" description="关于余非凡：大模型算法工程师，关注从模型到系统。">
   <section class="about-page page-shell">
     <header>
-      <p>About</p>
-      <h1>ABOUT</h1>
+      <p data-i18n-zh="关于" data-i18n-en="About">关于</p>
+      <h1 data-i18n-zh="关于" data-i18n-en="ABOUT">关于</h1>
     </header>
 
     <div class="about-page__body">
       <aside>
-        <span>{profile.availability}</span>
+        <span data-i18n-zh={profile.availability} data-i18n-en="AVAILABLE FOR GOOD WORK">{profile.availability}</span>
         <span>{profile.timezone}</span>
-        <span>{profile.location}</span>
+        <span data-i18n-zh="中国，北京" data-i18n-en="BEIJING, CHINA">{profile.location}</span>
       </aside>
 
       <div>

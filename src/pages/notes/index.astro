@@ -7,12 +7,17 @@ const notes = (await getCollection("notes")).sort(
 );
 ---
 
-<BaseLayout title="Notes - dd-y / 余非凡" description="短思考、工作笔记和 AI 系统判断。">
+<BaseLayout title="笔记 - dd-y / 余非凡" description="短思考、工作笔记和 AI 系统判断。">
   <section class="notes-page page-shell">
     <header>
-      <p>Notes</p>
-      <h1>NOTES</h1>
-      <span>一些还没有长成文章的判断、问题和工作笔记。</span>
+      <p data-i18n-zh="笔记" data-i18n-en="Notes">笔记</p>
+      <h1 data-i18n-zh="笔记" data-i18n-en="NOTES">笔记</h1>
+      <span
+        data-i18n-zh="一些还没有长成文章的判断、问题和工作笔记。"
+        data-i18n-en="Judgments, questions, and work notes that have not yet grown into essays."
+      >
+        一些还没有长成文章的判断、问题和工作笔记。
+      </span>
     </header>
 
     <div class="notes-page__list">
@@ -21,8 +26,8 @@ const notes = (await getCollection("notes")).sort(
           <time datetime={note.data.publishedAt.toISOString()}>
             {note.data.publishedAt.toISOString().slice(0, 10)}
           </time>
-          <h2>{note.data.title}</h2>
-          <p>{note.body}</p>
+          <h2 data-i18n-zh={note.data.title} data-i18n-en={note.data.titleEn}>{note.data.title}</h2>
+          <p data-i18n-zh={note.body} data-i18n-en={note.data.bodyEn}>{note.body}</p>
         </article>
       ))}
     </div>

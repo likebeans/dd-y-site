@@ -6,15 +6,17 @@ import { resume } from "@/data/resume";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Resume - dd-y / 余非凡" description="余非凡的在线简历。">
+<BaseLayout title="简历 - dd-y / 余非凡" description="余非凡的在线简历。">
   <section class="resume-page page-shell">
     <header>
       <div>
-        <p>Resume</p>
+        <p data-i18n-zh="简历" data-i18n-en="Resume">简历</p>
         <h1>{profile.name}</h1>
-        <span>{profile.role}</span>
+        <span data-i18n-zh={profile.role} data-i18n-en="AI Systems Engineer / Large Language Models">
+          {profile.role}
+        </span>
       </div>
-      <a href="/resume-yufeifan.pdf">下载 PDF</a>
+      <a href="/resume-yufeifan.pdf" data-i18n-zh="下载 PDF" data-i18n-en="Download PDF">下载 PDF</a>
     </header>
 
     <ResumeSection title="个人概述">

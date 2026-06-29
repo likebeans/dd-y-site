@@ -1,40 +1,43 @@
 ---
+import { toZhPhrase, toZhTerm } from "@/data/terms";
+
 interface Props {
   year: number;
   role: string;
   status: string;
+  statusLabelZh?: string;
   stack: string[];
   tags: string[];
 }
 
-const { year, role, status, stack, tags } = Astro.props;
+const { year, role, status, statusLabelZh = status, stack, tags } = Astro.props;
 ---
 
 <aside class="project-meta" data-case-meta-rail>
   <dl>
     <div>
-      <dt>Year</dt>
+      <dt data-i18n-zh="年份" data-i18n-en="Year">年份</dt>
       <dd>{year}</dd>
     </div>
     <div>
-      <dt>Role</dt>
-      <dd>{role}</dd>
+      <dt data-i18n-zh="角色" data-i18n-en="Role">角色</dt>
+      <dd data-i18n-zh={toZhPhrase(role)} data-i18n-en={role}>{toZhPhrase(role)}</dd>
     </div>
     <div>
-      <dt>Status</dt>
-      <dd>{status}</dd>
+      <dt data-i18n-zh="状态" data-i18n-en="Status">状态</dt>
+      <dd data-i18n-zh={statusLabelZh} data-i18n-en={status}>{statusLabelZh}</dd>
     </div>
   </dl>
   <div class="project-meta__group">
-    <p>Tags</p>
+    <p data-i18n-zh="标签" data-i18n-en="Tags">标签</p>
     <div class="project-meta__tags">
-      {tags.map((item) => <span>{item}</span>)}
+      {tags.map((item) => <span data-i18n-zh={toZhTerm(item)} data-i18n-en={item}>{toZhTerm(item)}</span>)}
     </div>
   </div>
   <div class="project-meta__group">
-    <p>Stack</p>
+    <p data-i18n-zh="技术栈" data-i18n-en="Stack">技术栈</p>
     <div class="project-meta__tags">
-      {stack.map((item) => <span>{item}</span>)}
+      {stack.map((item) => <span data-i18n-zh={toZhTerm(item)} data-i18n-en={item}>{toZhTerm(item)}</span>)}
     </div>
   </div>
 </aside>

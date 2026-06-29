@@ -1,12 +1,12 @@
 import { motion, useReducedMotion } from "motion/react";
 
 const nodes = [
-  { label: "MODEL", text: "Understand capability" },
-  { label: "CONTEXT", text: "Organize information" },
-  { label: "RETRIEVAL", text: "Find relevant knowledge" },
-  { label: "TOOLS", text: "Call reliable functions" },
-  { label: "WORKFLOW", text: "Orchestrate process" },
-  { label: "PRODUCT", text: "Deliver value" }
+  { label: "模型", labelEn: "MODEL", text: "理解能力边界", textEn: "Understand capability", topic: "model" },
+  { label: "上下文", labelEn: "CONTEXT", text: "组织信息", textEn: "Organize information", topic: "context" },
+  { label: "检索", labelEn: "RETRIEVAL", text: "找到相关知识", textEn: "Find relevant knowledge", topic: "retrieval" },
+  { label: "工具", labelEn: "TOOLS", text: "调用可靠函数", textEn: "Call reliable functions", topic: "tools" },
+  { label: "工作流", labelEn: "WORKFLOW", text: "编排过程", textEn: "Orchestrate process", topic: "workflow" },
+  { label: "产品", labelEn: "PRODUCT", text: "交付用户价值", textEn: "Deliver value", topic: "product" }
 ];
 
 export function SystemTrace() {
@@ -22,10 +22,14 @@ export function SystemTrace() {
         />
       </div>
       {nodes.map((node) => (
-        <a className="system-trace__node" href={`/writing?topic=${node.label.toLowerCase()}`} key={node.label}>
+        <a className="system-trace__node" href={`/writing?topic=${node.topic}`} key={node.topic}>
           <span className="system-trace__dot" aria-hidden="true" />
-          <strong>{node.label}</strong>
-          <small>{node.text}</small>
+          <strong data-i18n-zh={node.label} data-i18n-en={node.labelEn}>
+            {node.label}
+          </strong>
+          <small data-i18n-zh={node.text} data-i18n-en={node.textEn}>
+            {node.text}
+          </small>
         </a>
       ))}
     </div>

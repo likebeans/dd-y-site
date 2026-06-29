@@ -130,6 +130,18 @@ body::before {
   background-size: 100% 8rem;
 }
 
+[data-language-only="en"] {
+  display: none !important;
+}
+
+html[data-language="en"] [data-language-only="zh"] {
+  display: none !important;
+}
+
+html[data-language="en"] [data-language-only="en"] {
+  display: revert !important;
+}
+
 a {
   color: inherit;
   text-decoration: none;

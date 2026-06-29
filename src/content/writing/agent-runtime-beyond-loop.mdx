@@ -1,10 +1,24 @@
 ---
 title: "Agent Runtime 不只是循环调用模型"
+titleEn: "Agent Runtime Is More Than Looping Model Calls"
 description: "一个生产级 Agent Runtime 还需要状态、审批、工具、事件与可观测性。"
+descriptionEn: "A production-grade Agent Runtime also needs state, approval, tools, events, and observability."
 publishedAt: 2026-06-20
 minutes: 16
 tags: ["Agent", "System Design", "Runtime"]
 featured: true
+sectionsEn:
+  - heading: "From Demo to Runtime"
+    body:
+      - "In a demo, an Agent can be a loop: the model plans, calls a tool, observes the result, and continues."
+      - "In a real system, the problem becomes permissions, state, audit, idempotency, timeout, rollback, and human confirmation."
+  - heading: "What a Runtime Should Carry"
+    body:
+      - "A reliable Agent Runtime needs to manage task state, tool registration, parameter validation, approval nodes, event logs, and observability metrics."
+      - "The model is only one decision component inside the system."
+  - heading: "Key Judgment"
+    body:
+      - "If an Agent cannot explain what it did after failure and cannot recover safely, it is not ready to be called production-grade."
 ---
 
 Agent 的难点不在于让模型多调用一次工具，而在于让执行过程可控、可评测、可恢复。

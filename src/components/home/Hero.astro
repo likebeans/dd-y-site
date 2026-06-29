@@ -8,7 +8,7 @@ import { profile } from "@/data/profile";
   <div class="hero__meta mono">
     <span data-i18n-zh={profile.availability} data-i18n-en="AVAILABLE FOR GOOD WORK">{profile.availability}</span>
     <span>{profile.timezone}</span>
-    <span data-i18n-zh="BEIJING, CHINA" data-i18n-en="BEIJING, CHINA">{profile.location}</span>
+    <span data-i18n-zh="中国，北京" data-i18n-en="BEIJING, CHINA">{profile.location}</span>
   </div>
 
   <div class="hero__grid">
@@ -21,8 +21,8 @@ import { profile } from "@/data/profile";
         {profile.role}
       </p>
       <h1>
-        <span>FROM MODELS</span>
-        <span>TO SYSTEMS</span>
+        <span data-i18n-zh="从模型" data-i18n-en="FROM MODELS">从模型</span>
+        <span data-i18n-zh="到系统" data-i18n-en="TO SYSTEMS">到系统</span>
       </h1>
       <p
         class="hero__thesis"
@@ -39,9 +39,9 @@ import { profile } from "@/data/profile";
         {profile.intro}
       </p>
       <div class="hero__actions">
-        <ArrowLink href="/writing" label="READ WRITING" variant="primary" />
-        <ArrowLink href="/work" label="VIEW SYSTEMS" />
-        <ArrowLink href="/resume" label="GET RESUME" />
+        <ArrowLink href="/writing" label="阅读文章" labelEn="READ WRITING" variant="primary" />
+        <ArrowLink href="/work" label="查看项目" labelEn="VIEW SYSTEMS" />
+        <ArrowLink href="/resume" label="获取简历" labelEn="GET RESUME" />
       </div>
     </div>
 
@@ -52,9 +52,9 @@ import { profile } from "@/data/profile";
         <span>Y 000128</span>
       </div>
       <div class="diagram-node diagram-node--active">Agent</div>
-      <div class="diagram-node diagram-node--a">Retrieval</div>
-      <div class="diagram-node diagram-node--b">Tools</div>
-      <div class="diagram-node diagram-node--c">Workflow</div>
+      <div class="diagram-node diagram-node--a" data-i18n-zh="检索" data-i18n-en="Retrieval">检索</div>
+      <div class="diagram-node diagram-node--b" data-i18n-zh="工具" data-i18n-en="Tools">工具</div>
+      <div class="diagram-node diagram-node--c" data-i18n-zh="工作流" data-i18n-en="Workflow">工作流</div>
       <div class="diagram-cross diagram-cross--one"></div>
       <div class="diagram-cross diagram-cross--two"></div>
     </aside>

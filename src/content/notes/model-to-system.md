@@ -1,5 +1,7 @@
 ---
 title: "从模型能力到系统能力，中间还缺什么"
+titleEn: "What Is Missing Between Model Capability and System Capability"
+bodyEn: "Model capability is only the starting point. Once it enters real business, it still needs data, permissions, process, evaluation, observability, and stable engineering boundaries."
 publishedAt: 2026-06-24
 tags: ["Thinking", "AI Systems"]
 ---

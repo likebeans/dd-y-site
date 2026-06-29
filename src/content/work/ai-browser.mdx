@@ -1,6 +1,7 @@
 ---
 title: "AI Browser"
 summary: "面向复杂网页任务的下一代 AI 浏览器实验，关注检索、浏览、动作与结果验证。"
+summaryEn: "A next-generation AI browser experiment for complex web tasks, focused on retrieval, browsing, actions, and result verification."
 year: 2024
 order: 2
 role: "RAG / Search / VLLM"
@@ -12,6 +13,30 @@ metrics:
     value: "20+"
   - label: "Latency focus"
     value: "TTFT"
+sectionsEn:
+  - heading: "Problem"
+    body:
+      - "AI tasks inside a browser are not a single question-answer exchange. They are continuous chains of search, reading, locating, clicking, verification, and summarization."
+      - "The model needs to observe page state and also know when to stop."
+  - heading: "Constraints"
+    body:
+      - "Web pages are unstable: DOM structure, visual layout, and content summaries can all change."
+      - "Browser actions need to be replayable so failures can be diagnosed."
+      - "Inference latency directly affects the user experience."
+  - heading: "System Design"
+    body:
+      - "The prototype splits page observation, retrieval summaries, action planning, and execution verification into separate modules."
+      - "Browser automation captures state, the model decides the next step, and evaluation scripts verify whether the task was actually completed."
+  - heading: "Key Decisions"
+    body:
+      - "Browser tasks should not rely only on full-page summaries."
+      - "A stronger approach combines DOM structure, clickable elements, screenshots, and task context so the model sees enough information without being overloaded."
+  - heading: "Impact"
+    body:
+      - "The project helped define a basic execution pattern for browser Agents and exposed the difficulty of evaluation and recovery in long-running tasks."
+  - heading: "Reflection"
+    body:
+      - "Future work should focus on task evaluation, action constraints, and failure attribution rather than simply expanding prompts."
 ---
 
 ## Problem

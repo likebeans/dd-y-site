@@ -7,14 +7,19 @@ const works = (await getCollection("work")).sort((a, b) => a.data.order - b.data
 ---
 
 <BaseLayout
-  title="Work - dd-y / 余非凡"
+  title="项目 - dd-y / 余非凡"
   description="精选项目与系统设计实践，覆盖 RAG、Agent、工具调用与企业 AI 应用。"
 >
   <section class="work-page page-shell">
     <header>
-      <p>Selected Work</p>
-      <h1>WORK</h1>
-      <span>精选项目与系统设计，真实场景中的 AI 应用实践。</span>
+      <p data-i18n-zh="精选项目" data-i18n-en="Selected Work">精选项目</p>
+      <h1 data-i18n-zh="项目" data-i18n-en="WORK">项目</h1>
+      <span
+        data-i18n-zh="精选项目与系统设计，真实场景中的 AI 应用实践。"
+        data-i18n-en="Selected projects and system design practice in real AI application contexts."
+      >
+        精选项目与系统设计，真实场景中的 AI 应用实践。
+      </span>
     </header>
     <WorkIndex works={works} />
   </section>

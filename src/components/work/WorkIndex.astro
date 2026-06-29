@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { toZhPhrase, toZhTerm } from "@/data/terms";
 
 interface Props {
   works: CollectionEntry<"work">[];
@@ -18,14 +19,18 @@ const { works } = Astro.props;
           <span class="work-index__order">{String(work.data.order).padStart(2, "0")}</span>
           <div class="work-index__main">
             <strong>{work.data.title}</strong>
-            <p data-work-summary>{work.data.summary}</p>
+            <p data-work-summary data-i18n-zh={work.data.summary} data-i18n-en={work.data.summaryEn}>
+              {work.data.summary}
+            </p>
           </div>
           <div class="work-index__signals" data-work-signals>
             {signals.map((item) => (
-              <span>{item}</span>
+              <span data-i18n-zh={toZhTerm(item)} data-i18n-en={item}>{toZhTerm(item)}</span>
             ))}
           </div>
-          <small>{work.data.role}</small>
+          <small data-i18n-zh={toZhPhrase(work.data.role)} data-i18n-en={work.data.role}>
+            {toZhPhrase(work.data.role)}
+          </small>
           <em>{work.data.year}</em>
         </a>
       );

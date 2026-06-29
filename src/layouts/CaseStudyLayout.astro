@@ -11,20 +11,26 @@ interface Props {
 }
 
 const { entry } = Astro.props;
+const statusLabelZh = entry.data.status === "Case Study" ? "案例研究" : entry.data.status;
+const architectureTitleZh = `${entry.data.title} 架构`;
+const architectureTitleEn = `${entry.data.title} Architecture`;
 ---
 
 <BaseLayout title={`${entry.data.title} - dd-y / 余非凡`} description={entry.data.summary}>
   <article class="case-study page-shell">
     <header class="case-study__hero" id="overview">
       <div>
-        <p class="case-study__eyebrow">{entry.data.status}</p>
+        <p class="case-study__eyebrow" data-i18n-zh={statusLabelZh} data-i18n-en={entry.data.status}>
+          {statusLabelZh}
+        </p>
         <h1>{entry.data.title}</h1>
-        <p>{entry.data.summary}</p>
+        <p data-i18n-zh={entry.data.summary} data-i18n-en={entry.data.summaryEn}>{entry.data.summary}</p>
       </div>
       <ProjectMeta
         year={entry.data.year}
         role={entry.data.role}
         status={entry.data.status}
+        statusLabelZh={statusLabelZh}
         stack={entry.data.stack}
         tags={entry.data.tags}
       />
@@ -32,34 +38,52 @@ const { entry } = Astro.props;
 
     <section class="case-study__snapshot" id="snapshot" data-case-snapshot>
       <div class="case-study__snapshot-head">
-        <p>System Snapshot</p>
-        <span>Architecture, signals, and evidence live here before the narrative.</span>
+        <p data-i18n-zh="系统快照" data-i18n-en="System Snapshot">系统快照</p>
+        <span
+          data-i18n-zh="架构、信号与证据会先于正文呈现。"
+          data-i18n-en="Architecture, signals, and evidence live here before the narrative."
+        >
+          架构、信号与证据会先于正文呈现。
+        </span>
       </div>
       <MetricStrip metrics={entry.data.metrics} />
-      <ArchitectureFigure title={`${entry.data.title} Architecture`} />
+      <ArchitectureFigure title={architectureTitleZh} titleEn={architectureTitleEn} />
     </section>
 
     <div class="case-study__body">
       <nav aria-label="Case study sections" data-case-nav>
-        <a href="#overview">Overview</a>
-        <a href="#snapshot">Snapshot</a>
-        <a href="#case-notes">Case Notes</a>
-        <a href="#next">Next</a>
+        <a href="#overview" data-i18n-zh="概览" data-i18n-en="Overview">概览</a>
+        <a href="#snapshot" data-i18n-zh="快照" data-i18n-en="Snapshot">快照</a>
+        <a href="#case-notes" data-i18n-zh="案例正文" data-i18n-en="Case Notes">案例正文</a>
+        <a href="#next" data-i18n-zh="下一步" data-i18n-en="Next">下一步</a>
       </nav>
-      <div class="case-study__content" id="case-notes" data-case-content>
+      <div class="case-study__content" id="case-notes" data-case-content data-language-only="zh">
         <slot />
+      </div>
+      <div class="case-study__content" data-case-content data-language-only="en">
+        {entry.data.sectionsEn.map((section) => (
+          <section>
+            <h2>{section.heading}</h2>
+            {section.body.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))}
       </div>
     </div>
 
     <footer class="case-study__next" id="next" data-case-next>
       <div>
-        <p>Continue</p>
-        <span>Move between project evidence, writing, and resume without leaving the portfolio system.</span>
+        <p data-i18n-zh="继续浏览" data-i18n-en="Continue">继续浏览</p>
+        <span
+          data-i18n-zh="在项目证据、技术文章和简历之间继续浏览。"
+          data-i18n-en="Move between project evidence, writing, and resume without leaving the portfolio system."
+        >
+          在项目证据、技术文章和简历之间继续浏览。
+        </span>
       </div>
       <div class="case-study__next-actions">
-        <ArrowLink href="/work" label="ALL WORK" />
-        <ArrowLink href="/writing" label="READ WRITING" />
-        <ArrowLink href="/resume" label="RESUME" />
+        <ArrowLink href="/work" label="所有项目" labelEn="ALL WORK" />
+        <ArrowLink href="/writing" label="阅读文章" labelEn="READ WRITING" />
+        <ArrowLink href="/resume" label="查看简历" labelEn="RESUME" />
       </div>
     </footer>
   </article>

@@ -1,22 +1,27 @@
 ---
 interface Props {
   title?: string;
+  titleEn?: string;
 }
 
-const { title = "System Architecture" } = Astro.props;
+const { title = "系统架构", titleEn = "System Architecture" } = Astro.props;
 ---
 
 <figure class="architecture-figure">
   <figcaption>
-    <span>System Snapshot</span>
-    <strong>{title}</strong>
+    <span data-i18n-zh="系统快照" data-i18n-en="System Snapshot">系统快照</span>
+    <strong data-i18n-zh={title} data-i18n-en={titleEn}>{title}</strong>
   </figcaption>
   <div class="architecture-figure__canvas" aria-label={title}>
-    <div class="arch-node arch-node--user">User</div>
-    <div class="arch-node arch-node--agent">Agent Runtime</div>
-    <div class="arch-node arch-node--retrieval">Retrieval</div>
-    <div class="arch-node arch-node--tools">MCP Tools</div>
-    <div class="arch-node arch-node--system">Business System</div>
+    <div class="arch-node arch-node--user" data-i18n-zh="用户" data-i18n-en="User">用户</div>
+    <div class="arch-node arch-node--agent" data-i18n-zh="Agent 运行时" data-i18n-en="Agent Runtime">
+      Agent 运行时
+    </div>
+    <div class="arch-node arch-node--retrieval" data-i18n-zh="检索" data-i18n-en="Retrieval">检索</div>
+    <div class="arch-node arch-node--tools" data-i18n-zh="MCP 工具" data-i18n-en="MCP Tools">MCP 工具</div>
+    <div class="arch-node arch-node--system" data-i18n-zh="业务系统" data-i18n-en="Business System">
+      业务系统
+    </div>
     <span class="arch-line arch-line--vertical"></span>
     <span class="arch-line arch-line--left"></span>
     <span class="arch-line arch-line--right"></span>

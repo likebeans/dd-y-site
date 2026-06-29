@@ -1,6 +1,7 @@
 ---
 title: "Enterprise OA Agent"
 summary: "把企业流程中的自然语言请求转化为可审批、可追踪、可回滚的系统动作。"
+summaryEn: "Turns natural-language requests in enterprise workflows into approvable, traceable, and reversible system actions."
 year: 2025
 order: 1
 role: "Agent / MCP / Workflow"
@@ -12,6 +13,30 @@ metrics:
     value: "80%"
   - label: "Tool success"
     value: "95%+"
+sectionsEn:
+  - heading: "Problem"
+    body:
+      - "Enterprise OA workflows are scattered across many systems. Users need to understand pages, approval rules, and field constraints before they can act."
+      - "Adding a model to a chat window is not enough. The harder part is translating natural language into executable, approvable, and auditable business actions."
+  - heading: "Constraints"
+    body:
+      - "Tool calls must be auditable and must not bypass existing permission systems."
+      - "Sensitive operations need approval and explicit confirmation."
+      - "When the Agent fails, the system needs recoverable state rather than a plain explanation."
+  - heading: "System Design"
+    body:
+      - "The system separates user input into intent recognition, parameter completion, approval checks, tool execution, and result write-back."
+      - "The model handles understanding and planning. Controlled tools and business APIs perform the actual actions."
+  - heading: "Key Decisions"
+    body:
+      - "The Agent should obey the workflow rather than forcing the workflow to adapt to the Agent."
+      - "Each tool needs idempotency, permission checks, and structured returns so a failed action is not turned into another unsafe action."
+  - heading: "Impact"
+    body:
+      - "The project validated natural-language entry points for process-heavy scenarios and produced reusable capabilities around tool registration, approval interception, and execution logs."
+  - heading: "Reflection"
+    body:
+      - "The next version should strengthen evaluation sets, exception recovery, and cross-system state synchronization so the Agent Runtime behaves more like a production workflow engine."
 ---
 
 ## Problem

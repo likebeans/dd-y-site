@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 type Project = {
   title: string;
   role: string;
+  roleEn: string;
   year: number;
   href: string;
 };
@@ -11,7 +12,14 @@ type Props = {
   projects: Project[];
 };
 
-const previewNodes = ["Intent", "Retrieval", "Agent", "Tools", "Review", "System"];
+const previewNodes = [
+  { label: "意图", labelEn: "Intent" },
+  { label: "检索", labelEn: "Retrieval" },
+  { label: "Agent", labelEn: "Agent" },
+  { label: "工具", labelEn: "Tools" },
+  { label: "审核", labelEn: "Review" },
+  { label: "系统", labelEn: "System" }
+];
 
 export function ProjectPreview({ projects }: Props) {
   const [activeHref, setActiveHref] = useState(projects[0]?.href ?? "");
@@ -36,7 +44,7 @@ export function ProjectPreview({ projects }: Props) {
             <span className="work-row__index">{String(index + 1).padStart(2, "0")}</span>
             <span>
               <strong>{project.title}</strong>
-              <small>{project.role}</small>
+              <small data-i18n-zh={project.role} data-i18n-en={project.roleEn}>{project.role}</small>
             </span>
             <span className="work-row__year">{project.year}</span>
           </a>
@@ -45,12 +53,19 @@ export function ProjectPreview({ projects }: Props) {
       <aside className="selected-work__preview" aria-label="Architecture preview">
         <div className="selected-work__preview-title">
           <span>{activeProject?.title}</span>
-          <small>{activeProject?.role}</small>
+          <small data-i18n-zh={activeProject?.role} data-i18n-en={activeProject?.roleEn}>
+            {activeProject?.role}
+          </small>
         </div>
         <div className="preview-grid">
           {previewNodes.map((node) => (
-            <span className={node === "Agent" ? "active" : undefined} key={node}>
-              {node}
+            <span
+              className={node.labelEn === "Agent" ? "active" : undefined}
+              data-i18n-zh={node.label}
+              data-i18n-en={node.labelEn}
+              key={node.labelEn}
+            >
+              {node.label}
             </span>
           ))}
         </div>

@@ -4,13 +4,13 @@ import SectionLabel from "@/components/SectionLabel.astro";
 const focus = [
   ["RAG", "RAG", "复杂文档解析、切分、检索、重排与评测。", "Document parsing, chunking, retrieval, reranking, and evaluation."],
   ["Agent", "Agent", "状态管理、工具调用、人工审批、日志与可观测性。", "State, tool calling, human approval, logging, and observability."],
-  ["Evaluation", "Evaluation", "任务数据集、trace 分析、答案质量和可靠性验证。", "Task datasets, trace analysis, answer quality, and reliability checks."],
-  ["Engineering", "Engineering", "权限、延迟、失败归因、成本与可维护边界。", "Permissions, latency, failure attribution, cost, and maintainable boundaries."]
+  ["评测", "Evaluation", "任务数据集、trace 分析、答案质量和可靠性验证。", "Task datasets, trace analysis, answer quality, and reliability checks."],
+  ["工程", "Engineering", "权限、延迟、失败归因、成本与可维护边界。", "Permissions, latency, failure attribution, cost, and maintainable boundaries."]
 ];
 ---
 
 <section class="technical-focus page-shell" data-section-marker="Technical Focus" data-section-tone="surface">
-  <SectionLabel label="Technical Focus" labelEn="Technical Focus" kicker="Models to systems" kickerEn="Models to systems" />
+  <SectionLabel label="技术关注" labelEn="Technical Focus" kicker="从模型到系统" kickerEn="Models to systems" />
   <div class="technical-focus__grid">
     {
       focus.map(([title, titleEn, text, textEn]) => (

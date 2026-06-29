@@ -8,20 +8,30 @@ const posts = (await getCollection("writing")).sort(
 const featured = posts.filter((post) => post.data.featured);
 ---
 
-<BaseLayout title="Writing - dd-y / 余非凡" description="关于 RAG、Agent、评测与 AI 工程系统的长文章。">
+<BaseLayout title="文章 - dd-y / 余非凡" description="关于 RAG、Agent、评测与 AI 工程系统的长文章。">
   <section class="writing-page page-shell">
     <header>
-      <p>Writing</p>
-      <h1>WRITING</h1>
-      <span>技术文章、系统设计笔记，以及从模型能力走向系统能力的思考。</span>
+      <p data-i18n-zh="文章" data-i18n-en="Writing">文章</p>
+      <h1 data-i18n-zh="文章" data-i18n-en="WRITING">文章</h1>
+      <span
+        data-i18n-zh="技术文章、系统设计笔记，以及从模型能力走向系统能力的思考。"
+        data-i18n-en="Technical essays, system design notes, and thinking from model capability to system capability."
+      >
+        技术文章、系统设计笔记，以及从模型能力走向系统能力的思考。
+      </span>
     </header>
 
     <div class="writing-page__featured">
       {featured.map((post) => (
         <a href={`/writing/${post.id}`}>
-          <small>{post.data.tags.join(" · ")} · {post.data.minutes} min read</small>
-          <strong>{post.data.title}</strong>
-          <p>{post.data.description}</p>
+          <small
+            data-i18n-zh={`${post.data.tags.join(" · ")} · ${post.data.minutes} 分钟阅读`}
+            data-i18n-en={`${post.data.tags.join(" · ")} · ${post.data.minutes} min read`}
+          >
+            {post.data.tags.join(" · ")} · {post.data.minutes} 分钟阅读
+          </small>
+          <strong data-i18n-zh={post.data.title} data-i18n-en={post.data.titleEn}>{post.data.title}</strong>
+          <p data-i18n-zh={post.data.description} data-i18n-en={post.data.descriptionEn}>{post.data.description}</p>
         </a>
       ))}
     </div>
@@ -32,8 +42,10 @@ const featured = posts.filter((post) => post.data.featured);
           <time datetime={post.data.publishedAt.toISOString()}>
             {post.data.publishedAt.toISOString().slice(0, 10)}
           </time>
-          <strong>{post.data.title}</strong>
-          <span>{post.data.minutes} min</span>
+          <strong data-i18n-zh={post.data.title} data-i18n-en={post.data.titleEn}>{post.data.title}</strong>
+          <span data-i18n-zh={`${post.data.minutes} 分钟`} data-i18n-en={`${post.data.minutes} min`}>
+            {post.data.minutes} 分钟
+          </span>
         </a>
       ))}
     </div>

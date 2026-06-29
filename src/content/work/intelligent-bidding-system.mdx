@@ -1,6 +1,7 @@
 ---
 title: "Intelligent Bidding System"
 summary: "结合 AI 配置、RAG 与 Agent 的智能投标系统，用于提升文档处理和方案生成效率。"
+summaryEn: "An intelligent bidding system combining AI configuration, RAG, and Agent workflows to improve document processing and proposal generation."
 year: 2026
 order: 3
 role: "Crawler / Agent / RAG"
@@ -12,6 +13,30 @@ metrics:
     value: "Structured"
   - label: "Review loop"
     value: "Human-in-loop"
+sectionsEn:
+  - heading: "Problem"
+    body:
+      - "Bidding scenarios involve tender documents, historical proposals, qualification materials, and strict formatting requirements."
+      - "The system needs to understand document structure, constraints, and business facts rather than only generate text."
+  - heading: "Constraints"
+    body:
+      - "Documents contain tables, images, code blocks, and scanned pages, so they cannot be chunked only by length."
+      - "Generated content must be traceable to sources."
+      - "Important conclusions need human review before submission."
+  - heading: "System Design"
+    body:
+      - "The system contains document collection, parsing, chunking, retrieval, reranking, generation, and review workflows."
+      - "RAG recalls evidence, the Agent orchestrates multi-step tasks, and the business system manages permissions and state."
+  - heading: "Key Decisions"
+    body:
+      - "A controlled generation workflow is more reliable than a universal writing assistant."
+      - "Every step needs intermediate results, citations, and an entry point for human confirmation."
+  - heading: "Impact"
+    body:
+      - "The project aims to reduce repetitive document preparation and improve consistency and reviewability in proposal generation."
+  - heading: "Reflection"
+    body:
+      - "Future work should focus on evaluation, template management, citation quality, and multi-person collaboration."
 ---
 
 ## Problem

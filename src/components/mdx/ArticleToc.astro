@@ -10,7 +10,7 @@ const headings = Astro.props.headings.filter((heading) => heading.depth === 2 ||
 
 {headings.length > 0 && (
   <nav class="article-toc" aria-label="Article table of contents">
-    <span>On This Page</span>
+    <span data-i18n-zh="本页目录" data-i18n-en="On This Page">本页目录</span>
     {headings.map((heading) => (
       <a class:list={[`depth-${heading.depth}`]} href={`#${heading.slug}`}>
         {heading.text}

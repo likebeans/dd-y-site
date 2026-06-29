@@ -1,8 +1,8 @@
 export const navItems = [
-  { label: "WORK", labelEn: "WORK", href: "/work" },
-  { label: "WRITING", labelEn: "WRITING", href: "/writing" },
-  { label: "NOTES", labelEn: "NOTES", href: "https://likebeans.github.io/notes-on-llms/" },
-  { label: "SPACES", labelEn: "SPACES", href: "/#spaces" },
-  { label: "ABOUT", labelEn: "ABOUT", href: "/about" },
-  { label: "RESUME", labelEn: "RESUME", href: "/resume" }
+  { label: "项目", labelEn: "WORK", href: "/work" },
+  { label: "文章", labelEn: "WRITING", href: "/writing" },
+  { label: "笔记", labelEn: "NOTES", href: "https://likebeans.github.io/notes-on-llms/" },
+  { label: "空间", labelEn: "SPACES", href: "/#spaces" },
+  { label: "关于", labelEn: "ABOUT", href: "/about" },
+  { label: "简历", labelEn: "RESUME", href: "/resume" }
 ] as const;

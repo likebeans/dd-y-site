@@ -9,6 +9,10 @@ interface Props {
 }
 
 const { metrics } = Astro.props;
+const metricLabelZh: Record<string, string> = {
+  "Intent coverage": "意图覆盖",
+  "Tool success": "工具成功率"
+};
 ---
 
 {
@@ -16,13 +20,21 @@ const { metrics } = Astro.props;
   <dl class="metric-strip">
     {metrics.map((metric) => (
       <div>
-        <dt>{metric.label}</dt>
+        <dt data-i18n-zh={metricLabelZh[metric.label] ?? metric.label} data-i18n-en={metric.label}>
+          {metricLabelZh[metric.label] ?? metric.label}
+        </dt>
         <dd>{metric.value}</dd>
       </div>
     ))}
   </dl>
   ) : (
-    <div class="metric-strip metric-strip--empty">Evidence metrics can be added later.</div>
+    <div
+      class="metric-strip metric-strip--empty"
+      data-i18n-zh="可以稍后补充证据指标。"
+      data-i18n-en="Evidence metrics can be added later."
+    >
+      可以稍后补充证据指标。
+    </div>
   )
 }
 

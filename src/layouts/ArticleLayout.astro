@@ -10,6 +10,11 @@ interface Props {
 }
 
 const { entry, headings } = Astro.props;
+const publishedZh = entry.data.publishedAt.toLocaleDateString("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric"
+});
 const published = entry.data.publishedAt.toLocaleDateString("en", {
   month: "short",
   day: "numeric",
@@ -20,28 +25,40 @@ const published = entry.data.publishedAt.toLocaleDateString("en", {
 <BaseLayout title={`${entry.data.title} - dd-y / 余非凡`} description={entry.data.description}>
   <article class="article page-shell">
     <header class="article__hero">
-      <p class="article__eyebrow">Writing</p>
-      <h1>{entry.data.title}</h1>
-      <p>{entry.data.description}</p>
+      <p class="article__eyebrow" data-i18n-zh="文章" data-i18n-en="Writing">文章</p>
+      <h1 data-i18n-zh={entry.data.title} data-i18n-en={entry.data.titleEn}>{entry.data.title}</h1>
+      <p data-i18n-zh={entry.data.description} data-i18n-en={entry.data.descriptionEn}>{entry.data.description}</p>
     </header>
 
     <div class="article__layout">
       <aside class="article__meta">
-        <span>Published</span>
-        <strong>{published}</strong>
-        <span>Reading</span>
-        <strong>{entry.data.minutes} min</strong>
-        <span>Tags</span>
+        <span data-i18n-zh="发布" data-i18n-en="Published">发布</span>
+        <strong data-i18n-zh={publishedZh} data-i18n-en={published}>{publishedZh}</strong>
+        <span data-i18n-zh="阅读" data-i18n-en="Reading">阅读</span>
+        <strong data-i18n-zh={`${entry.data.minutes} 分钟`} data-i18n-en={`${entry.data.minutes} min`}>
+          {entry.data.minutes} 分钟
+        </strong>
+        <span data-i18n-zh="标签" data-i18n-en="Tags">标签</span>
         <div>
           {entry.data.tags.map((tag) => <em>{tag}</em>)}
         </div>
       </aside>
 
-      <div class="article__body">
+      <div class="article__body" data-language-only="zh">
         <slot />
       </div>
+      <div class="article__body" data-language-only="en">
+        {entry.data.sectionsEn.map((section) => (
+          <section>
+            <h2>{section.heading}</h2>
+            {section.body.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+        ))}
+      </div>
 
-      <ArticleToc headings={headings} />
+      <div data-language-only="zh">
+        <ArticleToc headings={headings} />
+      </div>
     </div>
   </article>
 </BaseLayout>

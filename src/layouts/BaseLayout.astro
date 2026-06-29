@@ -57,6 +57,7 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
       (() => {
         const root = document.documentElement;
         const storageKey = "dd-y-language";
+        let currentLanguage = "zh";
 
         const readStoredLanguage = () => {
           try {
@@ -74,17 +75,28 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
           }
         };
 
-        const applyLanguage = (language) => {
-          const nextLanguage = language === "en" ? "en" : "zh";
-          root.lang = nextLanguage === "en" ? "en" : "zh-CN";
-          root.dataset.language = nextLanguage;
-
-          document.querySelectorAll("[data-i18n-zh][data-i18n-en]").forEach((node) => {
-            const text = node.getAttribute(`data-i18n-${nextLanguage}`);
+        const translateElement = (element, language) => {
+          const translateNode = (node) => {
+            const text = node.getAttribute(`data-i18n-${language}`);
             if (text !== null) {
               node.textContent = text;
             }
-          });
+          };
+
+          if (element.matches("[data-i18n-zh][data-i18n-en]")) {
+            translateNode(element);
+          }
+
+          element.querySelectorAll("[data-i18n-zh][data-i18n-en]").forEach(translateNode);
+        };
+
+        const applyLanguage = (language) => {
+          const nextLanguage = language === "en" ? "en" : "zh";
+          currentLanguage = nextLanguage;
+          root.lang = nextLanguage === "en" ? "en" : "zh-CN";
+          root.dataset.language = nextLanguage;
+
+          translateElement(document.body, nextLanguage);
 
           document.querySelectorAll("[data-language-option]").forEach((node) => {
             node.setAttribute("aria-pressed", String(node.getAttribute("data-language-option") === nextLanguage));
@@ -98,6 +110,18 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
           if (!target) return;
           applyLanguage(target.getAttribute("data-language-option"));
         });
+
+        const translationObserver = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node instanceof Element) {
+                translateElement(node, currentLanguage);
+              }
+            });
+          });
+        });
+
+        translationObserver.observe(document.body, { childList: true, subtree: true });
 
         let pointerFrame = 0;
         const setPointer = (event) => {
