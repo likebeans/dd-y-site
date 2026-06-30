@@ -1,0 +1,151 @@
+---
+import ArrowLink from "@/components/ArrowLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+Astro.response.status = 404;
+---
+
+<BaseLayout
+  title="页面未找到 - dd-y / 余非凡"
+  description="这个页面不存在，回到个人网站继续浏览项目、文章和简历。"
+  canonical="https://yufeifan.cn/404"
+  robots="noindex,nofollow"
+>
+  <section class="not-found page-shell" data-section-marker="Not Found" data-section-tone="quiet">
+    <div class="not-found__meta mono">
+      <span>HTTP 404</span>
+      <span>X 000404</span>
+      <span>Y 000000</span>
+    </div>
+
+    <div class="not-found__grid">
+      <div class="not-found__copy">
+        <p data-i18n-zh="路径失效" data-i18n-en="Route Missing">路径失效</p>
+        <h1 data-i18n-zh="页面未找到" data-i18n-en="Page Not Found">页面未找到</h1>
+        <span
+          data-i18n-zh="这个地址没有对应的内容。你可以回到首页，或者继续查看项目、文章和简历。"
+          data-i18n-en="This address does not map to any published page. You can return home, or continue into work, writing, and resume."
+        >
+          这个地址没有对应的内容。你可以回到首页，或者继续查看项目、文章和简历。
+        </span>
+        <div class="not-found__actions">
+          <ArrowLink href="/" label="返回首页" labelEn="BACK HOME" variant="primary" />
+          <ArrowLink href="/work" label="查看项目" labelEn="VIEW WORK" />
+          <ArrowLink href="/writing" label="阅读文章" labelEn="READ WRITING" />
+        </div>
+      </div>
+
+      <aside class="not-found__panel" aria-label="404 diagnostic panel">
+        <div></div>
+        <strong>404</strong>
+        <span data-i18n-zh="没有匹配路由" data-i18n-en="No matching route">没有匹配路由</span>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - 10rem);
+    padding-top: clamp(3.5rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 9vw, 7rem);
+  }
+
+  .not-found__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.25rem;
+    color: var(--color-muted);
+    font-size: 0.68rem;
+  }
+
+  .not-found__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.42fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: center;
+    margin-top: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .not-found__copy {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .not-found__copy p {
+    margin: 0;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    max-width: 9ch;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 10rem);
+    font-weight: 850;
+    line-height: 0.86;
+  }
+
+  .not-found__copy > span {
+    max-width: 40rem;
+    font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+    line-height: 1.75;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+  }
+
+  .not-found__panel {
+    position: relative;
+    display: grid;
+    min-height: 24rem;
+    border: 1px solid var(--color-line);
+    background:
+      linear-gradient(to right, transparent 49.8%, rgba(17, 17, 17, 0.1) 50%, transparent 50.2%),
+      linear-gradient(to bottom, transparent 49.8%, rgba(17, 17, 17, 0.1) 50%, transparent 50.2%),
+      rgba(255, 255, 255, 0.16);
+    place-items: center;
+  }
+
+  .not-found__panel div {
+    position: absolute;
+    inset: 18%;
+    border: 1px solid rgba(199, 244, 50, 0.55);
+  }
+
+  .not-found__panel strong {
+    position: relative;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 7rem);
+    line-height: 1;
+  }
+
+  .not-found__panel span {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 760px) {
+    .not-found__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .not-found__panel {
+      min-height: 14rem;
+    }
+  }
+</style>

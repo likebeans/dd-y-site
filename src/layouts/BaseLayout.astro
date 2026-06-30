@@ -1,24 +1,75 @@
 ---
 import SiteFooter from "@/components/SiteFooter.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
+import { profile } from "@/data/profile";
 import "@/styles/tokens.css";
 import "@/styles/global.css";
+
+type JsonLdNode = Record<string, unknown>;
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   canonical?: string;
+  ogType?: string;
+  robots?: string;
+  structuredData?: JsonLdNode | JsonLdNode[];
 }
+
+const site = "https://yufeifan.cn";
+const normalizeCanonical = (value: string) => {
+  const url = new URL(value, site);
+  if (url.pathname !== "/") {
+    url.pathname = url.pathname.replace(/\/$/, "");
+  }
+  return url.toString();
+};
 
 const {
   title = "dd-y / 余非凡",
   description = "大模型算法工程师，关注 RAG、Agent、工具调用、评测与可上线的 AI 应用系统。",
   image = "/og-home.png",
-  canonical = new URL(Astro.url.pathname, Astro.site ?? "https://yufeifan.cn").toString()
+  canonical = normalizeCanonical(new URL(Astro.url.pathname, Astro.site ?? site).toString()),
+  ogType = "website",
+  robots = "index,follow,max-image-preview:large",
+  structuredData = []
 } = Astro.props;
 
-const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
+const canonicalUrl = normalizeCanonical(canonical);
+const imageUrl = new URL(image, Astro.site ?? site).toString();
+const siteUrl = `${site}/`;
+const structuredDataNodes = Array.isArray(structuredData) ? structuredData : [structuredData];
+const baseStructuredData: JsonLdNode[] = [
+  {
+    "@type": "Person",
+    "@id": `${siteUrl}#person`,
+    name: profile.name,
+    alternateName: profile.handle,
+    url: siteUrl,
+    jobTitle: profile.role,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Beijing",
+      addressCountry: "CN"
+    },
+    sameAs: [profile.github]
+  },
+  {
+    "@type": "WebSite",
+    "@id": `${siteUrl}#website`,
+    name: "dd-y / 余非凡",
+    url: siteUrl,
+    inLanguage: ["zh-CN", "en"],
+    publisher: {
+      "@id": `${siteUrl}#person`
+    }
+  }
+];
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [...baseStructuredData, ...structuredDataNodes]
+});
 ---
 
 <!doctype html>
@@ -27,20 +78,27 @@ const imageUrl = new URL(image, Astro.site ?? "https://yufeifan.cn").toString();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={profile.name} />
     <meta name="theme-color" content="#f5f1e8" />
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta property="og:type" content="website" />
+    <link rel="alternate" type="application/rss+xml" title="dd-y / 余非凡 Writing" href={`${site}/rss.xml`} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:site_name" content="dd-y / 余非凡" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
     <title>{title}</title>
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
     <script data-language-preflight is:inline>
       (() => {
         try {

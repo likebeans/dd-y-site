@@ -20,9 +20,32 @@ const published = entry.data.publishedAt.toLocaleDateString("en", {
   day: "numeric",
   year: "numeric"
 });
+const articleUrl = `https://yufeifan.cn/writing/${entry.id}`;
+const articleStructuredData = {
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description,
+  url: articleUrl,
+  mainEntityOfPage: articleUrl,
+  datePublished: entry.data.publishedAt.toISOString(),
+  dateModified: (entry.data.updatedAt ?? entry.data.publishedAt).toISOString(),
+  inLanguage: "zh-CN",
+  author: {
+    "@id": "https://yufeifan.cn/#person"
+  },
+  publisher: {
+    "@id": "https://yufeifan.cn/#person"
+  }
+};
 ---
 
-<BaseLayout title={`${entry.data.title} - dd-y / 余非凡`} description={entry.data.description}>
+<BaseLayout
+  title={`${entry.data.title} - dd-y / 余非凡`}
+  description={entry.data.description}
+  canonical={articleUrl}
+  ogType="article"
+  structuredData={articleStructuredData}
+>
   <article class="article page-shell">
     <header class="article__hero">
       <p class="article__eyebrow" data-i18n-zh="文章" data-i18n-en="Writing">文章</p>
