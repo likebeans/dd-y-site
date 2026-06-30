@@ -1,22 +1,25 @@
 ---
 title: "AI Browser"
-summary: "面向复杂网页任务的下一代 AI 浏览器实验，关注检索、浏览、动作与结果验证。"
-summaryEn: "A next-generation AI browser experiment for complex web tasks, focused on retrieval, browsing, actions, and result verification."
-year: 2024
-order: 2
+summary: "负责浏览器 AI 搜索、智能问数、模型微调与部署，服务高校近万名师生并沉淀评测与推理优化链路。"
+summaryEn: "Owned AI search, intelligent Q&A, fine-tuning, and deployment for an AI browser serving nearly 10,000 campus users."
+year: 2025
+order: 4
 role: "RAG / Search / VLLM"
 status: "Prototype"
-stack: ["Python", "Playwright", "VLLM", "Embeddings", "RAG"]
+stack: ["Python", "Qwen2.5", "LoRA", "DeepSpeed", "VLLM", "RAGas"]
 tags: ["Browser Agent", "Search", "VLLM"]
 metrics:
-  - label: "Task flows"
-    value: "20+"
-  - label: "Latency focus"
-    value: "TTFT"
+  - label: "Users"
+    value: "10000+"
+  - label: "AI features"
+    value: "10+"
+  - label: "Eval"
+    value: "RAGas"
 sectionsEn:
   - heading: "Problem"
     body:
       - "AI tasks inside a browser are not a single question-answer exchange. They are continuous chains of search, reading, locating, clicking, verification, and summarization."
+      - "The product served nearly 10,000 campus users and needed AI search, intelligent Q&A, fine-tuning, and private deployment to work as a usable system."
       - "The model needs to observe page state and also know when to stop."
   - heading: "Constraints"
     body:
@@ -26,14 +29,15 @@ sectionsEn:
   - heading: "System Design"
     body:
       - "The prototype splits page observation, retrieval summaries, action planning, and execution verification into separate modules."
-      - "Browser automation captures state, the model decides the next step, and evaluation scripts verify whether the task was actually completed."
+      - "Qwen2.5 was selected and fine-tuned with LoRA and DeepSpeed over cleaned campus-news data, then deployed through VLLM."
+      - "Evaluation monitored latency, throughput, TTFT, and answer quality through Locust, RAGas, and LLM-as-a-Judge."
   - heading: "Key Decisions"
     body:
       - "Browser tasks should not rely only on full-page summaries."
       - "A stronger approach combines DOM structure, clickable elements, screenshots, and task context so the model sees enough information without being overloaded."
   - heading: "Impact"
     body:
-      - "The project helped define a basic execution pattern for browser Agents and exposed the difficulty of evaluation and recovery in long-running tasks."
+      - "The project supported nearly 10,000 students and teachers, shipped 10+ AI features, and produced an end-to-end workflow from model selection to deployment and evaluation."
   - heading: "Reflection"
     body:
       - "Future work should focus on task evaluation, action constraints, and failure attribution rather than simply expanding prompts."
@@ -41,7 +45,7 @@ sectionsEn:
 
 ## Problem
 
-浏览器中的 AI 任务并不是一次问答，而是搜索、阅读、定位、点击、验证和总结的连续过程。模型需要看到页面状态，也需要知道什么时候停止。
+浏览器中的 AI 任务并不是一次问答，而是搜索、阅读、定位、点击、验证和总结的连续过程。项目服务高校近万名师生，覆盖 AI 搜索、智能问数、模型微调与私有化部署。
 
 ## Constraints
 
@@ -51,7 +55,9 @@ sectionsEn:
 
 ## System Design
 
-原型把页面观察、检索摘要、动作规划和执行验证拆成独立模块。浏览器自动化负责状态采集，模型负责下一步决策，评测脚本负责验证任务是否真的完成。
+原型把页面观察、检索摘要、动作规划和执行验证拆成独立模块。模型侧选用 Qwen2.5，基于校内新闻语料完成清洗与预处理，采用 LoRA + DeepSpeed 高效分布式微调，并基于 VLLM 完成推理优化和私有化部署。
+
+评测侧负责 benchmark、并发压测与 RAG 评估，持续监控 latency、throughput、TTFT，并结合 Locust、RAGas、LLM-as-a-Judge 优化效果。
 
 ## Key Decisions
 
@@ -59,7 +65,9 @@ sectionsEn:
 
 ## Impact
 
-这个项目帮助沉淀了浏览器 Agent 的基本执行模式，也暴露出长链路任务在评测和错误恢复上的复杂性。
+- 支撑高校近万名师生使用，落地十余项 AI 功能。
+- 沉淀从模型选型、训练、部署到评估的全链路工程化能力。
+- 建立可量化性能评估体系，为后续模型迭代和容量规划提供依据。
 
 ## Reflection
 

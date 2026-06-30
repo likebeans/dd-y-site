@@ -1,0 +1,73 @@
+---
+title: "企业级大模型与智能应用平台建设"
+summary: "构建统一的企业级智能数据与 AI 平台，把数据管理、模型服务、多智能体调度与知识检索整合成可复用底座。"
+summaryEn: "Built a unified enterprise AI platform that integrates data management, model serving, multi-agent orchestration, and knowledge retrieval into reusable infrastructure."
+year: 2025
+order: 1
+role: "AI Application / Platform / LLMOps"
+status: "Case Study"
+stack: ["Python", "LangGraph", "FastAPI", "VLLM", "BERT", "PostgreSQL"]
+tags: ["AI Platform", "Multi-Agent", "LLMOps"]
+metrics:
+  - label: "Efficiency"
+    value: "10x"
+  - label: "Intent accuracy"
+    value: "95%+"
+  - label: "Serving"
+    value: "VLLM"
+sectionsEn:
+  - heading: "Problem"
+    body:
+      - "Enterprise AI work was scattered across data systems, model services, business CRUD workflows, and isolated knowledge bases."
+      - "The real problem was not a single assistant. It was building a shared foundation that could connect enterprise data, model capability, and business workflows."
+  - heading: "Constraints"
+    body:
+      - "Structured and unstructured data needed to be retrieved through a consistent interface."
+      - "Model capabilities had to be deployed, evaluated, and routed without turning every business feature into a one-off integration."
+      - "High-frequency intent recognition needed lower latency than calling a full LLM for every request."
+  - heading: "System Design"
+    body:
+      - "The platform separates data, model, and application layers. Databases, vector stores, model services, agents, and business workflows are connected through controlled interfaces."
+      - "Multi-agent workflows combine local databases, enterprise knowledge bases, and external resources to produce structured reports and reusable business outputs."
+  - heading: "Key Decisions"
+    body:
+      - "The platform should standardize model serving and business integration before expanding more isolated AI features."
+      - "A lightweight BERT intent model handles high-frequency routing, while LLMs focus on heavier reasoning and generation tasks."
+  - heading: "Impact"
+    body:
+      - "The platform improved report generation by nearly 10x, reducing a half-month manual workflow to roughly 30 minutes."
+      - "It also produced reusable model serving, RAG, and multi-agent components for longer-term enterprise AI infrastructure."
+  - heading: "Reflection"
+    body:
+      - "The next step is to make evaluation, observability, and permission-aware orchestration first-class platform capabilities instead of project-specific add-ons."
+---
+
+## Problem
+
+企业 AI 应用容易分散在数据系统、模型服务、业务 CRUD、知识库和临时脚本里。真正的问题不是再做一个助手，而是建设一个能够连接企业数据、模型能力和业务流程的统一底座。
+
+## Constraints
+
+- 结构化数据和非结构化数据需要被统一检索和调用。
+- 模型能力需要可部署、可评测、可路由，不能每个业务功能都重新做一套集成。
+- 高频意图识别不能完全依赖大模型调用，需要更低延迟、更稳定的轻量模型。
+
+## System Design
+
+平台按数据层、模型层和应用层拆分。数据库、向量库、模型服务、Agent 编排和业务工作流通过受控接口连接，避免把 AI 能力做成孤立功能。
+
+多智能体系统接入本地库、企业知识库和外部资源，完成自动检索、推理分析和结构化报告生成。模型服务侧支持医疗大模型 CPT、SFT、RLHF 与 DRPO 对齐流程，并基于 VLLM 部署上线。
+
+## Key Decisions
+
+先标准化模型服务与业务接入，再扩展更多 AI 功能。高频意图识别由轻量 BERT 模型承担，准确率达到 95%+，推理速度约为大模型调用的 1/10；复杂推理和生成再交给 LLM。
+
+## Impact
+
+- 报告生成效率提升近 10x，从半月级人工流程缩短到约 30 分钟。
+- 沉淀统一模型服务、RAG 与多智能体框架，成为后续业务系统复用的长期基础设施。
+- 将数据、模型、知识能力整合为标准化输出，支持多个业务部门快速接入。
+
+## Reflection
+
+下一步应该把评测、可观测性和权限感知编排做成平台级能力，而不是在每个项目里重复补齐。

@@ -18,7 +18,7 @@ test("homepage presents identity and primary sections", async ({ page }) => {
     "href",
     "https://likebeans.github.io/OpenResume/"
   );
-  await expect(page.getByRole("link", { name: /01 Enterprise OA Agent/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /01 企业级大模型与智能应用平台建设/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /Agent Runtime 不只是循环调用模型/ })).toBeVisible();
 });
 

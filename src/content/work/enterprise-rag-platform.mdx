@@ -1,0 +1,74 @@
+---
+title: "企业级 RAG 检索与知识服务平台"
+summary: "建设统一知识检索与 RAG 服务底座，用多租户权限、安全裁剪和 OpenAI 兼容接口支撑多业务系统复用。"
+summaryEn: "Built a unified enterprise RAG foundation with multi-tenant permissions, security trimming, and OpenAI-compatible APIs for cross-system reuse."
+year: 2025
+order: 2
+role: "RAG / Security / Platform"
+status: "Case Study"
+stack: ["Python", "FastAPI", "Vector DB", "BM25", "Hybrid Search", "OpenAI API"]
+tags: ["RAG", "Security", "Infrastructure"]
+metrics:
+  - label: "Permission model"
+    value: "3-layer"
+  - label: "Retrieval"
+    value: "Hybrid"
+  - label: "Reuse"
+    value: "Multi-app"
+sectionsEn:
+  - heading: "Problem"
+    body:
+      - "Different AI applications needed knowledge retrieval, but repeated one-off RAG systems created duplicated cost and inconsistent permissions."
+      - "Enterprise retrieval must answer with the right knowledge while ensuring users cannot retrieve content outside their authorization scope."
+  - heading: "Constraints"
+    body:
+      - "Semantic retrieval cannot bypass enterprise permission boundaries."
+      - "The system needed to support multi-tenant isolation, quota management, and document-level ACLs."
+      - "Application teams needed a standard API instead of integrating directly with embeddings, vector stores, and rerankers."
+  - heading: "System Design"
+    body:
+      - "The platform uses a three-layer permission model: operation permission, knowledge-base scope, and document ACL."
+      - "Security Trimming is applied during retrieval so unauthorized chunks are filtered before they can reach generation."
+      - "The service exposes OpenAI-compatible embeddings and chat-completion interfaces, with standardized ingestion and retrieval workflows."
+  - heading: "Key Decisions"
+    body:
+      - "RAG should be treated as shared infrastructure, not a feature hidden inside each application."
+      - "Dense, BM25, and Hybrid retrieval modes are all supported because enterprise documents differ in structure, vocabulary, and precision requirements."
+  - heading: "Impact"
+    body:
+      - "The platform became a unified knowledge retrieval foundation for multiple AI systems and reduced duplicated build cost across teams."
+      - "It established a safer enterprise semantic retrieval mechanism for LLM applications."
+  - heading: "Reflection"
+    body:
+      - "Future work should strengthen citation quality, evaluation sets, audit trails, and tenant-level operations."
+---
+
+## Problem
+
+多个 AI 应用都需要知识检索，但如果每个应用各自搭建 RAG，会造成重复建设、接口不统一、权限控制不一致。企业级检索不仅要答得准，还要确保用户无法检索到权限之外的知识。
+
+## Constraints
+
+- 语义检索不能绕过企业权限边界。
+- 系统需要支持多租户隔离、配额管理和文档级 ACL。
+- 业务应用需要标准接口，而不是直接理解 Embedding、向量库和重排器细节。
+
+## System Design
+
+平台设计了三层权限模型：操作权限、知识库范围和文档 ACL。在检索阶段引入 Security Trimming，先过滤无权限片段，再进入生成阶段，避免语义召回绕过授权体系。
+
+服务层封装 OpenAI 兼容接口，支持 Embeddings 与 Chat Completions，同时沉淀标准化知识入库流程。检索侧支持 Dense、BM25、Hybrid 等模式，并补齐可观测与审计机制。
+
+## Key Decisions
+
+把 RAG 做成共享基础设施，而不是藏在每个应用里的功能模块。企业文档结构、术语和精确匹配要求差异很大，因此需要同时支持 Dense、BM25 和 Hybrid 检索。
+
+## Impact
+
+- 形成公司统一知识检索与 RAG 服务底座，支撑多个 AI 应用稳定运行并跨系统复用。
+- 建立企业级语义检索安全机制，解决大模型接入场景下的数据权限隔离问题。
+- 降低各业务线重复建设成本，让 AI 能力从单点应用升级为可规模化复用的基础设施。
+
+## Reflection
+
+后续重点会放在引用质量、评测集、审计链路和租户级运维能力上，让 RAG 平台真正成为可运营的基础设施。

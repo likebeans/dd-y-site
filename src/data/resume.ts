@@ -1,26 +1,32 @@
 export const resume = {
   summary:
-    "大模型算法工程师，关注 RAG、Agent、工具调用、评测体系和可上线的 AI 应用系统。擅长把模型能力拆解为数据、流程、权限、工具和工程边界中的可维护系统能力。",
+    "大模型算法工程师 / AI 应用开发工程师，关注 RAG、Agent、工具调用、评测体系和可上线的企业 AI 系统。曾在 A 股上市公司推动企业级 AI 平台、RAG 基础设施和 OA 智能化落地，擅长把模型能力拆解为数据、流程、权限、工具和工程边界中的可维护系统能力。",
   skills: [
     {
       label: "AI 系统",
-      items: ["RAG", "Agent Runtime", "Tool Calling", "Evaluation", "Prompt Engineering"]
+      items: ["RAG", "Agent Runtime", "Tool Calling", "LLMOps", "Evaluation", "Prompt Engineering"]
     },
     {
       label: "工程能力",
-      items: ["Python", "FastAPI", "Java", "PostgreSQL", "Redis", "Playwright"]
+      items: ["Python", "FastAPI", "Java", "PostgreSQL", "Redis", "VLLM", "Playwright"]
     },
     {
       label: "工作流",
-      items: ["MCP", "LangGraph", "Human-in-loop", "Observability", "Document Parsing"]
+      items: ["MCP", "FastMCP", "LangGraph", "Human-in-loop", "Security Trimming", "Document Parsing"]
     }
   ],
+  metrics: [
+    "原创 350+",
+    "阅读量 42万+",
+    "粉丝 2.6k+",
+    "浏览量 105万+"
+  ],
   projects: [
-    "Enterprise OA Agent",
+    "企业级大模型与智能应用平台建设",
+    "企业级 RAG 检索与知识服务平台",
     "AI Browser",
-    "Intelligent Bidding System",
-    "Reusable Agent Runtime",
-    "RAG Service"
+    "Enterprise OA Agent",
+    "Intelligent Bidding System"
   ],
   writing: [
     "RAG 分块中的表格、代码块与图片保护",
@@ -28,8 +34,8 @@ export const resume = {
   ],
   links: [
     { label: "个人网站", href: "https://yufeifan.cn" },
-    { label: "GitHub", href: "https://github.com/dd-y" },
-    { label: "邮箱", href: "mailto:hi@yufeifan.cn" }
+    { label: "GitHub", href: "https://github.com/likebeans" },
+    { label: "邮箱", href: "mailto:yufeifandd@gmail.com" }
   ],
   education: "计算机科学 / AI 工程方向"
 };

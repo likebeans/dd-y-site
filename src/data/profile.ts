@@ -9,6 +9,6 @@ export const profile = {
   thesis: "把模型能力，做成可上线、可评测、可维护的系统。",
   intro: "关注 RAG、Agent、工具调用、评测与可观测性如何经得起真实业务使用。",
   availability: "欢迎交流有价值的工作",
-  email: "hi@yufeifan.cn",
-  github: "https://github.com/dd-y"
+  email: "yufeifandd@gmail.com",
+  github: "https://github.com/likebeans"
 };

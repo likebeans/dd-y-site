@@ -34,6 +34,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </div>
     </ResumeSection>
 
+    <ResumeSection title="公开写作">
+      <div class="metric-list">
+        {resume.metrics.map((metric) => <span>{metric}</span>)}
+      </div>
+    </ResumeSection>
+
     <ResumeSection title="工作经历">
       <div class="resume-experience">
         {experience.map((item) => (
@@ -63,7 +69,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
     <ResumeSection title="链接">
       <div class="resume-links">
-        {resume.links.map((link) => <a href={link.href}>{link.label}</a>)}
+        {resume.links.map((link) => (
+          <a href={link.href}>
+            <span>{link.label}</span>
+            <small>{link.href.replace("mailto:", "")}</small>
+          </a>
+        ))}
       </div>
     </ResumeSection>
   </section>
@@ -117,6 +128,20 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     gap: 1rem;
   }
 
+  .metric-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .metric-list span {
+    border: 1px solid var(--color-line);
+    padding: 0.42rem 0.58rem;
+    color: #35332f;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
   h3 {
     margin: 0 0 0.4rem;
     font-family: var(--font-display);
@@ -146,14 +171,22 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   }
 
   .resume-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    gap: 0.7rem;
   }
 
   .resume-links a {
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 0.6rem;
+  }
+
+  .resume-links small {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
   }
 
   @media (max-width: 720px) {
@@ -201,6 +234,10 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     .skill-grid,
     .resume-experience {
       gap: 0.65rem;
+    }
+
+    .metric-list {
+      gap: 0.35rem;
     }
 
     h3 {

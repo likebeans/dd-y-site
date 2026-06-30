@@ -1,22 +1,24 @@
 ---
 title: "Enterprise OA Agent"
-summary: "把企业流程中的自然语言请求转化为可审批、可追踪、可回滚的系统动作。"
-summaryEn: "Turns natural-language requests in enterprise workflows into approvable, traceable, and reversible system actions."
+summary: "为 2,000+ 员工重构 OA 高频流程，把自然语言请求转化为可审批、可追踪、可回滚的系统动作。"
+summaryEn: "Rebuilt high-frequency OA workflows for 2,000+ employees, turning natural-language requests into approvable, traceable, and reversible system actions."
 year: 2025
-order: 1
+order: 3
 role: "Agent / MCP / Workflow"
 status: "Case Study"
-stack: ["Python", "FastAPI", "LangGraph", "PostgreSQL", "Redis", "MCP"]
+stack: ["Python", "FastAPI", "LangGraph", "FastMCP", "MinerU", "MCP"]
 tags: ["Agent", "Workflow", "Tool Calling"]
 metrics:
-  - label: "Intent coverage"
-    value: "80%"
-  - label: "Tool success"
-    value: "95%+"
+  - label: "Users"
+    value: "2000+"
+  - label: "Form time"
+    value: "10s"
+  - label: "Efficiency"
+    value: "20x"
 sectionsEn:
   - heading: "Problem"
     body:
-      - "Enterprise OA workflows are scattered across many systems. Users need to understand pages, approval rules, and field constraints before they can act."
+      - "Enterprise OA workflows are scattered across many systems. More than 2,000 employees need to understand pages, approval rules, and field constraints before they can act."
       - "Adding a model to a chat window is not enough. The harder part is translating natural language into executable, approvable, and auditable business actions."
   - heading: "Constraints"
     body:
@@ -26,14 +28,14 @@ sectionsEn:
   - heading: "System Design"
     body:
       - "The system separates user input into intent recognition, parameter completion, approval checks, tool execution, and result write-back."
-      - "The model handles understanding and planning. Controlled tools and business APIs perform the actual actions."
+      - "LangGraph, FastAPI, and FastMCP connect OA agents with workflow tools, while MinerU supports document parsing for internal knowledge flows."
   - heading: "Key Decisions"
     body:
       - "The Agent should obey the workflow rather than forcing the workflow to adapt to the Agent."
       - "Each tool needs idempotency, permission checks, and structured returns so a failed action is not turned into another unsafe action."
   - heading: "Impact"
     body:
-      - "The project validated natural-language entry points for process-heavy scenarios and produced reusable capabilities around tool registration, approval interception, and execution logs."
+      - "Form processing time dropped from 2-3 minutes to roughly 10 seconds, creating a reusable intelligent-office blueprint."
   - heading: "Reflection"
     body:
       - "The next version should strengthen evaluation sets, exception recovery, and cross-system state synchronization so the Agent Runtime behaves more like a production workflow engine."
@@ -41,7 +43,7 @@ sectionsEn:
 
 ## Problem
 
-企业 OA 系统中的流程入口分散，用户需要理解多个系统页面、审批规则和字段约束。单纯把模型接入聊天窗口并不能解决问题，真正困难的是把自然语言意图转成可执行、可审批、可审计的业务动作。
+企业 OA 系统中的流程入口分散，2,000+ 员工需要理解多个系统页面、审批规则和字段约束。单纯把模型接入聊天窗口并不能解决问题，真正困难的是把自然语言意图转成可执行、可审批、可审计的业务动作。
 
 ## Constraints
 
@@ -51,7 +53,9 @@ sectionsEn:
 
 ## System Design
 
-系统把用户输入拆成意图识别、参数补全、审批检查、工具调用和结果回写几个阶段。模型只负责理解与规划，真正的动作由受控工具和业务系统接口完成。
+系统把用户输入拆成意图识别、参数补全、审批检查、工具调用和结果回写几个阶段。基于 LangGraph、FastAPI 与 FastMCP 构建 OA 智能体和 MCP 服务，打通待办、排班、请假、外勤、会议室预定等工具链。
+
+知识库侧搭建采集、预处理、分块、嵌入和检索链路，并基于 MinerU 完成版面分析、OCR、公式识别等端到端解析；检索侧结合 RAG-Fusion 和 HyDE 提升召回与准确率。
 
 ## Key Decisions
 
@@ -59,7 +63,9 @@ sectionsEn:
 
 ## Impact
 
-项目验证了自然语言入口在流程密集型场景中的可行性，也沉淀出工具注册、审批拦截和执行日志等可复用能力。
+- 表单处理时间由 2-3 分钟降至约 10 秒，效率提升近 20x。
+- 项目验证了自然语言入口在流程密集型场景中的可行性。
+- 沉淀出工具注册、审批拦截、执行日志和知识库链路等可复用能力。
 
 ## Reflection
 

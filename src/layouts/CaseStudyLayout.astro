@@ -15,6 +15,7 @@ const statusLabelZh = entry.data.status === "Case Study" ? "案例研究" : entr
 const architectureTitleZh = `${entry.data.title} 架构`;
 const architectureTitleEn = `${entry.data.title} Architecture`;
 const caseUrl = `https://yufeifan.cn/work/${entry.id}`;
+const isLongTitle = entry.data.title.length > 12;
 const caseStructuredData = {
   "@type": "CreativeWork",
   headline: entry.data.title,
@@ -42,7 +43,7 @@ const caseStructuredData = {
         <p class="case-study__eyebrow" data-i18n-zh={statusLabelZh} data-i18n-en={entry.data.status}>
           {statusLabelZh}
         </p>
-        <h1>{entry.data.title}</h1>
+        <h1 class={isLongTitle ? "case-study__title--long" : undefined}>{entry.data.title}</h1>
         <p data-i18n-zh={entry.data.summary} data-i18n-en={entry.data.summaryEn}>{entry.data.summary}</p>
       </div>
       <ProjectMeta
@@ -137,6 +138,12 @@ const caseStructuredData = {
     font-weight: 840;
     letter-spacing: 0;
     line-height: 0.88;
+  }
+
+  .case-study__title--long {
+    max-width: 18ch;
+    font-size: clamp(2.7rem, 4.6vw, 4.9rem);
+    line-height: 0.96;
   }
 
   .case-study__hero p:not(.case-study__eyebrow) {

@@ -11,6 +11,14 @@ test("work index exposes a scannable project system", async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "项目" })).toBeVisible();
   await expect(page.getByText("精选项目", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /企业级大模型与智能应用平台建设/ })).toHaveAttribute(
+    "href",
+    "/work/enterprise-ai-platform"
+  );
+  await expect(page.getByRole("link", { name: /企业级 RAG 检索与知识服务平台/ })).toHaveAttribute(
+    "href",
+    "/work/enterprise-rag-platform"
+  );
   await expect(page.locator("[data-work-index]")).toBeVisible();
   await expect(page.locator("[data-work-row]").first()).toBeVisible();
   await expect(page.locator("[data-work-summary]").first()).toBeVisible();
@@ -19,6 +27,30 @@ test("work index exposes a scannable project system", async ({ page }) => {
   await page.getByRole("button", { name: "EN" }).click();
   await expect(page.getByRole("heading", { name: "WORK" })).toBeVisible();
   await expect(page.getByText("Selected Work", { exact: true })).toBeVisible();
+});
+
+test("migrated OpenResume work facts are available in current site", async ({ page }) => {
+  await page.goto("/work/enterprise-ai-platform");
+
+  await expect(page.getByRole("heading", { name: "企业级大模型与智能应用平台建设" })).toBeVisible();
+  await expect(page.getByText("10x").first()).toBeVisible();
+  await expect(page.getByText("95%+").first()).toBeVisible();
+  await expect(page.getByText("DRPO").first()).toBeVisible();
+
+  await page.goto("/work/enterprise-rag-platform");
+  await expect(page.getByRole("heading", { name: "企业级 RAG 检索与知识服务平台" })).toBeVisible();
+  await expect(page.getByText("Security Trimming").first()).toBeVisible();
+  await expect(page.getByText("OpenAI 兼容接口").first()).toBeVisible();
+  await expect(page.getByText("三层权限模型").first()).toBeVisible();
+});
+
+test("resume exposes public OpenResume career facts", async ({ page }) => {
+  await page.goto("/resume");
+
+  await expect(page.getByText("湖南九典制药股份有限公司")).toBeVisible();
+  await expect(page.getByText("A股上市（300705）")).toBeVisible();
+  await expect(page.getByText("github.com/likebeans")).toBeVisible();
+  await expect(page.getByText("原创 350+")).toBeVisible();
 });
 
 test("case study layout exposes reusable evidence structure", async ({ page }) => {
