@@ -9,12 +9,12 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: /获取简历/ })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByText("项目")).toBeVisible();
   await expect(page.getByText("写作线索", { exact: true })).toBeVisible();
-  await expect(page.locator("#spaces").getByText("知识空间", { exact: true }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /Notes on LLMs/ })).toHaveAttribute(
+  await expect(page.locator("#spaces").getByText("入口矩阵", { exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /大模型笔记/ })).toHaveAttribute(
     "href",
     "https://likebeans.github.io/notes-on-llms/"
   );
-  await expect(page.getByRole("link", { name: /Resume Lab/ })).toHaveAttribute(
+  await expect(page.getByRole("link", { name: /交互简历/ })).toHaveAttribute(
     "href",
     "https://likebeans.github.io/OpenResume/"
   );
@@ -53,6 +53,41 @@ test("homepage exposes refined interaction and language controls", async ({ page
   await expect
     .poll(() => page.evaluate(() => document.documentElement.style.getPropertyValue("--scroll-progress")))
     .not.toBe("0");
+});
+
+test("homepage frames main site and external spaces as a directory", async ({ page }) => {
+  await page.goto("/");
+
+  const spaces = page.locator("#spaces");
+
+  await expect(spaces.getByRole("link", { name: /项目案例/ })).toHaveAttribute("href", "/work");
+  await expect(spaces.getByRole("link", { name: /技术文章/ })).toHaveAttribute("href", "/writing");
+  await expect(spaces.getByRole("link", { name: /简历档案/ })).toHaveAttribute("href", "/resume");
+  await expect(spaces.getByRole("link", { name: /大模型笔记/ })).toHaveAttribute(
+    "href",
+    "https://likebeans.github.io/notes-on-llms/"
+  );
+  await expect(spaces.getByRole("link", { name: /交互简历/ })).toHaveAttribute(
+    "href",
+    "https://likebeans.github.io/OpenResume/"
+  );
+  await expect(spaces.getByRole("link", { name: /开源记录/ })).toHaveAttribute(
+    "href",
+    "https://github.com/likebeans"
+  );
+
+  await expect(spaces.getByText("主站内容", { exact: true }).first()).toBeVisible();
+  await expect(spaces.getByText("待接入子域名", { exact: true }).first()).toBeVisible();
+  await expect(spaces.locator(".space-row__index")).toHaveCount(0);
+
+  await page.getByRole("button", { name: "EN" }).click();
+  await expect(spaces.getByText("Site Directory", { exact: true }).first()).toBeVisible();
+  await expect(spaces.getByRole("link", { name: /Work Cases/ })).toHaveAttribute("href", "/work");
+  await expect(spaces.getByRole("link", { name: /Notes on LLMs/ })).toHaveAttribute(
+    "href",
+    "https://likebeans.github.io/notes-on-llms/"
+  );
+  await expect(spaces.getByText("Subdomain Pending", { exact: true }).first()).toBeVisible();
 });
 
 test("site chrome exposes mature navigation and language state", async ({ page }) => {

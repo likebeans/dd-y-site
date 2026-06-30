@@ -5,32 +5,48 @@ import { spaces } from "@/data/spaces";
 ---
 
 <section class="open-spaces page-shell" id="spaces" data-section-marker="Knowledge System" data-section-tone="surface">
-  <SectionLabel label="知识空间" labelEn="Knowledge System" kicker="开放入口" kickerEn="Open spaces" />
+  <SectionLabel label="入口矩阵" labelEn="Site Directory" kicker="主站与外部空间" kickerEn="Main site and spaces" />
   <div class="open-spaces__grid">
     <div class="open-spaces__copy">
       <p
-        data-i18n-zh="主站保持克制和正式，知识库、交互简历和开源项目作为独立空间存在。它们共享同一个技术身份，但各自承担不同用途。"
-        data-i18n-en="The main site stays restrained and formal, while the knowledge base, interactive resume, and open-source work live as independent spaces with different jobs."
+        data-i18n-zh="主站负责建立可信的职业叙事；项目、文章、简历和外部知识空间各自承担不同任务，但都服务于同一句话：从模型到系统。"
+        data-i18n-en="The main site carries the professional narrative; work, writing, resume, and external knowledge spaces each do a different job, all serving the same thesis: from models to systems."
       >
-        主站保持克制和正式，知识库、交互简历和开源项目作为独立空间存在。它们共享同一个技术身份，但各自承担不同用途。
+        主站负责建立可信的职业叙事；项目、文章、简历和外部知识空间各自承担不同任务，但都服务于同一句话：从模型到系统。
       </p>
+      <dl class="open-spaces__legend">
+        <div>
+          <dt data-i18n-zh="主站内容" data-i18n-en="Main Site">主站内容</dt>
+          <dd data-i18n-zh="当前网站内的正式入口" data-i18n-en="Formal entries inside this site">当前网站内的正式入口</dd>
+        </div>
+        <div>
+          <dt data-i18n-zh="外部空间" data-i18n-en="External Spaces">外部空间</dt>
+          <dd data-i18n-zh="后续可接入子域名" data-i18n-en="Ready for subdomain binding">后续可接入子域名</dd>
+        </div>
+      </dl>
     </div>
     <div class="space-list">
-      {
-        spaces.map((space, index) => (
-          <a class="space-row" href={space.href}>
-            <span class="space-row__index mono">{String(index + 1).padStart(2, "0")}</span>
-            <span>
-              <strong data-i18n-zh={space.title} data-i18n-en={space.titleEn}>{space.title}</strong>
-              <small>
-                <span data-i18n-zh={space.label} data-i18n-en={space.labelEn}>{space.label}</span> · {space.futureDomain}
-              </small>
+      {spaces.map((space) => (
+        <a class="space-row" href={space.href}>
+          <span class="space-row__marker" aria-hidden="true"></span>
+          <span class="space-row__identity">
+            <span class="space-row__label mono" data-i18n-zh={space.label} data-i18n-en={space.labelEn}>
+              {space.label}
             </span>
-            <p data-i18n-zh={space.summary} data-i18n-en={space.summaryEn}>{space.summary}</p>
-            <Icon name="arrowUpRight" class="space-row__arrow" />
-          </a>
-        ))
-      }
+            <strong data-i18n-zh={space.title} data-i18n-en={space.titleEn}>{space.title}</strong>
+            <small data-i18n-zh={space.domain} data-i18n-en={space.domainEn}>{space.domain}</small>
+          </span>
+          <span class="space-row__detail">
+            <span class="space-row__status mono" data-i18n-zh={space.status} data-i18n-en={space.statusEn}>
+              {space.status}
+            </span>
+            <span class="space-row__summary" data-i18n-zh={space.summary} data-i18n-en={space.summaryEn}>
+              {space.summary}
+            </span>
+          </span>
+          <Icon name="arrowUpRight" class="space-row__arrow" />
+        </a>
+      ))}
     </div>
   </div>
 </section>
@@ -42,7 +58,7 @@ import { spaces } from "@/data/spaces";
 
   .open-spaces__grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+    grid-template-columns: minmax(15rem, 0.58fr) minmax(0, 1.42fr);
     gap: clamp(2rem, 5vw, 5rem);
     margin-top: 1.8rem;
   }
@@ -55,14 +71,59 @@ import { spaces } from "@/data/spaces";
     line-height: 1.65;
   }
 
-  .space-list {
+  .open-spaces__legend {
+    display: grid;
+    gap: 1rem;
+    margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+    padding: 0;
+  }
+
+  .open-spaces__legend div {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 1rem;
     border-top: 1px solid var(--color-line);
+    padding-top: 0.8rem;
+  }
+
+  .open-spaces__legend dt,
+  .open-spaces__legend dd {
+    margin: 0;
+  }
+
+  .open-spaces__legend dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .open-spaces__legend dd {
+    color: var(--color-muted);
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .space-list {
+    position: relative;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .space-list::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1rem;
+    width: 1px;
+    content: "";
+    background: linear-gradient(to bottom, var(--color-lime), var(--color-line) 40%, transparent);
+    opacity: 0.42;
   }
 
   .space-row {
     display: grid;
-    grid-template-columns: 3rem minmax(10rem, 0.82fr) minmax(0, 1fr) 2rem;
-    gap: 1rem;
+    grid-template-columns: 2rem minmax(10rem, 0.7fr) minmax(0, 1fr) 2rem;
+    gap: 1.1rem;
     align-items: center;
     border-bottom: 1px solid var(--color-line);
     padding-block: 1.15rem;
@@ -76,7 +137,54 @@ import { spaces } from "@/data/spaces";
     background: rgba(255, 255, 255, 0.22);
   }
 
-  .space-row__index,
+  .space-row__marker {
+    position: relative;
+    z-index: 1;
+    width: 0.95rem;
+    height: 0.95rem;
+    border: 1px solid var(--color-line-strong);
+    background: color-mix(in srgb, var(--color-paper) 88%, white);
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .space-row__marker::before,
+  .space-row__marker::after {
+    position: absolute;
+    background: currentColor;
+    content: "";
+    opacity: 0.5;
+  }
+
+  .space-row__marker::before {
+    top: 50%;
+    left: -0.35rem;
+    width: 1.65rem;
+    height: 1px;
+  }
+
+  .space-row__marker::after {
+    top: -0.35rem;
+    left: 50%;
+    width: 1px;
+    height: 1.65rem;
+  }
+
+  .space-row:hover .space-row__marker {
+    border-color: var(--color-lime);
+    background: rgba(199, 244, 50, 0.16);
+    transform: rotate(45deg);
+  }
+
+  .space-row__identity,
+  .space-row__detail {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .space-row__label,
   .space-row small {
     color: var(--color-muted);
     font-size: 0.68rem;
@@ -89,24 +197,32 @@ import { spaces } from "@/data/spaces";
   }
 
   .space-row small {
-    display: block;
-    margin-top: 0.35rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
   }
 
-  .space-row p {
+  .space-row__status {
+    width: fit-content;
+    border: 1px solid rgba(17, 17, 17, 0.14);
+    padding: 0.25rem 0.45rem;
+    background: rgba(255, 255, 255, 0.24);
+    font-size: 0.62rem;
+  }
+
+  .space-row__summary {
     margin: 0;
     color: var(--color-muted);
     line-height: 1.6;
   }
 
-  .space-row__arrow {
+  .space-row :global(.space-row__arrow) {
     width: 0.9rem;
     height: 0.9rem;
     justify-self: end;
     transition: transform 180ms ease;
   }
 
-  .space-row:hover .space-row__arrow {
+  .space-row:hover :global(.space-row__arrow) {
     transform: translate(1px, -1px);
   }
 
@@ -118,11 +234,29 @@ import { spaces } from "@/data/spaces";
 
   @media (max-width: 680px) {
     .space-row {
-      grid-template-columns: 2.4rem minmax(0, 1fr) 1.5rem;
+      grid-template-columns: 1.8rem minmax(0, 1fr) 1.5rem;
+      align-items: start;
     }
 
-    .space-row p {
+    .space-row__identity {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .space-row__detail {
+      grid-row: 2;
       grid-column: 2 / -1;
+    }
+
+    .space-row :global(.space-row__arrow) {
+      grid-row: 1;
+      grid-column: 3;
+      margin-top: 0.25rem;
+    }
+
+    .open-spaces__legend div {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
     }
   }
 </style>
