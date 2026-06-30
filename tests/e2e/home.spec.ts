@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("homepage presents identity and primary sections", async ({ page }) => {
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "从模型 到系统" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "从模型能力 到系统能力" })).toBeVisible();
   await expect(page.getByText("把模型能力，做成可上线、可评测、可维护的系统。")).toBeVisible();
   await expect(page.getByRole("link", { name: /阅读文章/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /获取简历/ })).toBeVisible();
@@ -35,9 +35,11 @@ test("homepage exposes refined interaction and language controls", async ({ page
   await expect(page.locator("[data-home-visual]")).toBeVisible();
   await expect(page.getByRole("img", { name: /首页图片槽位/ })).toBeVisible();
 
-  await expect(page.getByRole("button", { name: "ZH" })).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "EN" }).click();
-  await expect(page.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
+  const languageSwitch = page.getByRole("group", { name: "语言 / Language" });
+  await expect(languageSwitch).toHaveAttribute("data-language-switch", "");
+  await expect(languageSwitch.getByRole("button", { name: "中文" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "English" }).click();
+  await expect(languageSwitch.getByRole("button", { name: "English" })).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("heading", { name: "FROM MODELS TO SYSTEMS" })).toBeVisible();
   await expect(page.getByRole("link", { name: /READ WRITING/ })).toBeVisible();
   await expect(
@@ -80,7 +82,7 @@ test("homepage frames main site and external spaces as a directory", async ({ pa
   await expect(spaces.getByText("待接入子域名", { exact: true }).first()).toBeVisible();
   await expect(spaces.locator(".space-row__index")).toHaveCount(0);
 
-  await page.getByRole("button", { name: "EN" }).click();
+  await page.getByRole("button", { name: "English" }).click();
   await expect(spaces.getByText("Site Directory", { exact: true }).first()).toBeVisible();
   await expect(spaces.getByRole("link", { name: /Work Cases/ })).toHaveAttribute("href", "/work");
   await expect(spaces.getByRole("link", { name: /Notes on LLMs/ })).toHaveAttribute(
@@ -114,6 +116,6 @@ test("stored English preference is available before interaction", async ({ page 
 
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await expect(page.locator("html")).toHaveAttribute("data-language", "en");
-  await expect(page.getByRole("button", { name: "EN" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "English" })).toHaveAttribute("aria-pressed", "true");
   await expect(page.getByRole("heading", { name: "FROM MODELS TO SYSTEMS" })).toBeVisible();
 });

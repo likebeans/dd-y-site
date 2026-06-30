@@ -67,7 +67,7 @@ test("404 page keeps the site language and indexing rules", async ({ page }) => 
   await expect(page.getByRole("heading", { name: "页面未找到" })).toBeVisible();
   await expect(page.getByRole("link", { name: /返回首页/ })).toBeVisible();
 
-  await page.getByRole("button", { name: "EN" }).click();
+  await page.getByRole("button", { name: "English" }).click();
   await expect(page.getByRole("heading", { name: "Page Not Found" })).toBeVisible();
   await expect(page.getByRole("link", { name: /BACK HOME/ })).toBeVisible();
 });

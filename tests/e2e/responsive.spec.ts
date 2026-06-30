@@ -9,7 +9,7 @@ test("mobile layout has no horizontal overflow", async ({ page }) => {
 
   await expect(page.locator(".site-header")).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary navigation" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "ZH" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "中文" })).toBeVisible();
 
   const headerFits = await page.evaluate(() => {
     const header = document.querySelector(".site-header");

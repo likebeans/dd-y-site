@@ -27,9 +27,13 @@ const isCurrentNavItem = (href: string) => {
         ))
       }
     </nav>
-    <div class="site-header__language" aria-label="Language">
-      <button type="button" data-language-option="zh" aria-pressed="true">ZH</button>
-      <button type="button" data-language-option="en" aria-pressed="false">EN</button>
+    <div class="site-header__language" role="group" aria-label="语言 / Language" data-language-switch>
+      <button type="button" data-language-option="zh" aria-label="中文" aria-pressed="true">
+        <span aria-hidden="true">中</span>
+      </button>
+      <button type="button" data-language-option="en" aria-label="English" aria-pressed="false">
+        <span aria-hidden="true">EN</span>
+      </button>
     </div>
   </div>
 </header>

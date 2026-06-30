@@ -20,9 +20,9 @@ import { profile } from "@/data/profile";
       >
         {profile.role}
       </p>
-      <h1>
-        <span data-i18n-zh="从模型" data-i18n-en="FROM MODELS">从模型</span>
-        <span data-i18n-zh="到系统" data-i18n-en="TO SYSTEMS">到系统</span>
+      <h1 class="hero__headline">
+        <span class="hero__headline-line" data-i18n-zh="从模型能力" data-i18n-en="FROM MODELS">从模型能力</span>
+        <span class="hero__headline-line" data-i18n-zh="到系统能力" data-i18n-en="TO SYSTEMS">到系统能力</span>
       </h1>
       <p
         class="hero__thesis"
@@ -95,7 +95,7 @@ import { profile } from "@/data/profile";
     text-transform: uppercase;
   }
 
-  h1 {
+  .hero__headline {
     max-width: 13ch;
     margin: 0;
     font-family: var(--font-display);
@@ -105,8 +105,19 @@ import { profile } from "@/data/profile";
     line-height: 0.84;
   }
 
-  h1 span {
+  .hero__headline-line {
     display: block;
+  }
+
+  :global(html[data-language="zh"]) .hero__headline {
+    max-width: 12ch;
+    font-size: clamp(3.9rem, 6.35vw, 7rem);
+    font-weight: 820;
+    line-height: 0.98;
+  }
+
+  :global(html[data-language="zh"]) .hero__headline-line + .hero__headline-line {
+    margin-top: 0.1em;
   }
 
   .hero__thesis {
@@ -308,7 +319,7 @@ import { profile } from "@/data/profile";
   }
 
   @media (min-width: 721px) {
-    h1 span {
+    .hero__headline-line {
       white-space: nowrap;
     }
   }
@@ -329,9 +340,15 @@ import { profile } from "@/data/profile";
       font-size: 0.68rem;
     }
 
-    h1 {
+    .hero__headline {
       font-size: clamp(3.55rem, 16vw, 4.2rem);
       line-height: 0.85;
+    }
+
+    :global(html[data-language="zh"]) .hero__headline {
+      max-width: 8ch;
+      font-size: clamp(3.15rem, 13vw, 4rem);
+      line-height: 1;
     }
 
     .hero__thesis {

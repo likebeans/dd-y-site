@@ -24,7 +24,7 @@ test("work index exposes a scannable project system", async ({ page }) => {
   await expect(page.locator("[data-work-summary]").first()).toBeVisible();
   await expect(page.locator("[data-work-signals]").first()).toBeVisible();
 
-  await page.getByRole("button", { name: "EN" }).click();
+  await page.getByRole("button", { name: "English" }).click();
   await expect(page.getByRole("heading", { name: "WORK" })).toBeVisible();
   await expect(page.getByText("Selected Work", { exact: true })).toBeVisible();
 });
@@ -67,7 +67,7 @@ test("case study layout exposes reusable evidence structure", async ({ page }) =
   await expect(page.locator("[data-case-content][data-language-only='en']")).toBeHidden();
   await expect(page.locator("[data-case-next]")).toBeVisible();
 
-  await page.getByRole("button", { name: "EN" }).click();
+  await page.getByRole("button", { name: "English" }).click();
   await expect(page.getByText("Case Study", { exact: true }).first()).toBeVisible();
   await expect(page.getByText("System Snapshot", { exact: true }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Case Notes" })).toBeVisible();
