@@ -48,11 +48,15 @@ test("homepage right rail explains the agent runtime harness", async ({ page }, 
   await expect(harness).toBeVisible();
   await expect(harness.getByText("Agent Runtime Harness")).toBeVisible();
   await expect(harness.getByText("Loop Engineering")).toBeVisible();
+  await expect(harness.getByText("Runtime Core")).toBeVisible();
 
   for (const label of ["Plan", "Act", "Observe", "Evaluate", "State", "Tools", "Memory", "Policy"]) {
     await expect(harness.getByText(label, { exact: true })).toBeVisible();
   }
 
+  await expect(harness.getByText("Tool Boundary")).toBeVisible();
+  await expect(harness.getByText("Human Gate")).toBeVisible();
+  await expect(harness.locator(".runtime-guards").getByText("Retry Path", { exact: true })).toBeVisible();
   await expect(harness.getByText("Traceable")).toBeVisible();
   await expect(harness.getByText("Recoverable")).toBeVisible();
 });

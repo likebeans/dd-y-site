@@ -56,18 +56,30 @@ import { profile } from "@/data/profile";
           <span>Runtime Slice</span>
           <strong>Loop Engineering</strong>
         </div>
+        <div class="runtime-boundary runtime-boundary--input">User Intent</div>
+        <div class="runtime-boundary runtime-boundary--output">System Action</div>
         <div class="runtime-loop" aria-label="Plan Act Observe Evaluate">
           <span class="runtime-loop__path"></span>
           <span class="runtime-node runtime-node--plan">Plan</span>
           <span class="runtime-node runtime-node--act">Act</span>
           <span class="runtime-node runtime-node--observe">Observe</span>
           <span class="runtime-node runtime-node--evaluate">Evaluate</span>
+          <div class="runtime-kernel" data-runtime-core>
+            <span>Runtime Core</span>
+            <strong>Agent Loop</strong>
+            <small>stateful / tool-aware / auditable</small>
+          </div>
         </div>
         <div class="runtime-core" aria-label="Runtime Harness controls">
           <span>State</span>
           <span>Tools</span>
           <span>Memory</span>
           <span>Policy</span>
+        </div>
+        <div class="runtime-guards" aria-label="Runtime guard rails">
+          <span>Tool Boundary</span>
+          <span>Human Gate</span>
+          <span>Retry Path</span>
         </div>
         <dl class="runtime-signals">
           <div>
@@ -202,13 +214,25 @@ import { profile } from "@/data/profile";
 
   .runtime-blueprint {
     position: absolute;
-    inset: 21% 4% 6% 14%;
+    inset: 14% 0 3% 6%;
+  }
+
+  .runtime-blueprint::before {
+    position: absolute;
+    inset: 0 0 0.2rem;
+    content: "";
+    border: 1px solid rgba(17, 17, 17, 0.1);
+    background:
+      linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px) 0 0 / 25% 100%,
+      linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px) 0 0 / 100% 25%,
+      rgba(255, 255, 255, 0.11);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
   }
 
   .runtime-blueprint__title {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0.8rem;
+    left: 0.9rem;
     display: grid;
     gap: 0.28rem;
     color: var(--color-muted);
@@ -217,24 +241,49 @@ import { profile } from "@/data/profile";
 
   .runtime-blueprint__title strong {
     color: var(--color-ink);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 760;
+  }
+
+  .runtime-boundary {
+    position: absolute;
+    z-index: 1;
+    border: 1px solid rgba(17, 17, 17, 0.16);
+    background: rgba(255, 255, 255, 0.32);
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    text-transform: uppercase;
+  }
+
+  .runtime-boundary--input {
+    top: 7.2rem;
+    left: 0.85rem;
+    padding: 0.5rem 0.65rem;
+    writing-mode: vertical-rl;
+  }
+
+  .runtime-boundary--output {
+    right: 0.95rem;
+    bottom: 9.2rem;
+    padding: 0.5rem 0.7rem;
   }
 
   .runtime-loop {
     position: absolute;
-    top: 17%;
-    right: 4%;
-    left: 10%;
-    height: 10.5rem;
+    top: 4.8rem;
+    right: 1.7rem;
+    left: 4.2rem;
+    height: 13.1rem;
   }
 
   .runtime-loop__path {
     position: absolute;
-    inset: 1.1rem 2.1rem 1.35rem 2rem;
-    border: 1px solid rgba(199, 244, 50, 0.72);
-    border-left-color: rgba(17, 17, 17, 0.15);
-    border-bottom-color: rgba(17, 17, 17, 0.1);
+    inset: 0.95rem 1.35rem 1rem 1.35rem;
+    border: 2px solid rgba(199, 244, 50, 0.86);
+    border-left-color: rgba(17, 17, 17, 0.18);
+    border-bottom-color: rgba(17, 17, 17, 0.13);
+    box-shadow: 0 0 0 1px rgba(199, 244, 50, 0.08);
   }
 
   .runtime-loop__path::before,
@@ -270,38 +319,76 @@ import { profile } from "@/data/profile";
   }
 
   .runtime-node--plan {
-    top: 0.4rem;
-    left: 1.15rem;
+    top: 0.15rem;
+    left: 0.95rem;
   }
 
   .runtime-node--act {
-    top: 2.15rem;
-    right: 0.45rem;
+    top: 1.75rem;
+    right: 0;
     border-color: var(--color-lime);
+    box-shadow: 0 0 0 1px rgba(199, 244, 50, 0.22);
   }
 
   .runtime-node--observe {
-    right: 4.7rem;
-    bottom: 0.15rem;
+    right: 3.95rem;
+    bottom: 0;
   }
 
   .runtime-node--evaluate {
-    bottom: 0.9rem;
-    left: 2.25rem;
+    bottom: 1.2rem;
+    left: 1.95rem;
+  }
+
+  .runtime-kernel {
+    position: absolute;
+    top: 4.2rem;
+    left: 50%;
+    z-index: 2;
+    display: grid;
+    width: min(66%, 17rem);
+    min-height: 5.4rem;
+    border: 1px solid rgba(17, 17, 17, 0.9);
+    padding: 0.8rem 1rem;
+    background: rgba(17, 17, 17, 0.94);
+    color: var(--color-paper);
+    font-family: var(--font-mono);
+    transform: translateX(-50%);
+  }
+
+  .runtime-kernel span {
+    color: rgba(236, 230, 220, 0.62);
+    font-size: 0.58rem;
+    text-transform: uppercase;
+  }
+
+  .runtime-kernel strong {
+    margin-top: 0.4rem;
+    color: var(--color-paper);
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .runtime-kernel small {
+    margin-top: 0.55rem;
+    color: rgba(199, 244, 50, 0.82);
+    font-size: 0.62rem;
+    text-transform: uppercase;
   }
 
   .runtime-core {
     position: absolute;
     right: 0;
-    bottom: 4.4rem;
-    left: 0;
+    bottom: 5.9rem;
+    left: 0.85rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0.38rem;
     align-items: flex-start;
     min-height: 3.5rem;
     border-top: 1px solid rgba(17, 17, 17, 0.1);
-    padding-top: 0.75rem;
+    padding-top: 0.8rem;
   }
 
   .runtime-core::before {
@@ -324,14 +411,35 @@ import { profile } from "@/data/profile";
     font-size: 0.56rem;
   }
 
+  .runtime-guards {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 3.75rem;
+    left: 0.85rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.42rem;
+  }
+
+  .runtime-guards span {
+    border: 1px solid rgba(17, 17, 17, 0.13);
+    padding: 0.42rem 0.55rem;
+    background: rgba(255, 255, 255, 0.18);
+    color: #35332f;
+    font-family: var(--font-mono);
+    font-size: 0.54rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   .runtime-signals {
     position: absolute;
-    right: 0;
+    right: 0.9rem;
     bottom: 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
-    width: min(100%, 24rem);
+    width: min(calc(100% - 1.75rem), 28rem);
     border-top: 1px solid var(--color-line);
     margin: 0;
   }
