@@ -22,6 +22,23 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: /Agent Runtime 不只是循环调用模型/ })).toBeVisible();
 });
 
+test("homepage avoids an oversized empty band above the hero content", async ({ page }) => {
+  await page.goto("/");
+
+  const topGap = await page.evaluate(() => {
+    const header = document.querySelector(".site-header");
+    const meta = document.querySelector(".hero__meta");
+    if (!header || !meta) return Number.POSITIVE_INFINITY;
+
+    const headerBox = header.getBoundingClientRect();
+    const metaBox = meta.getBoundingClientRect();
+    return metaBox.top - headerBox.bottom;
+  });
+
+  const maxGap = page.viewportSize() && page.viewportSize()!.width <= 720 ? 40 : 64;
+  expect(topGap).toBeLessThanOrEqual(maxGap);
+});
+
 test("homepage exposes refined interaction and language controls", async ({ page }) => {
   await page.goto("/");
 
