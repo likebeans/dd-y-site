@@ -45,16 +45,45 @@ import { profile } from "@/data/profile";
       </div>
     </div>
 
-    <aside class="hero__diagram" aria-label="System diagram">
+    <aside class="hero__diagram" aria-label="Agent Runtime Harness" data-runtime-harness>
       <div class="hero__diagram-meta mono">
-        <span>Astro · MDX · Motion</span>
-        <span>X 000512</span>
-        <span>Y 000128</span>
+        <span>Agent Runtime Harness</span>
+        <span>Loop ID 000512</span>
+        <span>Trace 000128</span>
       </div>
-      <div class="diagram-node diagram-node--active">Agent</div>
-      <div class="diagram-node diagram-node--a" data-i18n-zh="检索" data-i18n-en="Retrieval">检索</div>
-      <div class="diagram-node diagram-node--b" data-i18n-zh="工具" data-i18n-en="Tools">工具</div>
-      <div class="diagram-node diagram-node--c" data-i18n-zh="工作流" data-i18n-en="Workflow">工作流</div>
+      <div class="runtime-blueprint">
+        <div class="runtime-blueprint__title mono">
+          <span>Runtime Slice</span>
+          <strong>Loop Engineering</strong>
+        </div>
+        <div class="runtime-loop" aria-label="Plan Act Observe Evaluate">
+          <span class="runtime-loop__path"></span>
+          <span class="runtime-node runtime-node--plan">Plan</span>
+          <span class="runtime-node runtime-node--act">Act</span>
+          <span class="runtime-node runtime-node--observe">Observe</span>
+          <span class="runtime-node runtime-node--evaluate">Evaluate</span>
+        </div>
+        <div class="runtime-core" aria-label="Runtime Harness controls">
+          <span>State</span>
+          <span>Tools</span>
+          <span>Memory</span>
+          <span>Policy</span>
+        </div>
+        <dl class="runtime-signals">
+          <div>
+            <dt>Traceable</dt>
+            <dd>event log</dd>
+          </div>
+          <div>
+            <dt>Evaluable</dt>
+            <dd>score gate</dd>
+          </div>
+          <div>
+            <dt>Recoverable</dt>
+            <dd>retry path</dd>
+          </div>
+        </dl>
+      </div>
       <div class="diagram-cross diagram-cross--one"></div>
       <div class="diagram-cross diagram-cross--two"></div>
     </aside>
@@ -151,19 +180,13 @@ import { profile } from "@/data/profile";
       linear-gradient(to bottom, transparent 49.8%, rgba(17, 17, 17, 0.08) 50%, transparent 50.2%);
   }
 
-  .hero__diagram::before,
-  .hero__diagram::after {
+  .hero__diagram::before {
     position: absolute;
     inset: 20% 12%;
     content: "";
     border: 1px solid rgba(17, 17, 17, 0.08);
     border-right: 0;
     border-bottom: 0;
-  }
-
-  .hero__diagram::after {
-    inset: 38% 6% 18% 26%;
-    border-color: rgba(199, 244, 50, 0.55);
   }
 
   .hero__diagram-meta {
@@ -177,7 +200,66 @@ import { profile } from "@/data/profile";
     text-align: right;
   }
 
-  .diagram-node {
+  .runtime-blueprint {
+    position: absolute;
+    inset: 21% 4% 6% 14%;
+  }
+
+  .runtime-blueprint__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    gap: 0.28rem;
+    color: var(--color-muted);
+    font-size: 0.58rem;
+  }
+
+  .runtime-blueprint__title strong {
+    color: var(--color-ink);
+    font-size: 0.68rem;
+    font-weight: 760;
+  }
+
+  .runtime-loop {
+    position: absolute;
+    top: 17%;
+    right: 4%;
+    left: 10%;
+    height: 10.5rem;
+  }
+
+  .runtime-loop__path {
+    position: absolute;
+    inset: 1.1rem 2.1rem 1.35rem 2rem;
+    border: 1px solid rgba(199, 244, 50, 0.72);
+    border-left-color: rgba(17, 17, 17, 0.15);
+    border-bottom-color: rgba(17, 17, 17, 0.1);
+  }
+
+  .runtime-loop__path::before,
+  .runtime-loop__path::after {
+    position: absolute;
+    content: "";
+    background: rgba(17, 17, 17, 0.12);
+  }
+
+  .runtime-loop__path::before {
+    top: 50%;
+    right: -9%;
+    left: -9%;
+    height: 1px;
+  }
+
+  .runtime-loop__path::after {
+    top: -11%;
+    bottom: -11%;
+    left: 50%;
+    width: 1px;
+  }
+
+  .runtime-node,
+  .runtime-core span {
     position: absolute;
     border: 1px solid var(--color-line);
     padding: 0.55rem 0.75rem;
@@ -187,25 +269,93 @@ import { profile } from "@/data/profile";
     text-transform: uppercase;
   }
 
-  .diagram-node--active {
-    top: 42%;
-    right: 18%;
+  .runtime-node--plan {
+    top: 0.4rem;
+    left: 1.15rem;
+  }
+
+  .runtime-node--act {
+    top: 2.15rem;
+    right: 0.45rem;
     border-color: var(--color-lime);
   }
 
-  .diagram-node--a {
-    top: 27%;
-    left: 18%;
+  .runtime-node--observe {
+    right: 4.7rem;
+    bottom: 0.15rem;
   }
 
-  .diagram-node--b {
-    right: 8%;
-    bottom: 27%;
+  .runtime-node--evaluate {
+    bottom: 0.9rem;
+    left: 2.25rem;
   }
 
-  .diagram-node--c {
-    bottom: 16%;
-    left: 28%;
+  .runtime-core {
+    position: absolute;
+    right: 0;
+    bottom: 4.4rem;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.38rem;
+    align-items: flex-start;
+    min-height: 3.5rem;
+    border-top: 1px solid rgba(17, 17, 17, 0.1);
+    padding-top: 0.75rem;
+  }
+
+  .runtime-core::before {
+    position: absolute;
+    top: 1.85rem;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, rgba(199, 244, 50, 0.78), rgba(17, 17, 17, 0.08));
+  }
+
+  .runtime-core span {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    min-width: 4.5rem;
+    margin: 0;
+    padding: 0.42rem 0.55rem;
+    font-size: 0.56rem;
+  }
+
+  .runtime-signals {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    width: min(100%, 24rem);
+    border-top: 1px solid var(--color-line);
+    margin: 0;
+  }
+
+  .runtime-signals div {
+    padding: 0.7rem 0.75rem 0;
+  }
+
+  .runtime-signals div + div {
+    border-left: 1px solid var(--color-line);
+  }
+
+  .runtime-signals dt {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 760;
+    text-transform: uppercase;
+  }
+
+  .runtime-signals dd {
+    margin: 0.35rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.7rem;
   }
 
   .diagram-cross {

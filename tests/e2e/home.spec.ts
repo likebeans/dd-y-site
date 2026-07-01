@@ -39,6 +39,24 @@ test("homepage avoids an oversized empty band above the hero content", async ({ 
   expect(topGap).toBeLessThanOrEqual(maxGap);
 });
 
+test("homepage right rail explains the agent runtime harness", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "mobile", "The hero right rail is hidden on compact screens.");
+
+  await page.goto("/");
+
+  const harness = page.locator("[data-runtime-harness]");
+  await expect(harness).toBeVisible();
+  await expect(harness.getByText("Agent Runtime Harness")).toBeVisible();
+  await expect(harness.getByText("Loop Engineering")).toBeVisible();
+
+  for (const label of ["Plan", "Act", "Observe", "Evaluate", "State", "Tools", "Memory", "Policy"]) {
+    await expect(harness.getByText(label, { exact: true })).toBeVisible();
+  }
+
+  await expect(harness.getByText("Traceable")).toBeVisible();
+  await expect(harness.getByText("Recoverable")).toBeVisible();
+});
+
 test("homepage exposes refined interaction and language controls", async ({ page }) => {
   await page.goto("/");
 
