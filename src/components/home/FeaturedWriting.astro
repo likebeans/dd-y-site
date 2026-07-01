@@ -4,23 +4,12 @@ import ArrowLink from "@/components/ArrowLink.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
 
 const posts = (await getCollection("writing"))
-  .filter((post) => post.data.featured)
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-
-const featuredCopy: Record<string, { titleEn: string; descriptionEn: string }> = {
-  "agent-runtime-beyond-loop": {
-    titleEn: "Agent Runtime Is More Than Looping Model Calls",
-    descriptionEn: "A production-grade Agent Runtime also needs state, approval, tools, events, and observability."
-  },
-  "rag-chunking-tables-code-images": {
-    titleEn: "Protecting Tables, Code Blocks, and Images in RAG Chunking",
-    descriptionEn: "Preserve semantic structure in complex document processing instead of splitting by length alone."
-  }
-};
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 2);
 ---
 
 <section class="featured-writing page-shell" data-section-marker="Current Thinking" data-section-tone="quiet">
-  <SectionLabel label="当前思考" labelEn="Current Thinking" kicker="精选文章" kickerEn="Featured writing" />
+  <SectionLabel label="当前思考" labelEn="Current Thinking" kicker="最新文章" kickerEn="Latest writing" />
   <div class="featured-writing__grid">
     {
       posts.map((post, index) => (
@@ -33,12 +22,12 @@ const featuredCopy: Record<string, { titleEn: string; descriptionEn: string }> =
               {post.data.tags.join(" · ")} · {post.data.minutes} 分钟阅读
             </span>
           </span>
-          <strong data-i18n-zh={post.data.title} data-i18n-en={featuredCopy[post.id]?.titleEn ?? post.data.title}>
+          <strong data-i18n-zh={post.data.title} data-i18n-en={post.data.titleEn}>
             {post.data.title}
           </strong>
           <p
             data-i18n-zh={post.data.description}
-            data-i18n-en={featuredCopy[post.id]?.descriptionEn ?? post.data.description}
+            data-i18n-en={post.data.descriptionEn}
           >
             {post.data.description}
           </p>

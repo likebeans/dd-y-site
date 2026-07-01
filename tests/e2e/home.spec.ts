@@ -9,15 +9,7 @@ test("homepage presents identity and primary sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: /获取简历/ })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByText("项目")).toBeVisible();
   await expect(page.getByText("写作线索", { exact: true })).toBeVisible();
-  await expect(page.locator("#spaces").getByText("入口矩阵", { exact: true }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /大模型笔记/ })).toHaveAttribute(
-    "href",
-    "https://likebeans.github.io/notes-on-llms/"
-  );
-  await expect(page.getByRole("link", { name: /交互简历/ })).toHaveAttribute(
-    "href",
-    "https://likebeans.github.io/OpenResume/"
-  );
+  await expect(page.getByText("当前思考", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: /01 企业级大模型与智能应用平台建设/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /Agent Runtime 不只是循环调用模型/ })).toBeVisible();
 });
@@ -104,39 +96,38 @@ test("homepage exposes refined interaction and language controls", async ({ page
     .not.toBe("0");
 });
 
-test("homepage frames main site and external spaces as a directory", async ({ page }) => {
+test("homepage current thinking surfaces latest published writing", async ({ page }) => {
   await page.goto("/");
 
-  const spaces = page.locator("#spaces");
+  const thinking = page.locator("[data-section-marker='Current Thinking']");
+  const rows = thinking.locator(".writing-row");
 
-  await expect(spaces.getByRole("link", { name: /项目案例/ })).toHaveAttribute("href", "/work");
-  await expect(spaces.getByRole("link", { name: /技术文章/ })).toHaveAttribute("href", "/writing");
-  await expect(spaces.getByRole("link", { name: /简历档案/ })).toHaveAttribute("href", "/resume");
-  await expect(spaces.getByRole("link", { name: /大模型笔记/ })).toHaveAttribute(
-    "href",
-    "https://likebeans.github.io/notes-on-llms/"
-  );
-  await expect(spaces.getByRole("link", { name: /交互简历/ })).toHaveAttribute(
-    "href",
-    "https://likebeans.github.io/OpenResume/"
-  );
-  await expect(spaces.getByRole("link", { name: /开源记录/ })).toHaveAttribute(
-    "href",
-    "https://github.com/likebeans"
-  );
-
-  await expect(spaces.getByText("主站内容", { exact: true }).first()).toBeVisible();
-  await expect(spaces.getByText("待接入子域名", { exact: true }).first()).toBeVisible();
-  await expect(spaces.locator(".space-row__index")).toHaveCount(0);
+  await expect(thinking.getByText("最新文章", { exact: true })).toBeVisible();
+  await expect(thinking.getByText("精选文章", { exact: true })).toHaveCount(0);
+  await expect(rows.first()).toHaveAttribute("href", "/writing/agent-runtime-beyond-loop");
+  await expect(rows.nth(1)).toHaveAttribute("href", "/writing/rag-chunking-tables-code-images");
+  await expect(thinking.getByText("一个生产级 Agent Runtime 还需要状态、审批、工具、事件与可观测性。")).toBeVisible();
 
   await page.getByRole("button", { name: "English" }).click();
-  await expect(spaces.getByText("Site Directory", { exact: true }).first()).toBeVisible();
-  await expect(spaces.getByRole("link", { name: /Work Cases/ })).toHaveAttribute("href", "/work");
-  await expect(spaces.getByRole("link", { name: /Notes on LLMs/ })).toHaveAttribute(
+  await expect(thinking.getByText("Latest writing", { exact: true })).toBeVisible();
+  await expect(thinking.getByText("A production-grade Agent Runtime also needs state, approval, tools, events, and observability.")).toBeVisible();
+});
+
+test("homepage omits the entry matrix and keeps navigation focused", async ({ page }) => {
+  await page.goto("/");
+
+  const navigation = page.getByRole("navigation", { name: "Primary navigation" });
+
+  await expect(page.locator("#spaces")).toHaveCount(0);
+  await expect(page.getByText("入口矩阵", { exact: true })).toHaveCount(0);
+  await expect(navigation.getByRole("link", { name: "空间" })).toHaveCount(0);
+  await expect(navigation.getByRole("link", { name: "笔记" })).toHaveAttribute(
     "href",
     "https://likebeans.github.io/notes-on-llms/"
   );
-  await expect(spaces.getByText("Subdomain Pending", { exact: true }).first()).toBeVisible();
+
+  await page.getByRole("button", { name: "English" }).click();
+  await expect(navigation.getByRole("link", { name: "SPACES" })).toHaveCount(0);
 });
 
 test("site chrome exposes mature navigation and language state", async ({ page }) => {
