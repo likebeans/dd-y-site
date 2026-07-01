@@ -5,12 +5,6 @@ import { profile } from "@/data/profile";
 ---
 
 <section class="hero page-shell" data-section-marker="Home" data-section-tone="quiet">
-  <div class="hero__meta mono">
-    <span data-i18n-zh={profile.availability} data-i18n-en="AVAILABLE FOR GOOD WORK">{profile.availability}</span>
-    <span>{profile.timezone}</span>
-    <span data-i18n-zh="中国，北京" data-i18n-en="BEIJING, CHINA">{profile.location}</span>
-  </div>
-
   <div class="hero__grid">
     <div class="hero__copy">
       <p
@@ -109,15 +103,6 @@ import { profile } from "@/data/profile";
     min-height: min(54rem, calc(92vh - 4.5rem));
     padding-top: clamp(1.5rem, 3.25vw, 3.25rem);
     padding-bottom: clamp(1.75rem, 4vw, 3rem);
-  }
-
-  .hero__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem 1.25rem;
-    margin-bottom: clamp(2rem, 4.2vw, 3.75rem);
-    color: var(--color-muted);
-    font-size: 0.68rem;
   }
 
   .hero__grid {
@@ -598,10 +583,6 @@ import { profile } from "@/data/profile";
       min-height: auto;
       padding-top: 1.8rem;
       padding-bottom: 1.4rem;
-    }
-
-    .hero__meta {
-      margin-bottom: 1.55rem;
     }
 
     .hero__role {

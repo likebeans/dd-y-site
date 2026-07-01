@@ -25,14 +25,16 @@ test("homepage presents identity and primary sections", async ({ page }) => {
 test("homepage avoids an oversized empty band above the hero content", async ({ page }) => {
   await page.goto("/");
 
+  await expect(page.locator(".hero__meta")).toHaveCount(0);
+
   const topGap = await page.evaluate(() => {
     const header = document.querySelector(".site-header");
-    const meta = document.querySelector(".hero__meta");
-    if (!header || !meta) return Number.POSITIVE_INFINITY;
+    const grid = document.querySelector(".hero__grid");
+    if (!header || !grid) return Number.POSITIVE_INFINITY;
 
     const headerBox = header.getBoundingClientRect();
-    const metaBox = meta.getBoundingClientRect();
-    return metaBox.top - headerBox.bottom;
+    const gridBox = grid.getBoundingClientRect();
+    return gridBox.top - headerBox.bottom;
   });
 
   const maxGap = page.viewportSize() && page.viewportSize()!.width <= 720 ? 40 : 64;
