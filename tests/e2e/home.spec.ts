@@ -45,6 +45,12 @@ test("homepage right rail explains the agent runtime harness", async ({ page }, 
   await page.goto("/");
 
   const harness = page.locator("[data-runtime-harness]");
+  const copyBox = await page.locator(".hero__copy").boundingBox();
+  const harnessBox = await harness.boundingBox();
+  expect(copyBox).not.toBeNull();
+  expect(harnessBox).not.toBeNull();
+  expect(harnessBox!.width / copyBox!.width).toBeGreaterThanOrEqual(0.9);
+
   await expect(harness).toBeVisible();
   await expect(harness.getByText("Agent Runtime Harness")).toBeVisible();
   await expect(harness.getByText("Loop Engineering")).toBeVisible();

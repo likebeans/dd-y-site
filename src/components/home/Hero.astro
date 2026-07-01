@@ -122,9 +122,17 @@ import { profile } from "@/data/profile";
 
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-    gap: clamp(2rem, 5vw, 5rem);
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) minmax(30rem, 1fr);
+    gap: clamp(1.5rem, 3.2vw, 3.5rem);
+    align-items: center;
+  }
+
+  .hero__copy {
+    display: flex;
+    min-width: 0;
+    min-height: 34rem;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .hero__role {
@@ -185,8 +193,8 @@ import { profile } from "@/data/profile";
 
   .hero__diagram {
     position: relative;
-    min-height: 29rem;
-    border-left: 1px solid var(--color-line);
+    min-height: 34rem;
+    margin-left: clamp(-1.25rem, -1.2vw, -0.5rem);
     background:
       linear-gradient(to right, transparent 49.8%, rgba(17, 17, 17, 0.08) 50%, transparent 50.2%),
       linear-gradient(to bottom, transparent 49.8%, rgba(17, 17, 17, 0.08) 50%, transparent 50.2%);
@@ -194,7 +202,7 @@ import { profile } from "@/data/profile";
 
   .hero__diagram::before {
     position: absolute;
-    inset: 20% 12%;
+    inset: 8% 0 9% 4%;
     content: "";
     border: 1px solid rgba(17, 17, 17, 0.08);
     border-right: 0;
@@ -214,25 +222,28 @@ import { profile } from "@/data/profile";
 
   .runtime-blueprint {
     position: absolute;
-    inset: 14% 0 3% 6%;
+    inset: 7.5% 0 4% 0;
   }
 
   .runtime-blueprint::before {
     position: absolute;
     inset: 0 0 0.2rem;
     content: "";
-    border: 1px solid rgba(17, 17, 17, 0.1);
+    border-top: 1px solid rgba(17, 17, 17, 0.12);
+    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
     background:
       linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px) 0 0 / 25% 100%,
       linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px) 0 0 / 100% 25%,
       rgba(255, 255, 255, 0.11);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    box-shadow:
+      inset 1px 0 0 rgba(17, 17, 17, 0.06),
+      inset -1px 0 0 rgba(17, 17, 17, 0.04);
   }
 
   .runtime-blueprint__title {
     position: absolute;
-    top: 0.8rem;
-    left: 0.9rem;
+    top: 1rem;
+    left: 1.1rem;
     display: grid;
     gap: 0.28rem;
     color: var(--color-muted);
@@ -257,24 +268,24 @@ import { profile } from "@/data/profile";
   }
 
   .runtime-boundary--input {
-    top: 7.2rem;
-    left: 0.85rem;
+    top: 8.1rem;
+    left: 1rem;
     padding: 0.5rem 0.65rem;
     writing-mode: vertical-rl;
   }
 
   .runtime-boundary--output {
-    right: 0.95rem;
-    bottom: 9.2rem;
+    right: 1.1rem;
+    bottom: 10.4rem;
     padding: 0.5rem 0.7rem;
   }
 
   .runtime-loop {
     position: absolute;
-    top: 4.8rem;
-    right: 1.7rem;
-    left: 4.2rem;
-    height: 13.1rem;
+    top: 5.2rem;
+    right: 0.7rem;
+    left: 4.6rem;
+    height: 15.1rem;
   }
 
   .runtime-loop__path {
@@ -342,14 +353,14 @@ import { profile } from "@/data/profile";
 
   .runtime-kernel {
     position: absolute;
-    top: 4.2rem;
+    top: 4.85rem;
     left: 50%;
     z-index: 2;
     display: grid;
-    width: min(66%, 17rem);
-    min-height: 5.4rem;
+    width: min(74%, 23rem);
+    min-height: 7rem;
     border: 1px solid rgba(17, 17, 17, 0.9);
-    padding: 0.8rem 1rem;
+    padding: 1rem 1.2rem;
     background: rgba(17, 17, 17, 0.94);
     color: var(--color-paper);
     font-family: var(--font-mono);
@@ -358,20 +369,20 @@ import { profile } from "@/data/profile";
 
   .runtime-kernel span {
     color: rgba(236, 230, 220, 0.62);
-    font-size: 0.58rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
   }
 
   .runtime-kernel strong {
-    margin-top: 0.4rem;
+    margin-top: 0.55rem;
     color: var(--color-paper);
-    font-size: 1rem;
+    font-size: clamp(1.15rem, 1.7vw, 1.55rem);
     letter-spacing: 0.02em;
     text-transform: uppercase;
   }
 
   .runtime-kernel small {
-    margin-top: 0.55rem;
+    margin-top: 0.75rem;
     color: rgba(199, 244, 50, 0.82);
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -380,8 +391,8 @@ import { profile } from "@/data/profile";
   .runtime-core {
     position: absolute;
     right: 0;
-    bottom: 5.9rem;
-    left: 0.85rem;
+    bottom: 6.9rem;
+    left: 1rem;
     display: flex;
     flex-wrap: wrap;
     gap: 0.38rem;
@@ -413,9 +424,9 @@ import { profile } from "@/data/profile";
 
   .runtime-guards {
     position: absolute;
-    right: 0.9rem;
-    bottom: 3.75rem;
-    left: 0.85rem;
+    right: 1rem;
+    bottom: 4.4rem;
+    left: 1rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.42rem;
@@ -434,12 +445,12 @@ import { profile } from "@/data/profile";
 
   .runtime-signals {
     position: absolute;
-    right: 0.9rem;
-    bottom: 0;
+    right: 1rem;
+    bottom: 0.15rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0;
-    width: min(calc(100% - 1.75rem), 28rem);
+    width: calc(100% - 2rem);
     border-top: 1px solid var(--color-line);
     margin: 0;
   }
