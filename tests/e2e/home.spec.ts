@@ -96,6 +96,30 @@ test("homepage exposes refined interaction and language controls", async ({ page
     .not.toBe("0");
 });
 
+test("homepage English hero keeps the headline clear of the runtime diagram", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "mobile", "The runtime diagram is hidden on compact screens.");
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "English" }).click();
+
+  const overlap = await page.evaluate(() => {
+    const diagram = document.querySelector("[data-runtime-harness]");
+    const lines = Array.from(document.querySelectorAll(".hero__headline-line"));
+    if (!diagram || lines.length === 0) return Number.POSITIVE_INFINITY;
+
+    const textRight = lines.reduce((right, line) => {
+      const range = document.createRange();
+      range.selectNodeContents(line);
+      const box = range.getBoundingClientRect();
+      return Math.max(right, box.right);
+    }, 0);
+
+    return textRight - diagram.getBoundingClientRect().left;
+  });
+
+  expect(overlap).toBeLessThanOrEqual(-16);
+});
+
 test("homepage current thinking surfaces latest published writing", async ({ page }) => {
   await page.goto("/");
 

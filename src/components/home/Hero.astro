@@ -143,6 +143,12 @@ import { profile } from "@/data/profile";
     display: block;
   }
 
+  :global(html[data-language="en"]) .hero__headline {
+    max-width: 10.8ch;
+    font-size: clamp(4rem, 5.7vw, 6.35rem);
+    line-height: 0.9;
+  }
+
   :global(html[data-language="zh"]) .hero__headline {
     max-width: 12ch;
     font-size: clamp(3.9rem, 6.35vw, 7rem);
