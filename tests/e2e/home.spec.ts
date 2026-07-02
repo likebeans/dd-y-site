@@ -137,6 +137,37 @@ test("homepage current thinking surfaces latest published writing", async ({ pag
   await expect(thinking.getByText("A production-grade Agent Runtime also needs state, approval, tools, events, and observability.")).toBeVisible();
 });
 
+test("homepage introduces public open source work, technical blog, and contact", async ({ page }) => {
+  await page.goto("/");
+
+  const navigation = page.getByRole("navigation", { name: "Primary navigation" });
+  const output = page.locator("#public-output");
+
+  await expect(navigation.getByRole("link", { name: "开源" })).toHaveAttribute("href", "/#public-output");
+  await expect(output.getByText("公开输出", { exact: true })).toBeVisible();
+  await expect(output.getByRole("link", { name: /GitHub 开源项目/ })).toHaveAttribute(
+    "href",
+    "https://github.com/likebeans?tab=repositories"
+  );
+  await expect(output.getByRole("link", { name: /CSDN 技术博客/ })).toHaveAttribute(
+    "href",
+    "https://blog.csdn.net/m0_63309778"
+  );
+  await expect(output.getByRole("link", { name: /邮件联系/ })).toHaveAttribute(
+    "href",
+    "mailto:yufeifandd@gmail.com"
+  );
+
+  for (const repo of ["RAGForge", "notes-on-llms", "Genesis-LLM", "OpenResume"]) {
+    await expect(output.getByRole("link", { name: new RegExp(repo) })).toBeVisible();
+  }
+
+  await page.getByRole("button", { name: "English" }).click();
+  await expect(navigation.getByRole("link", { name: "OPEN" })).toHaveAttribute("href", "/#public-output");
+  await expect(output.getByText("Public Output", { exact: true })).toBeVisible();
+  await expect(output.getByRole("link", { name: /Email/ })).toHaveAttribute("href", "mailto:yufeifandd@gmail.com");
+});
+
 test("homepage omits the entry matrix and keeps navigation focused", async ({ page }) => {
   await page.goto("/");
 

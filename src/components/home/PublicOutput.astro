@@ -1,0 +1,174 @@
+---
+import SectionLabel from "@/components/SectionLabel.astro";
+import { profile } from "@/data/profile";
+import { publicChannels, publicRepositories } from "@/data/publicOutput";
+---
+
+<section class="public-output page-shell" id="public-output" data-section-marker="Public Output" data-section-tone="surface">
+  <SectionLabel label="公开输出" labelEn="Public Output" kicker="开源与技术博客" kickerEn="Open source & blog" />
+  <div class="public-output__layout">
+    <div class="public-output__copy">
+      <p
+        data-i18n-zh="除了项目案例，我也把可复用代码、学习笔记和技术博客放在公开空间里。这里更适合看我的长期积累、技术判断和工程表达。"
+        data-i18n-en="Beyond selected projects, I keep reusable code, learning notes, and technical writing in public spaces. This is where long-term accumulation, judgment, and engineering communication become visible."
+      >
+        除了项目案例，我也把可复用代码、学习笔记和技术博客放在公开空间里。这里更适合看我的长期积累、技术判断和工程表达。
+      </p>
+
+      <div class="public-output__channels" aria-label="Public channels">
+        {
+          publicChannels.map((channel) => (
+            <a href={channel.href} target="_blank" rel="noreferrer" class="channel-link">
+              <strong data-i18n-zh={channel.label} data-i18n-en={channel.labelEn}>{channel.label}</strong>
+              <span data-i18n-zh={channel.summary} data-i18n-en={channel.summaryEn}>{channel.summary}</span>
+            </a>
+          ))
+        }
+      </div>
+
+      <a class="public-output__email" href={`mailto:${profile.email}`} data-i18n-zh="邮件联系" data-i18n-en="Email">
+        邮件联系
+      </a>
+    </div>
+
+    <div class="public-output__repos" aria-label="Open source repositories">
+      {
+        publicRepositories.map((repo) => (
+          <a href={repo.href} target="_blank" rel="noreferrer" class="repo-row">
+            <span class="repo-row__name">{repo.name}</span>
+            <span class="repo-row__tags">{repo.tags.join(" · ")}</span>
+            <span class="repo-row__summary" data-i18n-zh={repo.summary} data-i18n-en={repo.summaryEn}>
+              {repo.summary}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .public-output {
+    border-top: 1px solid var(--color-line);
+    padding-block: clamp(3rem, 7vw, 6rem);
+  }
+
+  .public-output__layout {
+    display: grid;
+    grid-template-columns: minmax(16rem, 0.38fr) minmax(0, 0.62fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: 1.8rem;
+  }
+
+  .public-output__copy {
+    display: grid;
+    align-content: start;
+    gap: 1.35rem;
+  }
+
+  .public-output__copy p {
+    max-width: 35rem;
+    margin: 0;
+    color: #3c3a35;
+    font-size: clamp(1.04rem, 1.45vw, 1.28rem);
+    line-height: 1.75;
+  }
+
+  .public-output__channels {
+    display: grid;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .public-output__email {
+    justify-self: start;
+    border: 1px solid var(--color-line);
+    padding: 0.85rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .public-output__email:hover {
+    border-color: var(--color-ink);
+    background: rgba(17, 17, 17, 0.04);
+  }
+
+  .channel-link {
+    display: grid;
+    gap: 0.45rem;
+    border-bottom: 1px solid var(--color-line);
+    padding-block: 1rem;
+    transition:
+      padding 180ms ease,
+      background 180ms ease;
+  }
+
+  .channel-link:hover {
+    padding-left: 0.75rem;
+    background: rgba(199, 244, 50, 0.08);
+  }
+
+  .channel-link strong,
+  .repo-row__name,
+  .repo-row__tags {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .channel-link span,
+  .repo-row__summary {
+    color: var(--color-muted);
+    line-height: 1.55;
+  }
+
+  .public-output__repos {
+    display: grid;
+    border-top: 1px solid var(--color-line);
+    border-left: 1px solid var(--color-line);
+  }
+
+  .repo-row {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.34fr) minmax(7rem, 0.28fr) minmax(0, 0.38fr);
+    gap: 1rem;
+    align-items: start;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    padding: 1.15rem;
+    transition:
+      background 180ms ease,
+      padding 180ms ease;
+  }
+
+  .repo-row:hover {
+    padding-left: 1.55rem;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .repo-row__name {
+    color: var(--color-ink);
+    font-weight: 760;
+  }
+
+  .repo-row__tags {
+    color: var(--color-muted);
+    font-size: 0.62rem;
+  }
+
+  .repo-row__summary {
+    font-size: 0.88rem;
+  }
+
+  @media (max-width: 960px) {
+    .public-output__layout,
+    .repo-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
